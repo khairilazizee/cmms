@@ -1,0 +1,454 @@
+/**************************************************************
+   Visit FullAhead.org and studio7designs.com for more layouts and downloads for this template!
+ **************************************************************/
+
+/*********************************************************
+   HTML Elements
+ *********************************************************/
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  /*line-height: 170%;*/
+  font-family: Verdana;
+  font-size: 11px;
+  color: #000;
+}
+/* Table */
+table {
+  font-size: 11px;
+  font-family: Verdana;
+  bgcolor: #FFFFFF
+}
+
+/*tr {
+  height: 20px;
+}*/
+
+/*div {
+  font-size: 12px;
+  font-family:  Arial,Verdana;
+}
+*/
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+
+h1 {
+  padding-bottom: 0.7em;
+
+  font: 400 12px Arial,Verdana;
+  color: #536C71;
+  /*border-bottom: 12px solid #ddd;*/
+}
+
+h2 {
+  font-size: 1.3em;
+  color: #586B7A;
+}
+
+h3 {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  color: #5D6F73;
+}
+
+h4 {
+  font-size: 0.85em;
+}
+
+h5 {
+  font-size: 0.8em;
+}
+
+
+/* Needed to horizontally pad in a coloured container */
+/*.horzPad h1,
+.horzPad h2,
+.horzPad h3,
+.horzPad h4,
+.horzPad h5,
+.horzPad p {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+*/
+
+/* Links */
+a {
+  text-decoration: none;
+  font-family:Verdana;
+  color: #026AB9;
+  font-size: 11px;
+}
+
+a:hover {
+  color: #B90220; 
+}
+
+a img {
+  border: 0;
+}
+
+a img.border {  
+  border: 1px solid #FC3307;
+}
+
+a:hover img.border {  
+  /* Fixes IE bug - IE doesn't correctly apply the style on a:hover so need to mask it */
+  border: 1px solid #668FA3 !important;
+  border: 1px solid #FC3307;
+}
+
+
+
+/* Lists */
+
+
+ol li {
+  font-weight: bold;
+  color: #668FA3;
+}
+
+/*ol li span {
+  font-weight: normal;
+  color: #444;
+}
+*/
+
+
+/* Blockquote */
+blockquote {
+  margin: 0;
+  padding: 0 20px;
+  background: #E7F1F3;
+  border-top: 1px solid #AAD3DB;
+  border-bottom: 1px solid #AAD3DB;
+}
+
+
+
+/**************************************************************
+   Form Elements
+ **************************************************************/
+
+form {
+  padding: 0;
+  margin: 0;
+}
+
+/* If you're finding the input elements get pushed down, increase the width */
+/*label {
+  float: left;
+  width: 25%;
+  vertical-align: top;
+}*/
+
+input,
+textarea,
+select {
+  padding: 1px;
+  font: 400 11px Verdana;
+  color: #000;
+  background: #FFF;
+  border: 1px solid #CCC;
+}
+
+input:focus,
+input:hover,
+textarea:focus,
+textarea:hover,
+select:focus,
+select:hover {
+  color: #000;
+  background: #E7F1F3;
+  border: 1px solid #888;
+}
+
+input.noBorder,
+input:focus.noBorder,
+input:hover.noBorder {
+  padding: 0;
+  border: 0;
+}
+
+input.button {
+  padding: 1px 1px;
+
+  font: normal 11px Verdana;
+  cursor: pointer;
+
+  color: #000; 
+  background: url(../images/button.gif) #C0C0C0; 
+  border-bottom: solid 1px #eee;
+  border-right: solid 1px #eee;
+  border-bottom: solid 1px #333;
+  border-right: solid 1px #333;
+}
+
+input.radio {
+  background: none;
+  border: 0px;
+}
+
+
+
+A.menulink {
+display: block;
+width: 180px;
+text-align: left;
+text-decoration: none;
+font-family:Verdana;
+font-size:11px;
+color:  #B90220;
+}
+
+A.menulink:hover {
+font-family:Verdana;
+font-size:11px;
+color:  #FFFFFF;
+background:  #66A7CE;
+}
+
+
+A.menutop {
+display: block;
+width: 90px;
+text-align: center;
+text-decoration: none;
+font-family:Verdana;
+font-size:11px;
+color:  #FFFFFF;
+}
+
+A.menutop2 {
+display: block;
+width: 90px;
+text-align: center;
+text-decoration: none;
+font-family:Verdana;
+font-size:11px;
+color:  #000000;
+}
+
+span.clock {
+text-align: center;
+text-decoration: none;
+font-family: Verdana;
+font-size:11px;
+font-weight:bold;
+color:  #FFFFFF;
+}
+
+A.menutop:hover {
+font-family:Verdana;
+font-size:11px;
+color:  #0000FF;
+background:  #C0E1FA;
+}
+
+#popitmenu{
+position: absolute;
+background-color: #B8C9F5;/*#F0F0FF; */
+border:1px solid #6699CC; /*#FF99CC;*/
+font: normal 11px Verdana;
+line-height: 18px;
+z-index: 100;
+visibility: hidden;
+}
+
+#popitmenu a{
+text-decoration: none;
+padding-left: 6px;
+color: black;
+display: block;
+width: 218px;
+}
+
+#popitmenu a:hover{ /*hover background color*/
+background-color: #0099FF;
+color: #FFFFFF;
+}
+
+.main {
+width:195px;
+/*border:1px solid black;*/
+}
+
+.month {
+background-color:#CCCCCC;
+font:bold 11px Verdana;
+color:blue;
+}
+
+.daysofweek {
+background-color:#EEEEEE;
+font:bold 11px Verdana;
+color:black;
+}
+
+.days {
+font-size: 11px;
+font-family:Verdana;
+color:black;
+background-color: #EEEEEE;
+/*padding: 1px;*/
+}
+
+.days #today{
+font-weight: bold;
+font-family:Verdana;
+color: red;
+}
+
+
+#list_table {
+    background: #FFFFFF;
+	padding: 0;
+	spacing: 1;
+	border: 1;
+	align: center;
+}
+
+
+td.list_table_pageheader {
+	font: bold 11px Verdana;
+	color: #FFFFFF;
+	background: #6098C8 url(../images/bg2.gif);  
+	text-align: left;
+	padding: 0;
+	height: 20;
+}
+
+td.list_table_header {
+	font: bold 11px Verdana;
+	color: #000099;
+	background: url(../images/border/menu_bg.jpg);
+	text-align: center;
+}
+
+.form_table_outer {
+   background: #FFFFFF;
+	padding: 0;
+	spacing: 0;
+	border: 0;
+	align: center;
+    border: solid 1px #E8EFFC;
+}
+
+.form_table_inner {
+   background: #FFFFFF;
+	padding: 2px;
+	spacing: 0;
+	border: 0;
+	align: center;
+}
+
+.readonly {
+   background: #EEEEEE;
+}
+
+td.form_table_header {
+	font: bold 12px Verdana;
+	color: #EEEEEE;
+	background: #487AAA;
+	text-align: left;
+	height: 25;
+}
+
+td.title_sub {
+  font: bold 12px Verdana;
+  color: #EEEEEE;
+  background: #487AAA; /*url(../images/border/footer_bg.gif);*/
+  text-align:center;
+}
+#ptjform_table_outer {
+   background: #CCCCCC;
+	padding: 1;
+	spacing: 0;
+	border: 0;
+	align: center;
+}
+
+#ptjform_table_inner {
+   background: #FFFFFF;
+	padding: 0;
+	spacing: 0;
+	border: 0;
+	align: center;
+}
+
+td.ptjform_table_header {
+	font: bold 11px Verdana;
+	color: #FFFFFF;
+	background: #66A7CE url(../images/bg2.gif);
+	text-align: left;
+}
+
+#imagelist{
+position: relative;
+background-color: #B8C9F5;/*#F0F0FF; */
+border:1px solid #6699CC; /*#FF99CC;*/
+font: normal 11px Verdana;
+width: 300px;
+line-height: 18px;
+padding: 2px;
+visible: none;
+}
+
+.floatright
+{
+float: right;
+margin: 0 0 5px 5px;
+border: none;
+padding: 2px;
+}
+
+.menuOut {cursor:pointer; margin:1px; background: url(image/menu_bg.gif) no-repeat #FFFFFF; color:#006600; width:195px; border:1px solid #CCCCCC; padding:2px; text-align:left; font-family:verdana; font-size:12px; }
+.menuOver {cursor:pointer; margin:1px; background-color:#0000CC; color:#ffffff; width:195px; border:1px solid #CCCCCC; padding:2px; text-align:left; font-family:verdana;font-size:12px; }
+.submenu {width:198px; font-family:verdana; font-size:12px; border:1px solid #CCCCCC}
+
+.submenu ul{
+margin: 1px 1px;
+padding-left:15px;
+background: #E8EEFA;
+list-style-type: none;
+width: 180px; /* Width of Menu Items */
+}
+	
+.submenu ul li a {
+color: #0000CC;
+list-type: none;
+text-decoration: none;
+width: 180px;
+border-bottom: solid 1px #CCCCCC;
+}
+
+.submenu ul li  {
+color: #FF0000;
+list-type: none;
+text-decoration: none;
+font-size:11px;
+width: 180px;
+border-bottom: solid 1px #CCCCCC;
+}
+
+.submenu ul li a:hover{
+background-color: #0000CC;
+color: #FFFFFF;
+}
+
+.menuTop {cursor:pointer; margin:1px; background: url(image/menu_bg.gif) no-repeat #FFFFFF; border:1px solid #CCCCCC; color:#000000; width:195px; height:24px; padding:2px; text-align:left; font-family:verdana; font-size:12px; }
+.logout {
+color: #000099;
+}
+	

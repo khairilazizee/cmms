@@ -1,0 +1,41 @@
+A.menuadmin {
+display: block;
+width: 170px;
+text-align: left;
+text-decoration: none;
+font-family:Verdana;
+font-size:11px;
+color:  #FFFFFF;
+}
+
+A.menuadmin:hover {
+font-family:Verdana;
+font-size:11px;
+color:  #FFFFFF;
+background:  #536C71;
+}
+
+
+table.admintable {
+  font-size: 11px;
+  font-family: Verdana;
+  bgcolor: #CCCC00
+}
+
+#adminheader{
+position: relative;
+background-color: #F5C9B8;/*#F0F0FF; */
+border:1px solid #CC9966; /*#FF99CC;*/
+font: normal 11px Verdana;
+line-height: 18px;
+padding: 5px;
+}
+
+#adminpanel{
+position: relative;
+background-color: #B8C9F5;/*#F0F0FF; */
+border:1px solid #6699CC; /*#FF99CC;*/
+font: normal 11px Verdana;
+line-height: 18px;
+padding: 2px;
+}
