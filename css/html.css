@@ -425,7 +425,7 @@ padding: 2px;
 }
 
 .submenu ul > li {
-  list-style:circle;
+  list-style:square;
   line-height: 15px;
 }
 

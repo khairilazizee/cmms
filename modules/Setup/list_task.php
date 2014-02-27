@@ -25,8 +25,11 @@ if($_GET['delete']=="1"){
 }
 
 ?>
-<div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_task">Add<img src="images/admin/btn_add.gif"></a></div>
+<div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_task">Add<img src="images/admin/btn_add.gif"></a></div><br>
 <table width="100%" cellspacing="1" cellpadding="3" align="center" class="table">
+    <tr>
+        <td style="font-weight:bold;" class="formheader" colspan="3">Task List</td>
+    </tr>
     <tr>
         <th class="formheader" width="30" align="center">No</th>
         <th class="formheader">Task</th>
