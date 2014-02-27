@@ -50,6 +50,24 @@ table.table td {
     background-color: #ffffff;
 }
 
+table.outerform {
+  font-size: 11px;
+  font-family: Verdana;
+  bgcolor: #FFFFFF
+}
+
+table.outerform td.formheader {
+  padding: 10px;
+  border-width: 1px;
+  border:1px solid #ccc;
+  background:#47A6DB;
+  text-transform:uppercase;
+}
+
+table.outerform td {
+  font-weight:bold;
+}
+
 /*tr {
   height: 20px;
 }*/
