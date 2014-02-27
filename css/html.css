@@ -181,19 +181,46 @@ input:hover.noBorder {
   border: 0;
 }
 
-input.button {
-  padding: 1px 1px;
-
-  font: normal 11px Verdana;
-  cursor: pointer;
-
-  color: #000; 
-  background: url(../images/button.gif) #C0C0C0; 
-  border-bottom: solid 1px #eee;
-  border-right: solid 1px #eee;
-  border-bottom: solid 1px #333;
-  border-right: solid 1px #333;
+.button {
+  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  box-shadow:inset 0px 1px 0px 0px #ffffff;
+  background-color:#ededed;
+  -webkit-border-top-left-radius:20px;
+  -moz-border-radius-topleft:20px;
+  border-top-left-radius:20px;
+  -webkit-border-top-right-radius:20px;
+  -moz-border-radius-topright:20px;
+  border-top-right-radius:20px;
+  -webkit-border-bottom-right-radius:20px;
+  -moz-border-radius-bottomright:20px;
+  border-bottom-right-radius:20px;
+  -webkit-border-bottom-left-radius:20px;
+  -moz-border-radius-bottomleft:20px;
+  border-bottom-left-radius:20px;
+  text-indent:0;
+  border:1px solid #dcdcdc;
+  display:inline-block;
+  color:#777777;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  font-style:normal;
+  height:65px;
+  line-height:65px;
+  width:131px;
+  text-decoration:none;
+  text-align:center;
+  text-shadow:1px 1px 0px #ffffff;
 }
+
+.button:hover {
+  background-color:#dfdfdf;
+}
+
+.button:active {
+  position:relative;
+  top:1px;
 
 input.radio {
   background: none;
