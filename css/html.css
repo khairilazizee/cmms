@@ -186,18 +186,18 @@ input:hover.noBorder {
   -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
   box-shadow:inset 0px 1px 0px 0px #ffffff;
   background-color:#ededed;
-  -webkit-border-top-left-radius:20px;
-  -moz-border-radius-topleft:20px;
-  border-top-left-radius:20px;
-  -webkit-border-top-right-radius:20px;
-  -moz-border-radius-topright:20px;
-  border-top-right-radius:20px;
-  -webkit-border-bottom-right-radius:20px;
-  -moz-border-radius-bottomright:20px;
-  border-bottom-right-radius:20px;
-  -webkit-border-bottom-left-radius:20px;
-  -moz-border-radius-bottomleft:20px;
-  border-bottom-left-radius:20px;
+  -webkit-border-top-left-radius:2px;
+  -moz-border-radius-topleft:2px;
+  border-top-left-radius:2px;
+  -webkit-border-top-right-radius:2px;
+  -moz-border-radius-topright:2px;
+  border-top-right-radius:2px;
+  -webkit-border-bottom-right-radius:2px;
+  -moz-border-radius-bottomright:2px;
+  border-bottom-right-radius:2px;
+  -webkit-border-bottom-left-radius:2px;
+  -moz-border-radius-bottomleft:2px;
+  border-bottom-left-radius:2px;
   text-indent:0;
   border:1px solid #dcdcdc;
   display:inline-block;
@@ -206,9 +206,7 @@ input:hover.noBorder {
   font-size:15px;
   font-weight:bold;
   font-style:normal;
-  height:65px;
-  line-height:65px;
-  width:131px;
+  padding:5px 20px;
   text-decoration:none;
   text-align:center;
   text-shadow:1px 1px 0px #ffffff;
@@ -347,21 +345,7 @@ color: red;
 }
 
 
-td.list_table_pageheader {
-	font: bold 11px Verdana;
-	color: #FFFFFF;
-	background: #6098C8 url(../images/bg2.gif);  
-	text-align: left;
-	padding: 0;
-	height: 20;
-}
 
-td.list_table_header {
-	font: bold 11px Verdana;
-	color: #000099;
-	background: url(../images/border/menu_bg.jpg);
-	text-align: center;
-}
 
 .form_table_outer {
    background: #FFFFFF;
@@ -384,20 +368,7 @@ td.list_table_header {
    background: #EEEEEE;
 }
 
-td.form_table_header {
-	font: bold 12px Verdana;
-	color: #EEEEEE;
-	background: #487AAA;
-	text-align: left;
-	height: 25;
-}
 
-td.title_sub {
-  font: bold 12px Verdana;
-  color: #EEEEEE;
-  background: #487AAA; /*url(../images/border/footer_bg.gif);*/
-  text-align:center;
-}
 #ptjform_table_outer {
    background: #CCCCCC;
 	padding: 1;
@@ -414,12 +385,6 @@ td.title_sub {
 	align: center;
 }
 
-td.ptjform_table_header {
-	font: bold 11px Verdana;
-	color: #FFFFFF;
-	background: #66A7CE url(../images/bg2.gif);
-	text-align: left;
-}
 
 #imagelist{
 position: relative;
