@@ -18,7 +18,6 @@ function head()
  echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/html.css\" media=\"screen, projection, tv \" />\n";
  echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/cssmenu.css\" media=\"screen, projection, tv \" />\n";
  echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/admin.css\" media=\"screen, projection, tv \" />\n";
-  echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/normalize.css\" media=\"screen, projection, tv \" />\n";
  echo " <LINK REL=\"SHORTCUT ICON\" HREF=\"http://localhost:90/umportal/favicon.ico\">\n"; 
  echo "<script type=\"text/javascript\" src=\"jscript/clock.js\"></script>\n";
  echo "<script type=\"text/javascript\" src=\"jscript/imagebrowse.js\"></script>\n";

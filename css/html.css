@@ -27,6 +27,29 @@ table {
   bgcolor: #FFFFFF
 }
 
+table.table {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #CCCCCC;
+    border-collapse: collapse;
+}
+table.table th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #CCCCCC;
+    background-color: #DBE6F4;
+}
+table.table td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #CCCCCC;
+    background-color: #ffffff;
+}
+
 /*tr {
   height: 20px;
 }*/
@@ -343,9 +366,6 @@ color: red;
 	border: 1;
 	align: center;
 }
-
-
-
 
 .form_table_outer {
    background: #FFFFFF;

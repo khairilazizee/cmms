@@ -18,7 +18,7 @@ if($_POST['submit']){
 if($_GET['delete']=="1"){
     $iddelete = $_GET['iddelete'];
     
-    $delete = "DELETE FROM asset WHERE task_id='$iddelete'";
+    $delete = "DELETE FROM asset WHERE asset_id='$iddelete'";
     sql_query($delete,$dbi);
     
     pageredirect("mainpage.php?module=Setup&task=list_asset");
