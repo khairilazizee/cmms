@@ -1,6 +1,6 @@
 <?php
 
-$tid = $_GET['taskid'];
+$tid = $_GET['assetid'];
 
 if($_POST['submit']){
     $taskdesc = mysql_real_escape_string($_POST['txtTaskDesc']);
@@ -8,44 +8,40 @@ if($_POST['submit']){
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO task (task_desc) VALUES ('$taskdesc')";
+        $insert = "INSERT INTO system (sys_desc) VALUES ('$taskdesc')";
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE task SET task_desc='$taskdesc' WHERE task_id='$tid'";
+        $update = "UPDATE system SET sys_desc='$taskdesc' WHERE sys_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
     
-    pageredirect("mainpage.php?module=Setup&task=setup_task");
+    pageredirect("mainpage.php?module=Setup&task=setup_asset");
     
 }
 
 
 $flg = "add";
-$check = "SELECT task_desc, task_ag_id, task_staff_id, task_asset_id, task_sys_id, task_date FROM task WHERE task_id='$tid'";
+$check = "SELECT sys_desc, sys_id FROM system WHERE sys_id='$tid'";
 //echo $check;
 $result = sql_query($check,$dbi);
 if($a = mysql_fetch_array($result)){
     $flg = "edit";
-    $tdesc = $a['task_desc'];
-    $tagid = $a['task_ag_id'];
-    $tstaff = $a['task_staff_id'];
-    $tasset = $a['task_asset_id'];
-    $tsystem = $a['task_sys_id'];
-    $tdate = $a['task_date'];
+    $adesc = $a['sys_desc'];
+    $aid = $a['sys_id'];
 }
 
 ?>
 <form name="frmtask" method="POST" action="">
-<table width="100%" cellspacing="3" cellpadding="0" align="center" class="outerform">
+<table width="100%" cellspacing="3" cellpadding="3" align="center" class="outerform">
     <tr>
-        <td style="font-weight:bold;" class="formheader" colspan="3">Setup Task</td>
+        <td style="font-weight:bold;" class="formheader" colspan="3">System Assets</td>
     </tr>
     <tr>
-        <td width="120" valign="middle" class="title">Task Description</td>
+        <td width="220" valign="middle" class="title">System Description</td>
         <td width="5" valign="middle" class="title">:</td>
         <td>
-            <textarea name="txtTaskDesc" rows="3" wrap="physical" cols="80"><?php echo $tdesc;?></textarea>
+            <textarea name="txtAssetDesc" rows="3" wrap="physical" cols="100%"><?php echo $adesc;?></textarea>
         </td>
     </tr>
     <!-- <tr>
@@ -72,14 +68,14 @@ if($a = mysql_fetch_array($result)){
         <td width="120">Date</td>
         <td width="5">:</td>
         <td><input type="text" name="txtTdate" size="40" value="<?php echo $tdate;?>"/></td>
-    </tr>
+    </tr> -->
     <tr>
         <td colspan="3">
-            <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
+            <input type="hidden" name="assetid" value="<?php echo $aid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
             <input type="submit" value="Submit" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
-            <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_task'" class="button"/>
+            <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_system'" class="button"/>
         </td>
-    </tr> -->
+    </tr> 
 </table>
 </form>

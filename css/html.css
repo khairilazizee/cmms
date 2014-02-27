@@ -64,8 +64,9 @@ table.outerform td.formheader {
   text-transform:uppercase;
 }
 
-table.outerform td {
-  font-weight:bold;
+table.outerform td.title {
+  font-weight:550;
+
 }
 
 /*tr {

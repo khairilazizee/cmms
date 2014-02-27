@@ -38,8 +38,8 @@ if($a = mysql_fetch_array($result)){
         <td style="font-weight:bold;" class="formheader" colspan="3">Setup Assets</td>
     </tr>
     <tr>
-        <td width="120" valign="top">Assets Description</td>
-        <td width="5" valign="top">:</td>
+        <td width="220" valign="middle" class="title">Assets Description</td>
+        <td width="5" valign="middle" class="title">:</td>
         <td>
             <textarea name="txtAssetDesc" rows="3" wrap="physical" cols="100%"><?php echo $adesc;?></textarea>
         </td>
