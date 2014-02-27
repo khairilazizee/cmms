@@ -42,11 +42,13 @@ if($a = mysql_fetch_array($result)){
         <td style="font-weight:bold;" colspan="3">Setup Task</td>
     </tr>
     <tr>
-        <td width="120">Task Description</td>
-        <td width="5">:</td>
-        <td><input type="text" name="txtTdesc" size="40" value="<?php echo $tdesc;?>"/></td>
+        <td width="120" valign="top">Task Description</td>
+        <td width="5" valign="top">:</td>
+        <td>
+            <textarea rows="3" wrap="physical" cols="80"></textarea>
+        </td>
     </tr>
-    <tr>
+    <!-- <tr>
         <td width="120">Asset Group</td>
         <td width="5">:</td>
         <td><input type="text" name="txtTag" size="40" value="<?php echo $tagid;?>"/></td>
@@ -78,6 +80,6 @@ if($a = mysql_fetch_array($result)){
             <input type="submit" value="Submit" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
             <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_task'" class="button"/>
         </td>
-    </tr>
+    </tr> -->
 </table>
 </form>
