@@ -29,7 +29,7 @@ if($_GET['delete']=="1"){
 <table width="100%" cellspacing="1" cellpadding="3" align="center" class="table">
     <tr>
         <th class="formheader" width="30" align="center">No</th>
-        <th class="formheader">Task</th>
+        <th class="formheader">Asset</th>
         <th class="formheader" width="100" align="center">Action</th>
     </tr>
     <?php
