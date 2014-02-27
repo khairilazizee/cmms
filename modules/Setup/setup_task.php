@@ -3,20 +3,20 @@
 $tid = $_GET['taskid'];
 
 if($_POST['submit']){
-    $bank_p = mysql_real_escape_string($_POST['txtBank']);
+    $taskdesc = mysql_real_escape_string($_POST['txtTaskDesc']);
     
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO payment_bank (bank_name) VALUES ('$bank_p')";
+        $insert = "INSERT INTO task (task_desc) VALUES ('$taskdesc')";
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE payment_bank SET bank_name='$bank_p' WHERE bank_id='$bankid'";
+        $update = "UPDATE task SET task_desc='$taskdesc' WHERE task_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
     
-    pageredirect("mainpage.php?module=Setup&task=list_payment_bank");
+    pageredirect("mainpage.php?module=Setup&task=setup_task");
     
 }
 
@@ -45,7 +45,7 @@ if($a = mysql_fetch_array($result)){
         <td width="120" valign="top">Task Description</td>
         <td width="5" valign="top">:</td>
         <td>
-            <textarea rows="3" wrap="physical" cols="80"></textarea>
+            <textarea name="txtTaskDesc" rows="3" wrap="physical" cols="80"><?php echo $tdesc;?></textarea>
         </td>
     </tr>
     <!-- <tr>
