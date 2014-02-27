@@ -19,7 +19,7 @@ $curr = "'$temp[2]-$temp[0]-$temp[1] $date[1]'";
 $sql = "select title,activity from announcement where curdate() between startdate and enddate order by ordering";
 $result = sql_query($sql, $dbi);
 if (sql_num_rows($result) == 0) {
-  $content .= "Tiada berita terkini.";
+  $content .= "<div align='center'>Tiada berita terkini.</div>";
 }
 else {
   while (list($title,$activity) = sql_fetch_row($result)) {

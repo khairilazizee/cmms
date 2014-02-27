@@ -62,7 +62,7 @@ document.onselectstart = new Function("return true");
 		$subtitle=$data2["title"];
         $target=$data2["target_window"];
         if ($submenu==$_GET["s_id"])
-		  echo "<li><a href=\"$link\" target=\"$target\" title=\"$subtitle\" style=\"background:#CC3366;color:#FFFFFF;border:1px solid #000;\">$subtitle</a></li>\n";
+		  echo "<li><a href=\"$link\" target=\"$target\" title=\"$subtitle\" style=\"color:#CC3366;\">$subtitle</a></li>\n";
         else
 		  echo "<li><a href=\"$link\" target=\"$target\" title=\"$subtitle\">$subtitle</a></li>\n";
 	}	
