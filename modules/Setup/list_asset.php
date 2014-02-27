@@ -18,14 +18,14 @@ if($_POST['submit']){
 if($_GET['delete']=="1"){
     $iddelete = $_GET['iddelete'];
     
-    $delete = "DELETE FROM task WHERE task_id='$iddelete'";
+    $delete = "DELETE FROM asset WHERE task_id='$iddelete'";
     sql_query($delete,$dbi);
     
-    pageredirect("mainpage.php?module=Setup&task=list_task");
+    pageredirect("mainpage.php?module=Setup&task=list_asset");
 }
 
 ?>
-<div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_task">Add<img src="images/admin/btn_add.gif"></a></div>
+<div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_assets">Add<img src="images/admin/btn_add.gif"></a></div>
 <table width="100%" cellspacing="1" cellpadding="3" align="center" class="innerform">
     <tr>
         <td class="formheader" width="30" align="center">No</td>
@@ -34,21 +34,21 @@ if($_GET['delete']=="1"){
     </tr>
     <?php
     
-    $sql = "SELECT task_id, task_desc from task ORDER BY task_id";
+    $sql = "SELECT asset_id, asset_desc from asset ORDER BY asset_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);
     $cnt=$rowstart;
     $numrows = mysql_num_rows($res);
     while($data = mysql_fetch_array($resfull)){
-        $tid = $data['task_id'];
-        $tdesc = $data['task_desc'];
+        $aid = $data['asset_id'];
+        $adesc = $data['asset_desc'];
         $cnt++;
         
         echo "<tr bgcolor=\"$bgcolor\" onMouseOver=\"this.bgColor = '$hlcolor'\" onMouseOut =\"this.bgColor = '$bgcolor'\">\n";
         echo "<td align=\"center\">$cnt</td>";
-        echo "<td>$tdesc</td>";
-        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_task&taskid=$tid\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_task&delete=1&iddelete=$tid\" onClick=\"return confirm('Do you wish to proceed?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
+        echo "<td>$adesc</td>";
+        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_asset&taskid=$aid\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_asset&delete=1&iddelete=$aid\" onClick=\"return confirm('Do you wish to proceed?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
         echo "</tr>";
     }
     
