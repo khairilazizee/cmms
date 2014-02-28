@@ -181,7 +181,7 @@ input:hover.noBorder {
   border: 0;
 }
 
-input.button {
+/*input.button {
   padding: 1px 1px;
 
   font: normal 11px Verdana;
@@ -193,7 +193,7 @@ input.button {
   border-right: solid 1px #eee;
   border-bottom: solid 1px #333;
   border-right: solid 1px #333;
-}
+}*/
 
 input.radio {
   background: none;
@@ -418,6 +418,7 @@ padding: 2px;
 
 #cont {
   border:1px solid #abbfe1;
+  /*background:#fff;*/
 }
 
 .submenu ul {
@@ -481,5 +482,28 @@ table.outerform td.formheader {
 
 table.outerform td.title {
   font-weight:550;
+}
+
+.button {
+  background-color: #2ba6cb;
+  border-color: #2ba6cb;
+  color: white;
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-bottom: 6px;
+  padding-left: 10px;
+  cursor:pointer;
+  font-weight:normal !important;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+.button:hover {
+  background-color: #2ba6cb;
+  border-color: #2ba6cb;
+  color:#fff;
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-bottom: 6px;
+  padding-left: 10px;
 }
   

@@ -4,19 +4,20 @@ $tid = $_GET['assetid'];
 
 if($_POST['submit']){
     $taskdesc = mysql_real_escape_string($_POST['txtAssetDesc']);
+    $sysgroup = $_POST['txtSystemGroup'];
     
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO system (sys_desc) VALUES ('$taskdesc')";
+        $insert = "INSERT INTO system (sys_desc, sys_sg_id) VALUES ('$taskdesc','$sysgroup')";
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE system SET sys_desc='$taskdesc' WHERE sys_id='$tid'";
+        $update = "UPDATE system SET sys_desc='$taskdesc', sys_sg_id='$sysgroup' WHERE sys_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
     
-    pageredirect("mainpage.php?module=Setup&task=setup_asset");
+    pageredirect("mainpage.php?module=Setup&task=list_system");
     
 }
 
@@ -36,6 +37,25 @@ if($a = mysql_fetch_array($result)){
 <table width="100%" cellspacing="3" cellpadding="3" align="center" class="outerform">
     <tr>
         <td style="font-weight:bold;" class="formheader" colspan="3">System Assets</td>
+    </tr>
+    <tr>
+        <td width="220" valign="middle" class="title">System Group</td>
+        <td width="5" valign="middle" class="title">:</td>
+        <td>
+            <select name="txtSystemGroup" id="txtSystemGroup">
+                <option value="">- PILIH -</option>
+                <?php
+                    $sql = "SELECT sg_id, sg_desc FROM system_group ORDER BY sg_id";
+                    $res = mysql_query($sql,$dbi);
+                    while($sgdata = mysql_fetch_array($res)){
+                        $sgid = $sgdata['sg_id'];
+                        $sgdesc = $sgdata['sg_desc'];
+
+                        echo "<option value='$sgid'>$sgdesc</option>";
+                    }
+                ?>
+            </select>
+        </td>
     </tr>
     <tr>
         <td width="220" valign="middle" class="title">System Description</td>

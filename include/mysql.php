@@ -94,6 +94,14 @@ else
 return($s);
 }
 
+function GetDesc($table,$paparan,$field,$id) {
+    global $dbi;
+    $sql = "SELECT $paparan FROM $table WHERE $field='$id'";
+    $res = mysql_query($sql,$dbi);
+    $data = mysql_fetch_array($res);
+    return $data[0];
+}
+
 function dateDiff($dformat, $endDate, $beginDate)
 {
 $date_parts1=explode($dformat, $beginDate);

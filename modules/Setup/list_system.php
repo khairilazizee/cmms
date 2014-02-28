@@ -26,18 +26,19 @@ if($_GET['delete']=="1"){
 
 ?>
 <div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_system">Add<img src="images/admin/btn_add.gif"></a></div><br>
-<table width="100%" cellspacing="1" cellpadding="3" align="center" class="table">
+<table width="100%" cellspacing="1" cellpadding="4" align="center" class="table">
     <tr>
-        <td style="font-weight:bold;" class="formheader" colspan="3">Task List</td>
+        <td style="font-weight:bold;" class="formheader" colspan="4">System List</td>
     </tr>
     <tr>
         <th class="formheader" width="30" align="center">No</th>
         <th class="formheader">System</th>
+        <th class="formheader">Group</th>
         <th class="formheader" width="100" align="center">Action</th>
     </tr>
     <?php
     
-    $sql = "SELECT sys_id, sys_desc from system ORDER BY sys_id";
+    $sql = "SELECT sys_id, sys_desc , sys_sg_id from system ORDER BY sys_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);
@@ -46,11 +47,14 @@ if($_GET['delete']=="1"){
     while($data = mysql_fetch_array($resfull)){
         $tid = $data['sys_id'];
         $tdesc = $data['sys_desc'];
+        $sgroup = $data['sys_sg_id'];
+        $namasysgroup = GetDesc("system_group","sg_desc","sg_id",$sgroup);
         $cnt++;
         
         echo "<tr bgcolor=\"$bgcolor\" onMouseOver=\"this.bgColor = '$hlcolor'\" onMouseOut =\"this.bgColor = '$bgcolor'\">\n";
         echo "<td align=\"center\">$cnt</td>";
         echo "<td>$tdesc</td>";
+        echo "<td>$namasysgroup</td>";
         echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_system&taskid=$tid\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_system&delete=1&iddelete=$tid\" onClick=\"return confirm('Do you wish to proceed?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
         echo "</tr>";
     }
