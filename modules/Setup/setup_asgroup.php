@@ -1,29 +1,28 @@
 <?php
 
-$tid = $_GET['assetid'];
+$tid = $_GET['sysid'];
 
 if($_POST['submit']){
-    $taskdesc = mysql_real_escape_string($_POST['txtTaskDesc']);
-    $systemgroup = $_POST['txtSystemGroup'];
+    $taskdesc = mysql_real_escape_string($_POST['txtAssetDesc']);
     
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO asset (ag_desc,asset_ag_id) VALUES ('$taskdesc','$systemgroup')";
+        $insert = "INSERT INTO asset_group (ag_desc) VALUES ('$taskdesc')";
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE asset SET ag_desc='$taskdesc', asset_ag_id='$systemgroup' WHERE ag_id='$tid'";
+        $update = "UPDATE asset_group SET ag_desc='$taskdesc' WHERE ag_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
     
-    pageredirect("mainpage.php?module=Setup&task=setup_asgroup");
+    pageredirect("mainpage.php?module=Setup&task=setup_asset");
     
 }
 
 
 $flg = "add";
-$check = "SELECT ag_desc, ag_id FROM asset WHERE ag_id='$tid'";
+$check = "SELECT ag_desc, ag_id FROM asset_group WHERE ag_id='$tid'";
 //echo $check;
 $result = sql_query($check,$dbi);
 if($a = mysql_fetch_array($result)){
@@ -36,29 +35,10 @@ if($a = mysql_fetch_array($result)){
 <form name="frmtask" method="POST" action="">
 <table width="100%" cellspacing="3" cellpadding="3" align="center" class="outerform">
     <tr>
-        <td style="font-weight:bold;" class="formheader" colspan="3">Setup Assets</td>
+        <td style="font-weight:bold;" class="formheader" colspan="3">Asset Group</td>
     </tr>
     <tr>
-        <td width="220" valign="middle" class="title">Asset Group</td>
-        <td width="5" valign="middle" class="title">:</td>
-        <td>
-            <select name="txtSystemGroup" id="txtSystemGroup">
-                <option value="">- PILIH -</option>
-                <?php
-                    $sql = "SELECT ag_id, ag_desc FROM asset_group ORDER BY ag_id";
-                    $res = mysql_query($sql,$dbi);
-                    while($sgdata = mysql_fetch_array($res)){
-                        $sgid = $sgdata['ag_id'];
-                        $sgdesc = $sgdata['ag_desc'];
-
-                        echo "<option value='$sgid'>$sgdesc</option>";
-                    }
-                ?>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td width="220" valign="middle" class="title">Assets Description</td>
+        <td width="220" valign="middle" class="title">Asset Group Description</td>
         <td width="5" valign="middle" class="title">:</td>
         <td>
             <textarea name="txtAssetDesc" rows="3" wrap="physical" cols="100%"><?php echo $adesc;?></textarea>
@@ -94,7 +74,7 @@ if($a = mysql_fetch_array($result)){
             <input type="hidden" name="assetid" value="<?php echo $aid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
             <input type="submit" value="Submit" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
-            <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_asset'" class="button"/>
+            <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_sysgroup'" class="button"/>
         </td>
     </tr> 
 </table>

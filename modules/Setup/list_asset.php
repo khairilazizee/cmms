@@ -26,18 +26,19 @@ if($_GET['delete']=="1"){
 
 ?>
 <div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_assets">Add<img src="images/admin/btn_add.gif"></a></div><br>
-<table width="100%" cellspacing="1" cellpadding="3" align="center" class="table">
+<table width="100%" cellspacing="1" cellpadding="4" align="center" class="table">
     <tr>
-        <td style="font-weight:bold;" class="formheader" colspan="3">System Assets</td>
+        <td style="font-weight:bold;" class="formheader" colspan="4">System Assets</td>
     </tr>
     <tr>
         <th class="formheader" width="30" align="center">No</th>
         <th class="formheader">Asset</th>
+        <th class="formheader">Group</th>
         <th class="formheader" width="100" align="center">Action</th>
     </tr>
     <?php
     
-    $sql = "SELECT asset_id, asset_desc from asset ORDER BY asset_id";
+    $sql = "SELECT asset_id, asset_desc, asset_ag_id from asset ORDER BY asset_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);
@@ -46,11 +47,14 @@ if($_GET['delete']=="1"){
     while($data = mysql_fetch_array($resfull)){
         $aid = $data['asset_id'];
         $adesc = $data['asset_desc'];
+        $agid = $data['asset_ag_id'];
+        $namaag = GetDesc("asset_group","ag_desc","ag_id",$agid);
         $cnt++;
         
         echo "<tr bgcolor=\"$bgcolor\" onMouseOver=\"this.bgColor = '$hlcolor'\" onMouseOut =\"this.bgColor = '$bgcolor'\">\n";
         echo "<td align=\"center\">$cnt</td>";
         echo "<td>$adesc</td>";
+        echo "<td>$namaag</td>";
         echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_asset&assetid=$aid\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_asset&delete=1&iddelete=$aid\" onClick=\"return confirm('Do you wish to proceed?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
         echo "</tr>";
     }
