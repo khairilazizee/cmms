@@ -1,6 +1,6 @@
 <?php
 
-$tid = $_GET['assetid'];
+$tid = $_GET['sysid'];
 
 if($_POST['submit']){
     $taskdesc = mysql_real_escape_string($_POST['txtAssetDesc']);
@@ -8,10 +8,10 @@ if($_POST['submit']){
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO system (sys_desc) VALUES ('$taskdesc')";
+        $insert = "INSERT INTO system_group (sg_desc) VALUES ('$taskdesc')";
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE system SET sys_desc='$taskdesc' WHERE sys_id='$tid'";
+        $update = "UPDATE system_group SET sg_desc='$taskdesc' WHERE sg_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
@@ -22,23 +22,23 @@ if($_POST['submit']){
 
 
 $flg = "add";
-$check = "SELECT sys_desc, sys_id FROM system WHERE sys_id='$tid'";
+$check = "SELECT sg_desc, sg_id FROM system_group WHERE sg_id='$tid'";
 //echo $check;
 $result = sql_query($check,$dbi);
 if($a = mysql_fetch_array($result)){
     $flg = "edit";
-    $adesc = $a['sys_desc'];
-    $aid = $a['sys_id'];
+    $adesc = $a['sg_desc'];
+    $aid = $a['sg_id'];
 }
 
 ?>
 <form name="frmtask" method="POST" action="">
 <table width="100%" cellspacing="3" cellpadding="3" align="center" class="outerform">
     <tr>
-        <td style="font-weight:bold;" class="formheader" colspan="3">System Assets</td>
+        <td style="font-weight:bold;" class="formheader" colspan="3">System Group</td>
     </tr>
     <tr>
-        <td width="220" valign="middle" class="title">System Description</td>
+        <td width="220" valign="middle" class="title">System Group Description</td>
         <td width="5" valign="middle" class="title">:</td>
         <td>
             <textarea name="txtAssetDesc" rows="3" wrap="physical" cols="100%"><?php echo $adesc;?></textarea>
