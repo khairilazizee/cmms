@@ -73,13 +73,13 @@ if($a = mysql_fetch_array($result)){
         <td width="5">:</td>
         <td><input type="text" name="txtTdate" size="40" value="<?php echo $tdate;?>"/></td>
     </tr>
-    <tr>
+    <tr> -->
         <td colspan="3">
             <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
             <input type="submit" value="Submit" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
             <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_task'" class="button"/>
         </td>
-    </tr> -->
+    </tr> 
 </table>
 </form>
