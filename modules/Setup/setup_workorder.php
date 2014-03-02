@@ -124,6 +124,25 @@
 			</select>
 		</td>
 	</tr>
+	<tr>
+		<td class="title">Kekerapan Tugas</td>
+		<td class="title">:</td>
+		<td>
+			<select name="txtKekerapan" id="txtKekerapan">
+				<option value="">- PILIH -</option>
+				<option value="1">Seminggu sekali</option>
+				<option value="2">Dua minggu sekali</option>
+				<option value="3">Sebulan Sekali</option>
+				<option value="4">Setahun Sekali</option>
+			</select>
+		</td>
+	</tr>
+	<td colspan="3">
+            <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
+            <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
+            <input type="submit" value="Submit" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
+            <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_task'" class="button"/>
+        </td>
 </table>
 </form>
 
