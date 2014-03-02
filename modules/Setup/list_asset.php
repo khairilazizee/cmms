@@ -55,7 +55,7 @@ if($_GET['delete']=="1"){
         echo "<td align=\"center\">$cnt</td>";
         echo "<td>$adesc</td>";
         echo "<td>$namaag</td>";
-        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_asset&assetid=$aid\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_asset&delete=1&iddelete=$aid\" onClick=\"return confirm('Do you wish to proceed?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
+        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_assets&assetid=$aid\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_asset&delete=1&iddelete=$aid\" onClick=\"return confirm('Do you wish to proceed?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
         echo "</tr>";
     }
     

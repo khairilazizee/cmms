@@ -3,33 +3,34 @@
 $tid = $_GET['assetid'];
 
 if($_POST['submit']){
-    $taskdesc = mysql_real_escape_string($_POST['txtTaskDesc']);
+    $taskdesc = mysql_real_escape_string($_POST['txtAssetDesc']);
     $systemgroup = $_POST['txtSystemGroup'];
     
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO asset (ag_desc,asset_ag_id) VALUES ('$taskdesc','$systemgroup')";
+        $insert = "INSERT INTO asset (asset_desc,asset_ag_id) VALUES ('$taskdesc','$systemgroup')";
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE asset SET ag_desc='$taskdesc', asset_ag_id='$systemgroup' WHERE ag_id='$tid'";
+        $update = "UPDATE asset SET asset_desc='$taskdesc', asset_ag_id='$systemgroup' WHERE asset_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
     
-    pageredirect("mainpage.php?module=Setup&task=setup_asgroup");
+    pageredirect("mainpage.php?module=Setup&task=list_asset");
     
 }
 
 
 $flg = "add";
-$check = "SELECT ag_desc, ag_id FROM asset WHERE ag_id='$tid'";
+$check = "SELECT asset_id, asset_desc, asset_ag_id FROM asset WHERE asset_id='$tid'";
 //echo $check;
 $result = sql_query($check,$dbi);
 if($a = mysql_fetch_array($result)){
     $flg = "edit";
-    $adesc = $a['ag_desc'];
-    $aid = $a['ag_id'];
+    $adesc = $a['asset_desc'];
+    $aid = $a['asset_id'];
+    $agid = $a['asset_ag_id'];
 }
 
 ?>
@@ -51,7 +52,11 @@ if($a = mysql_fetch_array($result)){
                         $sgid = $sgdata['ag_id'];
                         $sgdesc = $sgdata['ag_desc'];
 
-                        echo "<option value='$sgid'>$sgdesc</option>";
+                        echo "<option ";
+                        if($agid==$sgid){
+                            echo " SELECTED ";
+                        }
+                        echo" value='$sgid'>$sgdesc</option>";
                     }
                 ?>
             </select>

@@ -166,7 +166,7 @@ $(function() {
 
      $.ajax({
          type: "GET",
-         url: "modules/Setup/task.php",
+         url: "modules/Setup/asset.php",
          data: "agid="+$("#txtAssetGroup").val(),
          success: function(html) {
              $("#txtAsset").html(html);
