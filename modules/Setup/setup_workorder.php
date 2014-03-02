@@ -1,3 +1,23 @@
+<?php
+
+if($_POST['submit']){
+	$sysgroup = $_POST['txtSysGroup'];
+	$system = $_POST['txtSystem'];
+	$task = $_POST['txtTask'];
+	$juruteknik = $_POST['txtJuruteknik'];
+	$asgroup = $_POST['txtAssetGroup'];
+	$asset = $_POST['txtAsset'];
+	$kekerapan = $_POST['txtKekerapan'];
+	$flg = $_POST['flg'];
+
+	if($flg=="add"){
+
+	}
+}
+
+$flg = "add";
+
+?>
 <form name="frmtask" method="POST" action="">
 <table class="outerform" width="100%" cellspacing="0" cellpadding="3" align="center">
 	<tr>
@@ -61,6 +81,13 @@
 		</td>
 	</tr>
 	<tr>
+		<td>Tarikh Mula</td>
+            <td>:</td>
+            <td><input type="text" readonly="" size="12" maxlength="12" name="txtTarikhMula" id="txtTarikhMula" value="<?php echo $session_start; ?>">
+        <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.frmtask.txtTarikhMula);return false;" ><img class="PopcalTrigger" align="absmiddle" src="popupcal/calbtn.gif" width="34" height="22" border="0" alt=""></a> 
+			</td>
+	</tr>
+	<tr>
 		<td class="title">Juru Teknik</td>
 		<td class="title">:</td>
 		<td>
@@ -77,13 +104,6 @@
 					}
 				?>
 			</select>
-		</td>
-	</tr>
-	<tr>
-		<td class="title">Tugasan</td>
-		<td class="title">:</td>
-		<td>
-			<input type="text" name="txtTugasan" size="60">
 		</td>
 	</tr>
 	<tr>
@@ -130,17 +150,17 @@
 		<td>
 			<select name="txtKekerapan" id="txtKekerapan">
 				<option value="">- PILIH -</option>
-				<option value="1">Seminggu sekali</option>
-				<option value="2">Dua minggu sekali</option>
-				<option value="3">Sebulan Sekali</option>
-				<option value="4">Setahun Sekali</option>
+				<option value="7">Seminggu sekali</option>
+				<option value="14">Dua minggu sekali</option>
+				<option value="30">Sebulan Sekali</option>
+				<option value="365">Setahun Sekali</option>
 			</select>
 		</td>
 	</tr>
 	<td colspan="3">
             <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
-            <input type="submit" value="Submit" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
+            <input type="submit" value="Submit" name="submit" class="button" onClick="return confirm('Do you wish to proceed?');"/>
             <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_task'" class="button"/>
         </td>
 </table>
@@ -178,4 +198,8 @@ $(function() {
 });
 </script>
 
+
+<!--  PopCalendar(tag name and id must match) Tags should not be enclosed in tags other than the html body tag. -->
+<iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="popupcal/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;">
+</iframe>	
 
