@@ -8,11 +8,28 @@ if($_POST['submit']){
 	$asgroup = $_POST['txtAssetGroup'];
 	$asset = $_POST['txtAsset'];
 	$kekerapan = $_POST['txtKekerapan'];
+	$tarikhmula = mysql_real_escape_string(mysqldate($_POST['txtTarikhMula']));
 	$flg = $_POST['flg'];
 
+	$hari = (strtotime("31-12-2014") - strtotime($tarikhmula)) / (60 * 60 * 24);
+	$hari = $hari + 1;
+	// $bahagi = $hari / $kekerapan;
+	// echo round($bahagi);
 	if($flg=="add"){
-
+		if($kekerapan<>""){
+			for ( $counter = 0; $counter <= $hari; $counter+= $kekerapan) {
+				$tarikhbaru[$counter] = date("Y-m-d", strtotime("$tarikhmula +$counter days"));
+				// echo $counter.$tarikhbaru[$counter]."<br />";
+				$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id) VALUES ('$sysgroup','$system','$task','$juruteknik','".$tarikhbaru[$counter]."','$asgroup','$asset')";
+				$resworkorder = mysql_query($sqlworkorder,$dbi);
+			}
+		} else {
+			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id) VALUES ('$sysgroup','$system','$task','$juruteknik','$tarikhmula','$asgroup','$asset')";
+			$resworkorder = mysql_query($sqlworkorder,$dbi);
+		}
 	}
+
+	
 }
 
 $flg = "add";
