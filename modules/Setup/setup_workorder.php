@@ -182,7 +182,7 @@ $flg = "add";
             <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
             <input type="submit" value="Submit" name="submit" class="button" onClick="return confirm('Do you wish to proceed?');"/>
-            <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_task'" class="button"/>
+            <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_workorder'" class="button"/>
         </td>
 </table>
 </form>
