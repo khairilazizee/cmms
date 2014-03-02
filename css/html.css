@@ -156,7 +156,7 @@ form {
 input,
 textarea,
 select {
-  padding: 1px;
+  padding: 5px;
   font: 400 11px Verdana;
   color: #000;
   background: #FFF;

@@ -53,9 +53,9 @@ if($a = mysql_fetch_array($result)){
 
 ?>
 <form name="frmtask" method="POST" action="">
-<table width="100%" cellspacing="3" cellpadding="0" align="center" class="outerform">
+<table width="100%" cellspacing="3" cellpadding="3" align="center" class="outerform">
     <tr>
-        <td style="font-weight:bold;" colspan="3">Penyediaan Zon</td>
+        <td style="font-weight:bold;" class="formheader" colspan="3">Penyediaan Zon</td>
     </tr>
     <tr>
         <td width="120" valign="top">Penerangan Zon</td>

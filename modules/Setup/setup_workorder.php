@@ -29,13 +29,96 @@
 			<select name="txtSystem" id="txtSystem">
 				<?php
 					echo "<option value=''>- PILIH -</option>";
-					$sqlsystem = "SELECT sys_id, sys_desc FROM system WHERE sys_id='$txtSysGroup'";
+					$sqlsystem = "SELECT sys_id, sys_desc FROM system";
 					$ressystem = mysql_query($sqlsystem,$dbi);
 					while($datasystem = mysql_fetch_array($ressystem)){
 						$sysid = $datasystem['sys_id'];
 						$sysdesc = $datasystem['sys_desc'];
 
 						echo "<option value='$sysid'>$sysdesc</option>";
+					}
+				?>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Task</td>
+		<td class="title">:</td>
+		<td>
+			<select name="txtTask" id="txtTask">
+				<?php
+					echo "<option value=''>- PILIH -</option>";
+					$sqltask = "SELECT task_id, task_desc FROM task";
+					$restask = mysql_query($sqltask,$dbi);
+					while($datatask = mysql_fetch_array($restask)){
+						$taskid = $datatask['task_id'];
+						$taskdesc = $datatask['task_desc'];
+
+						echo "<option value='$taskid'>$taskdesc</option>";
+					}
+				?>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Juru Teknik</td>
+		<td class="title">:</td>
+		<td>
+			<select name="txtJuruteknik" id="txtJuruteknik">
+				<?php
+					echo "<option value=''>- PILIH -</option>";
+					$sqltech = "SELECT nama, id FROM user WHERE role='15'";
+					$restech = mysql_query($sqltech,$dbi);
+					while($datatech = mysql_fetch_array($restech)){
+						$techid = $datatech['id'];
+						$techname = $datatech['nama'];
+
+						echo "<option value='$techid'>$techname</option>";
+					}
+				?>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Tugasan</td>
+		<td class="title">:</td>
+		<td>
+			<input type="text" name="txtTugasan" size="60">
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Asset Group</td>
+		<td class="title">:</td>
+		<td>
+			<select name="txtAssetGroup" id="txtAssetGroup">
+				<?php
+					echo "<option value=''>- PILIH -</option>";
+					$sqlag = "SELECT ag_desc, ag_id FROM asset_group";
+					$resag = mysql_query($sqlag,$dbi);
+					while($dataag = mysql_fetch_array($resag)){
+						$agid = $dataag['ag_id'];
+						$agdesc = $dataag['ag_desc'];
+
+						echo "<option value='$agid'>$agdesc</option>";
+					}
+				?>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Asset</td>
+		<td class="title">:</td>
+		<td>
+			<select name="txtAsset" id="txtAsset">
+				<?php
+					echo "<option value=''>- PILIH -</option>";
+					$sqlasset = "SELECT asset_desc, asset_id FROM asset";
+					$resasset = mysql_query($sqlasset,$dbi);
+					while($dataasset = mysql_fetch_array($resasset)){
+						$assetid = $dataasset['asset_id'];
+						$assetdesc = $dataasset['asset_desc'];
+
+						echo "<option value='$assetid'>$assetdesc</option>";
 					}
 				?>
 			</select>
@@ -58,7 +141,21 @@ $(function() {
              $("#txtSystem").html(html);
          }
      });
- });             
+ });
+
+ $("#txtAssetGroup").bind("change", function() {
+
+     $.ajax({
+         type: "GET",
+         url: "modules/Setup/task.php",
+         data: "agid="+$("#txtAssetGroup").val(),
+         success: function(html) {
+             $("#txtAsset").html(html);
+         }
+     });
+ });
+
+
 });
 </script>
 
