@@ -25,15 +25,15 @@ if($_GET['delete']=="1"){
 }
 
 ?>
-<div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_zon">Add<img src="images/admin/btn_add.gif"></a></div><br>
+<div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_zon">Tambah<img src="images/admin/btn_add.gif"></a></div><br>
 <table width="100%" cellspacing="1" cellpadding="3" align="center" class="table">
     <tr>
-        <td colspan="3"><h2>Penyediaan Zon</h2></td>
+        <td style="font-weight:bold;" class="formheader" colspan="3">Senarai Zon</td>
     </tr>
     <tr>
         <th class="formheader" width="30" align="center">No</th>
         <th class="formheader">Zon</th>
-        <th class="formheader" width="100" align="center">Action</th>
+        <th class="formheader" width="100" align="center">Tindakan</th>
     </tr>
     <?php
     
