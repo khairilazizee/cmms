@@ -25,16 +25,16 @@ if($_GET['delete']=="1"){
 }
 
 ?>
-<div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_assets">Add<img src="images/admin/btn_add.gif"></a></div><br>
+<div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_assets">Tambah<img src="images/admin/btn_add.gif"></a></div><br>
 <table width="100%" cellspacing="1" cellpadding="4" align="center" class="table">
     <tr>
-        <td style="font-weight:bold;" class="formheader" colspan="4">System Assets</td>
+        <td style="font-weight:bold;" class="formheader" colspan="4">Senarai Aset</td>
     </tr>
     <tr>
         <th class="formheader" width="30" align="center">No</th>
-        <th class="formheader">Asset</th>
-        <th class="formheader">Group</th>
-        <th class="formheader" width="100" align="center">Action</th>
+        <th class="formheader">Aset</th>
+        <th class="formheader">Kumpulan</th>
+        <th class="formheader" width="100" align="center">Tindakan</th>
     </tr>
     <?php
     
