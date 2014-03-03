@@ -42,10 +42,10 @@ $flg = "add";
 <form name="frmtask" method="POST" action="">
 <table class="outerform" width="100%" cellspacing="0" cellpadding="3" align="center">
 	<tr>
-		<td colspan="3" style="font-weight:bold;" class="formheader">Setup Work Order</td>
+		<td colspan="3" style="font-weight:bold;" class="formheader">Arahan Kerja</td>
 	</tr>
 	<tr>
-		<td width="100" class="title">System Group</td>
+		<td width="100" class="title">Kumpulan Sistem</td>
 		<td width="5" class="title">:</td>
 		<td>
 			<select name="txtSysGroup" id="txtSysGroup">
@@ -64,7 +64,7 @@ $flg = "add";
 		</td>
 	</tr>
 	<tr>
-		<td class="title">System</td>
+		<td class="title">Sistem</td>
 		<td class="title">:</td>
 		<td>
 			<select name="txtSystem" id="txtSystem">
@@ -83,7 +83,7 @@ $flg = "add";
 		</td>
 	</tr>
 	<tr>
-		<td class="title">Task</td>
+		<td class="title">Tugasan</td>
 		<td class="title">:</td>
 		<td>
 			<select name="txtTask" id="txtTask">
@@ -128,7 +128,7 @@ $flg = "add";
 		</td>
 	</tr>
 	<tr>
-		<td class="title">Asset Group</td>
+		<td class="title">Kumpulan Aset</td>
 		<td class="title">:</td>
 		<td>
 			<select name="txtAssetGroup" id="txtAssetGroup">
@@ -147,7 +147,7 @@ $flg = "add";
 		</td>
 	</tr>
 	<tr>
-		<td class="title">Asset</td>
+		<td class="title">Aset</td>
 		<td class="title">:</td>
 		<td>
 			<select name="txtAsset" id="txtAsset">
@@ -181,8 +181,8 @@ $flg = "add";
 	<td colspan="3">
             <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
-            <input type="submit" value="Submit" name="submit" class="button" onClick="return confirm('Do you wish to proceed?');"/>
-            <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_workorder'" class="button"/>
+            <input type="submit" value="Hantar" name="submit" class="button" onClick="return confirm('Do you wish to proceed?');"/>
+            <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_workorder'" class="button"/>
         </td>
 </table>
 </form>
