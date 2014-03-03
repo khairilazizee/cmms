@@ -74,7 +74,7 @@ if($a = mysql_fetch_array($result)){
             <input type="hidden" name="assetid" value="<?php echo $aid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
             <input type="submit" value="Hantar" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
-            <input type="button" name="back" value="Ke mbali" onclick="location.href='mainpage.php?module=Setup&task=list_sysgroup'" class="button"/>
+            <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_sysgroup'" class="button"/>
         </td>
     </tr> 
 </table>
