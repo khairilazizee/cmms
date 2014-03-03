@@ -37,10 +37,10 @@ if($a = mysql_fetch_array($result)){
 <form name="frmtask" method="POST" action="">
 <table width="100%" cellspacing="3" cellpadding="3" align="center" class="outerform">
     <tr>
-        <td style="font-weight:bold;" class="formheader" colspan="3">Setup Assets</td>
+        <td style="font-weight:bold;" class="formheader" colspan="3">Aset</td>
     </tr>
     <tr>
-        <td width="220" valign="middle" class="title">Asset Group</td>
+        <td width="220" valign="middle" class="title">Kumpulan Aset</td>
         <td width="5" valign="middle" class="title">:</td>
         <td>
             <select name="txtSystemGroup" id="txtSystemGroup">
@@ -63,7 +63,7 @@ if($a = mysql_fetch_array($result)){
         </td>
     </tr>
     <tr>
-        <td width="220" valign="middle" class="title">Assets Description</td>
+        <td width="220" valign="middle" class="title">Penerangan Aset</td>
         <td width="5" valign="middle" class="title">:</td>
         <td>
             <textarea name="txtAssetDesc" rows="3" wrap="physical" cols="100%"><?php echo $adesc;?></textarea>
@@ -98,8 +98,8 @@ if($a = mysql_fetch_array($result)){
         <td colspan="3">
             <input type="hidden" name="assetid" value="<?php echo $aid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
-            <input type="submit" value="Submit" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
-            <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_asset'" class="button"/>
+            <input type="submit" value="Hantar" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
+            <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_asset'" class="button"/>
         </td>
     </tr> 
 </table>
