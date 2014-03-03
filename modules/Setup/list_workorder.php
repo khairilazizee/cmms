@@ -10,7 +10,7 @@ else
   $rowstart = $_GET["limit"];
 
 ?>
-<div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_workorder">Tambah</a></div><br>
+<div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_workorder">Tambah<img src="images/admin/btn_add.gif"></a></div><br>
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
 	<tr>
 		<td style="font-weight:bold;" colspan="5">Senarai Arahan Kerja</td>
