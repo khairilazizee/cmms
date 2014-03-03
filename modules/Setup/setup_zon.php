@@ -55,7 +55,7 @@ if($a = mysql_fetch_array($result)){
 <form name="frmtask" method="POST" action="">
 <table width="100%" cellspacing="3" cellpadding="3" align="center" class="outerform">
     <tr>
-        <td style="font-weight:bold;" class="formheader" colspan="3">Penyediaan Zon</td>
+        <td style="font-weight:bold;" class="formheader" colspan="3">Zon</td>
     </tr>
     <tr>
         <td width="120" valign="top">Penerangan Zon</td>
@@ -93,8 +93,8 @@ if($a = mysql_fetch_array($result)){
         <td colspan="3">
             <input type="hidden" name="zonid" value="<?php echo $tid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
-            <input type="submit" value="Submit" name="submit" class="button" onClick="return checkform();">
-            <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_zon'" class="button"/>
+            <input type="submit" value="Hantar" name="submit" class="button" onClick="return checkform();">
+            <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_zon'" class="button"/>
         </td>
     </tr>
 </table>
