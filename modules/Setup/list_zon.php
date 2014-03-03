@@ -33,7 +33,7 @@ if($_GET['delete']=="1"){
     <tr>
         <th class="formheader" width="30" align="center">No</th>
         <th class="formheader">Zon</th>
-        <th class="formheader" width="100" align="center">Tin dakan</th>
+        <th class="formheader" width="100" align="center">Tindakan</th>
     </tr>
     <?php
     
