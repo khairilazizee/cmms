@@ -39,10 +39,10 @@ if($a = mysql_fetch_array($result)){
 <form name="frmtask" method="POST" action="">
 <table width="100%" cellspacing="3" cellpadding="0" align="center" class="outerform">
     <tr>
-        <td style="font-weight:bold;" class="formheader" colspan="3">Setup Task</td>
+        <td style="font-weight:bold;" class="formheader" colspan="3">Tugasan</td>
     </tr>
     <tr>
-        <td width="120" valign="middle" class="title">Task Description</td>
+        <td width="120" valign="middle" class="title">Penerangan Tugasan</td>
         <td width="5" valign="middle" class="title">:</td>
         <td>
             <textarea name="txtTaskDesc" rows="3" wrap="physical" cols="80"><?php echo $tdesc;?></textarea>
@@ -77,8 +77,8 @@ if($a = mysql_fetch_array($result)){
         <td colspan="3">
             <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
-            <input type="submit" value="Submit" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
-            <input type="button" name="back" value="Back" onclick="location.href='mainpage.php?module=Setup&task=list_task'" class="button"/>
+            <input type="submit" value="Hantar" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
+            <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_task'" class="button"/>
         </td>
     </tr> 
 </table>
