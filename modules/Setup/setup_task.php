@@ -4,35 +4,37 @@ $tid = $_GET['taskid'];
 
 if($_POST['submit']){
     $taskdesc = mysql_real_escape_string($_POST['txtTaskDesc']);
+    $sysgroup = $_POST['txtSystemGroup'];
     
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO task (task_desc) VALUES ('$taskdesc')";
+        $insert = "INSERT INTO task (task_desc, task_sg_id) VALUES ('$taskdesc','$sysgroup')";
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE task SET task_desc='$taskdesc' WHERE task_id='$tid'";
+        $update = "UPDATE task SET task_desc='$taskdesc', task_sg_id='$sysgroup' WHERE task_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
     
-    pageredirect("mainpage.php?module=Setup&task=setup_task");
+    pageredirect("mainpage.php?module=Setup&task=list_task");
     
 }
 
 
 $flg = "add";
-$check = "SELECT task_desc, task_ag_id, task_staff_id, task_asset_id, task_sys_id, task_date FROM task WHERE task_id='$tid'";
+$check = "SELECT task_desc, task_sg_id FROM task WHERE task_id='$tid'";
 //echo $check;
 $result = sql_query($check,$dbi);
 if($a = mysql_fetch_array($result)){
     $flg = "edit";
     $tdesc = $a['task_desc'];
-    $tagid = $a['task_ag_id'];
-    $tstaff = $a['task_staff_id'];
-    $tasset = $a['task_asset_id'];
-    $tsystem = $a['task_sys_id'];
-    $tdate = $a['task_date'];
+    $tsgid = $a['task_sg_id'];
+    // $tagid = $a['task_ag_id'];
+    // $tstaff = $a['task_staff_id'];
+    // $tasset = $a['task_asset_id'];
+    // $tsystem = $a['task_sys_id'];
+    // $tdate = $a['task_date'];
 }
 
 ?>
@@ -40,6 +42,25 @@ if($a = mysql_fetch_array($result)){
 <table width="100%" cellspacing="3" cellpadding="0" align="center" class="outerform">
     <tr>
         <td style="font-weight:bold;" class="formheader" colspan="3">Tugasan</td>
+    </tr>
+    <tr>
+        <td width="220" valign="middle" class="title">Kumpulan Sistem</td>
+        <td width="5" valign="middle" class="title">:</td>
+        <td>
+            <select name="txtSystemGroup" id="txtSystemGroup">
+                <option value="">- PILIH -</option>
+                <?php
+                    $sql = "SELECT sg_id, sg_desc FROM system_group ORDER BY sg_id";
+                    $res = mysql_query($sql,$dbi);
+                    while($sgdata = mysql_fetch_array($res)){
+                        $sgid = $sgdata['sg_id'];
+                        $sgdesc = $sgdata['sg_desc'];
+
+                        echo "<option value='$sgid'>$sgdesc</option>";
+                    }
+                ?>
+            </select>
+        </td>
     </tr>
     <tr>
         <td width="120" valign="middle" class="title">Penerangan Tugasan</td>
