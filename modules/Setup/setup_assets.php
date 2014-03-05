@@ -1,3 +1,20 @@
+<script type="text/javascript">
+    function checkform(){
+        if (document.frmtask.txtSystemGroup.value=="") {
+            alert("Sila pilih Kumpulan Aset.");
+            document.frmtask.txtSystemGroup.focus();
+            return false;
+        }
+        else if (document.frmtask.txtAssetDesc.value==""){
+            alert("Sila masukkan penerangan aset.");
+            document.frmtask.txtAssetDesc.focus();
+            return false;
+        }
+        else{
+            return confirm("Adakah anda pasti?");
+        }
+    }
+</script>
 <?php
 
 $tid = $_GET['assetid'];
@@ -98,7 +115,7 @@ if($a = mysql_fetch_array($result)){
         <td colspan="3">
             <input type="hidden" name="assetid" value="<?php echo $aid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
-            <input type="submit" value="Hantar" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
+            <input type="submit" value="Hantar" name="submit" class="button"/ onClick="return checkform();">
             <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_asset'" class="button"/>
         </td>
     </tr> 
