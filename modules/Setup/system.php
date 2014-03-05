@@ -6,7 +6,7 @@ $txtSysGroup = $_GET['txtSysGroup'];
 // die($txtSysGroup);
 
 echo "<option value=''>- PILIH -</option>";
-$sqlsystem = "SELECT sys_id, sys_desc FROM system WHERE sys_id='$txtSysGroup'";
+$sqlsystem = "SELECT sys_id, sys_desc FROM system WHERE sys_sg_id='$txtSysGroup'";
 $ressystem = mysql_query($sqlsystem,$dbi);
 while($datasystem = mysql_fetch_array($ressystem)){
 	$sysid = $datasystem['sys_id'];

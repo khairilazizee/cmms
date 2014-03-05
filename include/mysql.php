@@ -110,4 +110,34 @@ $start_date=gregoriantojd($date_parts1[1], $date_parts1[0], $date_parts1[2]);
 $end_date=gregoriantojd($date_parts2[1], $date_parts2[0], $date_parts2[2]);
 return $end_date - $start_date;
 }
+
+function namabulan($bulan){
+  if($bulan==1){
+    $namabulan = "Januari";
+  } elseif($bulan==2){
+    $namabulan = "Februari";
+  } elseif($bulan==3){
+    $namabulan = "Mac";
+  } elseif($bulan==4){
+     $namabulan = "April";
+  } elseif($bulan==5){
+    $namabulan = "Mei";
+  } elseif($bulan==6){
+    $namabulan = "Jun";
+  } elseif($bulan==7){
+    $namabulan = "Julai";
+  } elseif($bulan==8){
+    $namabulan = "Ogos";
+  } elseif($bulan==9){
+    $namabulan = "September";
+  } elseif($bulan==10){
+    $namabulan = "Oktober";
+  } elseif($bulan==11){
+    $namabulan = "November";
+  } elseif($bulan==12){
+    $namabulan = "Disember";
+  }
+
+  return $namabulan;
+}
 ?>
