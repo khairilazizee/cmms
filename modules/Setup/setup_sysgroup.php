@@ -1,7 +1,7 @@
 <script type="text/javascript">
     function checkform(){
         if (document.frmtask.txtAssetDesc.value=="") {
-            alert("Sila masukkan penerangan kumpulan tugasan.");
+            alert("Sila masukkan penerangan kumpulan sistem.");
             document.frmtask.txtAssetDesc.focus();
             return false;
         }
