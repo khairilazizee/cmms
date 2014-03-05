@@ -1,3 +1,20 @@
+<script type="text/javascript">
+    function checkform(){
+        if (document.frmtask.txtSystemGroup.value=="") {
+            alert("Sila pilih Kumpulan Sistem.");
+            document.frmtask.txtSystemGroup.focus();
+            return false;
+        }
+        else if (document.frmtask.txtTaskDesc.value==""){
+            alert("Sila masukkan penerangan tugasan.");
+            document.frmtask.txtTaskDesc.focus();
+            return false;
+        }
+        else{
+            return confirm("Adakah anda pasti?");
+        }
+    }
+</script>
 <?php
 
 $tid = $_GET['taskid'];
@@ -56,7 +73,10 @@ if($a = mysql_fetch_array($result)){
                         $sgid = $sgdata['sg_id'];
                         $sgdesc = $sgdata['sg_desc'];
 
-                        echo "<option value='$sgid'>$sgdesc</option>";
+                        echo "<option value='$sgid' "; 
+                        if($sgid==$tsgid)
+                            echo "selected "; 
+                        echo ">$sgdesc</option>";
                     }
                 ?>
             </select>
@@ -98,7 +118,7 @@ if($a = mysql_fetch_array($result)){
         <td colspan="3">
             <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
             <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
-            <input type="submit" value="Hantar" name="submit" class="button"/ onClick="return confirm('Do you wish to proceed?');">
+            <input type="submit" value="Hantar" name="submit" class="button"/ onClick="return checkform();">
             <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_task'" class="button"/>
         </td>
     </tr> 
