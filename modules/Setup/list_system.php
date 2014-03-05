@@ -1,3 +1,9 @@
+<script type="text/javascript">
+    function cari(){
+        var carian=document.frmcarian.txtSystemGroup.value;
+        location.href="mainpage.php?module=Setup&task=list_system&kumpcarian="+carian;
+    }
+</script>
 <?php
 
 include('include/function.php');
@@ -24,7 +30,37 @@ if($_GET['delete']=="1"){
     pageredirect("mainpage.php?module=Setup&task=list_system");
 }
 
+$kumpsistem=$_GET["kumpcarian"];
+
 ?>
+<div style="float:left;">
+    <table>
+        <form name="frmcarian">
+        <tr>
+            <td>Kump. Sistem</td>
+            <td>:</td>
+            <td>
+                <select name="txtSystemGroup" id="txtSystemGroup" onchange="return cari();">
+                    <option value="">- SEMUA -</option>
+                    <?php
+                        $sql = "SELECT sg_id, sg_desc FROM system_group ORDER BY sg_id";
+                        $res = mysql_query($sql,$dbi);
+                        while($sgdata = mysql_fetch_array($res)){
+                            $sgid = $sgdata['sg_id'];
+                            $sgdesc = $sgdata['sg_desc'];
+
+                            echo "<option value='$sgid' "; 
+                            if($sgid==$kumpsistem)
+                                echo "selected "; 
+                            echo ">$sgdesc</option>";
+                        }
+                    ?>
+                </select>
+            </td>
+        </tr>
+        </form>
+    </table>
+</div>
 <div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_system">Tambah<img src="images/admin/btn_add.gif"></a></div><br>
 <table width="100%" cellspacing="1" cellpadding="4" align="center" class="table">
     <tr>
@@ -38,7 +74,10 @@ if($_GET['delete']=="1"){
     </tr>
     <?php
     
-    $sql = "SELECT sys_id, sys_desc , sys_sg_id from system ORDER BY sys_id";
+    $sql = "SELECT sys_id, sys_desc , sys_sg_id from system WHERE 1 ";
+    if ($kumpsistem<>"")
+        $sql.="and sys_sg_id='$kumpsistem' ";
+    $sql.="ORDER BY sys_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);
