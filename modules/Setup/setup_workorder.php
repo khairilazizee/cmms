@@ -33,6 +33,9 @@ if($_POST['submit']){
 			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id) VALUES ('$sysgroup','$system','$task','$juruteknik','$tarikhmula','$asgroup','$asset')";
 			$resworkorder = mysql_query($sqlworkorder,$dbi);
 		}
+	} elseif($flg == "edit"){
+		$update = "UPDATE tbl_workorder SET sg_id='$sysgroup', sys_id='$system', task_id='$task', staff_id='$juruteknik', task_date='$tarikhmula', ag_id='$asgroup', asset_id='$asset' WHERE id='$idworkorder'";
+		mysql_query($update,$dbi);
 	}
 
 	pageredirect("mainpage.php?module=Setup&task=list_workorder");
