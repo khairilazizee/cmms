@@ -77,7 +77,7 @@ $kumpsistem=$_GET["kumpcarian"];
     $sql = "SELECT task_id, task_desc, task_sg_id from task WHERE 1 ";
     if ($kumpsistem<>"")
         $sql.="and task_sg_id='$kumpsistem' ";
-    $sql.="ORDER BY task_id";
+    $sql.="ORDER BY ORDER BY task_sg_id, task_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);
@@ -93,7 +93,7 @@ $kumpsistem=$_GET["kumpcarian"];
         echo "<td align=\"center\">$cnt</td>";
         echo "<td>$tdesc</td>";
         echo "<td>".GetDesc("system_group","sg_desc","sg_id",$tsgid)."</td>";
-        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_task&taskid=$tid\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_task&delete=1&iddelete=$tid\" onClick=\"return confirm('Do you wish to proceed?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
+        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_task&taskid=$tid\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_task&delete=1&iddelete=$tid\" onClick=\"return confirm('Adakah anda pasti?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
         echo "</tr>";
     }
     
