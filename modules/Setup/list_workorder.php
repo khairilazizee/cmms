@@ -17,10 +17,10 @@ else
 	</tr>
 	<tr>
 		<th width="5">Bil</th>
-		<th>Tarikh</th>
-		<th>Tugasan</th>
-		<th width="30">Juruteknik Bertugas</th>
-		<th width="15">Tindakan</td>
+        <th width="50">Tarikh</th>
+        <th width="200">Tugasan</th>
+        <th>Juruteknik Bertugas</th>
+        <th width="15">Tindakan</td>
 	</tr>
 	<?php
 
