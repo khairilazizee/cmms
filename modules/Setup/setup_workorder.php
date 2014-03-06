@@ -90,12 +90,12 @@ $flg = "add";
 				<option value="">- PILIH -</option>
 				<?php
 					$sqltugasan = "SELECT tg_id, tg_desc FROM task_group";
-					$restugasan = mysqltugasan_query($sqltugasan,$dbi);
+					$restugasan = mysql_query($sqltugasan,$dbi);
 					while($datatg = mysql_fetch_array($restugasan)){
 						$tgid = $datatg['tg_id'];
 						$tgdesc = $datatg['tg_desc'];
 
-						echo "<option value='$tgid'>$sgdesc</option>";
+						echo "<option value='$tgid'>$tgdesc</option>";
 					}
 				?>
 			</select>
