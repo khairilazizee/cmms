@@ -234,6 +234,17 @@ $(function() {
      });
  });
 
+ $("#txtSysGroup, #txtAssetGroup" ).bind("change", function() {
+ 	$.ajax({
+ 		type:"GET",
+ 		url:"modules/Setup/juruteknik.php",
+ 		data:"txtSysGroup="+$("#txtSysGroup").val() + "&agid="+$("#txtAssetGroup").val(),
+ 		success:function(html){
+ 			$("#txtJuruteknik").html(html);
+ 		}
+ 	});
+ });
+
 
 });
 </script>
