@@ -24,7 +24,7 @@ else
 	</tr>
 	<?php
 
-	$sql = "SELECT task_date, task_id, staff_id FROM tbl_workorder WHERE id";
+	$sql = "SELECT task_date, task_id, staff_id FROM tbl_workorder WHERE id ORDER BY task_date";
 	$sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);
