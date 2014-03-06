@@ -49,3 +49,8 @@ else
     
     ?>
 </table>
+<div style="text-align:center;">
+    <?php
+    print $Mfunction->page("?module=Setup&task=list_workorder", $limit, $rowstart, $numrows);
+    ?>
+</div>
