@@ -83,6 +83,25 @@ $flg = "add";
 		</td>
 	</tr>
 	<tr>
+		<td width="100" class="title">Kumpulan Tugasan</td>
+		<td width="5" class="title">:</td>
+		<td>
+			<select name="txtKumpTugasan" id="txtKumpTugasan">
+				<option value="">- PILIH -</option>
+				<?php
+					$sqltugasan = "SELECT tg_id, tg_desc FROM task_group";
+					$restugasan = mysqltugasan_query($sqltugasan,$dbi);
+					while($datatg = mysql_fetch_array($restugasan)){
+						$tgid = $datatg['tg_id'];
+						$tgdesc = $datatg['tg_desc'];
+
+						echo "<option value='$tgid'>$sgdesc</option>";
+					}
+				?>
+			</select>
+		</td>
+	</tr>
+	<tr>
 		<td class="title">Tugasan</td>
 		<td class="title">:</td>
 		<td>
