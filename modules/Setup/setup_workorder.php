@@ -176,7 +176,7 @@ $flg = "add";
 					$restech = mysql_query($sqltech,$dbi);
 					while($datatech = mysql_fetch_array($restech)){
 						$techid = $datatech['staff_id'];
-						$techname = $datatech['Staff_name'];
+						$techname = $datatech['staff_name'];
 
 						echo "<option value='$techid'>$techname</option>";
 					}
