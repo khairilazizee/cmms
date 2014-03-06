@@ -33,6 +33,8 @@ if($_POST['submit']){
 		}
 	}
 
+	pageredirect("mainpage.php?module=Setup&task=list_workorder");
+
 	
 }
 
