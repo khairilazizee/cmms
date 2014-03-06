@@ -103,7 +103,7 @@ if ($next_month == 13 ) {
 			$taskid = $data['task_id'];
 			$namatugasan = GetDesc("task","task_desc","task_id",$taskid);
 			$staff_id = $data['staff_id'];
-			$namastaff = GetDesc("user","nama","id",$staff_id);
+			$namastaff = GetDesc("staff","staff_name","staff_id",$staff_id);
 			$bil++;
 
 			echo "<tr>";
