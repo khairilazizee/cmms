@@ -28,11 +28,11 @@ function page($href, $limit, $rowstart, $numrows) {
 
                 if($rowstart == (($c*$limit)-$limit))
 
-                    $n_info     = $n_info."<span class='caltoday'>ms".$c."</span> ";
+                    $n_info     = $n_info."<span class='caltoday'>".$c."</span> ";
 
                 else
 
-                    $n_info     = $n_info."<a href='$href&limit=".(($c*$limit)-$limit)."'>ms".$c."</a> ";
+                    $n_info     = $n_info."<a href='$href&limit=".(($c*$limit)-$limit)."'>".$c."</a> ";
 
                 $c++;
 
