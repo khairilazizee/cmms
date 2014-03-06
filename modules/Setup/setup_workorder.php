@@ -128,25 +128,6 @@ $flg = "add";
 			</td>
 	</tr>
 	<tr>
-		<td class="title">Juru Teknik</td>
-		<td class="title">:</td>
-		<td>
-			<select name="txtJuruteknik" id="txtJuruteknik">
-				<?php
-					echo "<option value=''>- PILIH -</option>";
-					$sqltech = "SELECT nama, id FROM user WHERE role='15'";
-					$restech = mysql_query($sqltech,$dbi);
-					while($datatech = mysql_fetch_array($restech)){
-						$techid = $datatech['id'];
-						$techname = $datatech['nama'];
-
-						echo "<option value='$techid'>$techname</option>";
-					}
-				?>
-			</select>
-		</td>
-	</tr>
-	<tr>
 		<td class="title">Kumpulan Aset</td>
 		<td class="title">:</td>
 		<td>
@@ -179,6 +160,25 @@ $flg = "add";
 						$assetdesc = $dataasset['asset_desc'];
 
 						echo "<option value='$assetid'>$assetdesc</option>";
+					}
+				?>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Juru Teknik</td>
+		<td class="title">:</td>
+		<td>
+			<select name="txtJuruteknik" id="txtJuruteknik">
+				<?php
+					echo "<option value=''>- PILIH -</option>";
+					$sqltech = "SELECT staff_id, staff_name FROM staff ";
+					$restech = mysql_query($sqltech,$dbi);
+					while($datatech = mysql_fetch_array($restech)){
+						$techid = $datatech['staff_id'];
+						$techname = $datatech['Staff_name'];
+
+						echo "<option value='$techid'>$techname</option>";
 					}
 				?>
 			</select>
