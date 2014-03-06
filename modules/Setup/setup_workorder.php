@@ -1,5 +1,7 @@
 <?php
 
+$idworkorder = mysql_real_escape_string($_GET['sysid']);
+
 if($_POST['submit']){
 	$sysgroup = $_POST['txtSysGroup'];
 	$system = $_POST['txtSystem'];
@@ -39,6 +41,20 @@ if($_POST['submit']){
 }
 
 $flg = "add";
+$sql = "SELECT sg_id, sys_id, tg_id, task_id, staff_id, task_date, ag_id, asset_id FROM tbl_workorder WHERE 1 and id='$idworkorder'";
+$res = mysql_query($sql,$dbi);
+if(mysql_num_rows($res)>0){
+	$data = mysql_fetch_array($res);
+	$sysgroupid = $data['sg_id'];
+	$systemid = $data['sys_id'];
+	$taskgroupid = $data['tg_id'];
+	$taskpilihid = $data['task_id'];
+	$staffid = $data['staff_id'];
+	$taskdate = $data['task_date'];
+	$assetgroupid = $data['ag_id'];
+	$assetpilihid = $data['asset_id'];
+	$flg = "edit";
+}
 
 ?>
 <form name="frmtask" method="POST" action="">
@@ -59,7 +75,11 @@ $flg = "add";
 						$sgid = $datasg['sg_id'];
 						$sgdesc = $datasg['sg_desc'];
 
-						echo "<option value='$sgid'>$sgdesc</option>";
+						echo "<option";
+						if($sysgroupid==$sgid){
+							echo " SELECTED ";
+						}
+						echo" value='$sgid'>$sgdesc</option>";
 					}
 				?>
 			</select>
@@ -78,7 +98,11 @@ $flg = "add";
 						$sysid = $datasystem['sys_id'];
 						$sysdesc = $datasystem['sys_desc'];
 
-						echo "<option value='$sysid'>$sysdesc</option>";
+						echo "<option ";
+						if($systemid==$sysid){
+							echo " SELECTED ";
+						}
+						echo " value='$sysid'>$sysdesc</option>";
 					}
 				?>
 			</select>
@@ -97,7 +121,11 @@ $flg = "add";
 						$tgid = $datatg['tg_id'];
 						$tgdesc = $datatg['tg_desc'];
 
-						echo "<option value='$tgid'>$tgdesc</option>";
+						echo "<option ";
+						if($taskgroupid==$tgid){
+							echo " SELECTED ";
+						}
+						echo " value='$tgid'>$tgdesc</option>";
 					}
 				?>
 			</select>
@@ -116,7 +144,11 @@ $flg = "add";
 						$taskid = $datatask['task_id'];
 						$taskdesc = $datatask['task_desc'];
 
-						echo "<option value='$taskid'>$taskdesc</option>";
+						echo "<option ";
+						if($taskpilihid==$taskid){
+							echo " SELECTED ";
+						}
+						echo " value='$taskid'>$taskdesc</option>";
 					}
 				?>
 			</select>
@@ -125,7 +157,7 @@ $flg = "add";
 	<tr>
 		<td>Tarikh Mula</td>
             <td>:</td>
-            <td><input type="text" readonly="" size="12" maxlength="12" name="txtTarikhMula" id="txtTarikhMula" value="<?php echo $session_start; ?>">
+            <td><input type="text" readonly="" size="12" maxlength="12" name="txtTarikhMula" id="txtTarikhMula" value="<?php echo $taskdate; ?>">
         <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.frmtask.txtTarikhMula);return false;" ><img class="PopcalTrigger" align="absmiddle" src="popupcal/calbtn.gif" width="34" height="22" border="0" alt=""></a> 
 			</td>
 	</tr>
@@ -142,7 +174,11 @@ $flg = "add";
 						$agid = $dataag['ag_id'];
 						$agdesc = $dataag['ag_desc'];
 
-						echo "<option value='$agid'>$agdesc</option>";
+						echo "<option ";
+						if($assetgroupid==$agid){
+							echo " SELECTED ";
+						}
+						echo " value='$agid'>$agdesc</option>";
 					}
 				?>
 			</select>
@@ -161,7 +197,11 @@ $flg = "add";
 						$assetid = $dataasset['asset_id'];
 						$assetdesc = $dataasset['asset_desc'];
 
-						echo "<option value='$assetid'>$assetdesc</option>";
+						echo "<option ";
+						if($assetpilihid == $assetid){
+							echo " SELECTED ";
+						}
+						echo " value='$assetid'>$assetdesc</option>";
 					}
 				?>
 			</select>
@@ -180,12 +220,17 @@ $flg = "add";
 						$techid = $datatech['staff_id'];
 						$techname = $datatech['staff_name'];
 
-						echo "<option value='$techid'>$techname</option>";
+						echo "<option ";
+						if($staffid == $techid){
+							echo " SELECTED ";
+						}
+						echo " value='$techid'>$techname</option>";
 					}
 				?>
 			</select>
 		</td>
 	</tr>
+	<?php if($flg == "add") { ?>
 	<tr>
 		<td class="title">Kekerapan Tugas</td>
 		<td class="title">:</td>
@@ -199,12 +244,15 @@ $flg = "add";
 			</select>
 		</td>
 	</tr>
-	<td colspan="3">
-            <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
-            <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
-            <input type="submit" value="Hantar" name="submit" class="button" onClick="return confirm('Do you wish to proceed?');"/>
-            <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_workorder'" class="button"/>
-        </td>
+	<?php } ?>
+	<tr>
+		<td colspan="3">
+	        <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
+	        <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
+	        <input type="submit" value="Hantar" name="submit" class="button" onClick="return confirm('Do you wish to proceed?');"/>
+	        <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_workorder'" class="button"/>
+	    </td>
+    </tr>
 </table>
 </form>
 

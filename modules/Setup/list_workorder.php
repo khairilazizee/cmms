@@ -9,6 +9,17 @@ if(!isset($_GET["limit"]))
 else
   $rowstart = $_GET["limit"];
 
+if($_GET['delete']==1){
+    $iddelete = mysql_real_escape_string($_GET['iddelete']);
+
+    $check = "SELECT id FROM tbl_workorder WHERE id='$iddelete'";
+    $rescheck = mysql_query($check,$dbi);
+    if(mysql_num_rows($rescheck)>0){
+        $delete = mysql_query("DELETE FROM tbl_workorder WHERE id='$iddelete'");
+        pageredirect("mainpage.php?module=Setup&task=list_workorder");
+    }
+}
+
 ?>
 <div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_workorder">Tambah<img src="images/admin/btn_add.gif"></a></div><br>
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
@@ -24,13 +35,14 @@ else
 	</tr>
 	<?php
 
-	$sql = "SELECT task_date, task_id, staff_id FROM tbl_workorder WHERE id ORDER BY task_date";
+	$sql = "SELECT task_date, task_id, staff_id, id FROM tbl_workorder WHERE id ORDER BY task_date";
 	$sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);
     $cnt=$rowstart;
     $numrows = mysql_num_rows($res);
     while($data = mysql_fetch_array($resfull)){
+        $idworkorder = $data['id'];
         $taskdate = fmtdate($data['task_date']);
         $taskid = $data['task_id'];
         $tugasan = GetDesc("task","task_desc","task_id",$taskid);
@@ -43,7 +55,7 @@ else
         echo "<td>$taskdate</td>";
         echo "<td>$tugasan</td>";
         echo "<td>$namastaff</td>";
-        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_sysgroup&sysid=$tid\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_sysgroup&delete=1&iddelete=$tid\" onClick=\"return confirm('Do you wish to proceed?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
+        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_workorder&sysid=$idworkorder\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_workorder&delete=1&iddelete=$idworkorder\" onClick=\"return confirm('Do you wish to proceed?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
         echo "</tr>";
     }
     
