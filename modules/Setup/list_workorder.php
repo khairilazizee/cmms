@@ -35,7 +35,7 @@ else
         $taskid = $data['task_id'];
         $tugasan = GetDesc("task","task_desc","task_id",$taskid);
         $staffid = $data['staff_id'];
-        $namastaff = GetDesc("user","nama","id",$staffid);
+        $namastaff = GetDesc("staff","staff_name","staff_id",$staffid);
         $cnt++;
         
         echo "<tr bgcolor=\"$bgcolor\" onMouseOver=\"this.bgColor = '$hlcolor'\" onMouseOut =\"this.bgColor = '$bgcolor'\">\n";
