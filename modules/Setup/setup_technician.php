@@ -52,10 +52,16 @@ if($_POST['submit']){
         $insert = "INSERT INTO staff (staff_id,staff_name, staff_ag_id, staff_sg_id) VALUES ('$idstafbaru','$namastaff','$agroup','$sysgroup')";
         // die($insert);
         sql_query($insert,$dbi);
+
+        $tambah = "INSERT INTO user (login, password, role, nama) VALUES ('$idstafbaru','".md5(123)."','15','$namastaff')";
+        mysql_query($tambah,$dbi);
     } elseif($flg == "edit"){
         $update = "UPDATE staff SET staff_name='$namastaff', staff_ag_id='$agroup', staff_sg_id='$sysgroup' WHERE staff_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
+
+        $edit = "UPDATE user SET login='$idstafbaru', nama='$namastaff' WHERE id='".$_SESSION['staff_id_table_user']."'";
+        mysql_query($edit,$dbi);
     }
     
     pageredirect("mainpage.php?module=Setup&task=list_technician");
@@ -72,11 +78,9 @@ if($a = mysql_fetch_array($result)){
     $tname = $a['staff_name'];
     $tagid = $a['staff_ag_id'];
     $tsgid = $a['staff_sg_id'];
-    // $tagid = $a['task_ag_id'];
-    // $tstaff = $a['task_staff_id'];
-    // $tasset = $a['task_asset_id'];
-    // $tsystem = $a['task_sys_id'];
-    // $tdate = $a['task_date'];
+    
+    $check_id = GetDesc("user","id","login",$tid);
+    $_SESSION['staff_id_table_user'] = $check_id;
 }
 
 ?>
