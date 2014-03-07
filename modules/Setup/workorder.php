@@ -86,17 +86,19 @@ if ($next_month == 13 ) {
 
 <table class="table" width="100%">
 	<tr>
-		<td class="formheader" colspan="4" style="font-weight:bold;text-align:center;text-transform:uppercase;background:#fff;color:#000;">Senarai Tugasan pada <?php echo $tarikhsemasa;?></td>
+		<td class="formheader" colspan="6" style="font-weight:bold;text-align:center;text-transform:uppercase;background:#fff;color:#000;">Senarai Tugasan pada <?php echo $tarikhsemasa;?></td>
 	</tr>
 	<tr>
 		<th width="5">Bil</th>
 		<th>Tugasan</th>
 		<th>Juruteknik</th>
-		<th width="100">Tindakan</th>
+		<th>Kump. Asset</th>
+		<th>Asset</th>
+		<!-- <th width="100">Tindakan</th> -->
 	</tr>
 	<?php
 		$bil = 0;
-		$sqltugasan = "SELECT task_id, staff_id FROM tbl_workorder WHERE task_date='$currentdate'";
+		$sqltugasan = "SELECT task_id, staff_id, ag_id, asset_id FROM tbl_workorder WHERE task_date='$currentdate'";
 		// echo $sqltugasan;
 		$restugasan = mysql_query($sqltugasan,$dbi);
 		while($data = mysql_fetch_array($restugasan)){
@@ -104,13 +106,19 @@ if ($next_month == 13 ) {
 			$namatugasan = GetDesc("task","task_desc","task_id",$taskid);
 			$staff_id = $data['staff_id'];
 			$namastaff = GetDesc("staff","staff_name","staff_id",$staff_id);
+			$agid = $data['ag_id'];
+			$namaassetgroup = GetDesc("asset_group","ag_desc","ag_id",$agid);
+			$asset = $data['asset_id'];
+			$namaasset = GetDesc("asset","asset_desc","asset_id",$asset);
 			$bil++;
 
 			echo "<tr>";
 			echo "<td>$bil</td>";
 			echo "<td>$namatugasan</td>";
 			echo "<td>$namastaff</td>";
-			echo "<td><img src='images/admin/btn_papar.gif'/></td>";
+			echo "<td>$namaassetgroup</td>";
+			echo "<td>$namaasset</td>";
+			// echo "<td align='center'><img src='images/admin/btn_papar.gif'/></td>";
 			echo "</tr>";
 		}
 	?>
