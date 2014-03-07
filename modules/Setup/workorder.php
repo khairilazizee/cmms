@@ -1,5 +1,7 @@
 <?php
 
+$staffid = $_SESSION['staffid'];
+
 $cMonth = $_REQUEST["month"];
 $cYear = $_REQUEST["year"];
 $cDay = $_REQUEST['day'];
@@ -99,6 +101,10 @@ if ($next_month == 13 ) {
 	<?php
 		$bil = 0;
 		$sqltugasan = "SELECT task_id, staff_id, ag_id, asset_id FROM tbl_workorder WHERE task_date='$currentdate'";
+
+		if($staffid<>""){
+			$sqltugasan .=" and staff_id='$staffid'";
+		}
 		// echo $sqltugasan;
 		$restugasan = mysql_query($sqltugasan,$dbi);
 		while($data = mysql_fetch_array($restugasan)){
