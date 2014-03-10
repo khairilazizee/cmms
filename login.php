@@ -18,7 +18,7 @@
 			 $negeri=sql_result($res1,0,"negeri");
 			 $kodppd=sql_result($res1,0,"kodppd");
 			 $kodsek=sql_result($res1,0,"kodsek");
-			 $staffid = sql_result($res1,0,"staff_id");
+			 $staffid = sql_result($res1,0,"login");
 			 
 			 
 		   }
