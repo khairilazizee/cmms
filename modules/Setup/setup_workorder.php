@@ -22,15 +22,15 @@ if($_POST['submit']){
 			for ( $counter = 0; $counter <= $hari; $counter+= $kekerapan) {
 				$tarikhbaru[$counter] = date("Y-m-d", strtotime("$tarikhmula +$counter days"));
 				// echo $counter.$tarikhbaru[$counter]."<br />";
-				$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id) VALUES ('$sysgroup','$system','$task','$juruteknik','".$tarikhbaru[$counter]."','$asgroup','$asset')";
+				$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id,ws_id) VALUES ('$sysgroup','$system','$task','$juruteknik','".$tarikhbaru[$counter]."','$asgroup','$asset','1')";
 				$resworkorder = mysql_query($sqlworkorder,$dbi);
 			}
 		} elseif($kekerapan == 365) {
 			$tarikhbaru = date("Y-m-d", strtotime("$tarikhmula +$kekerapan days"));
-			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id) VALUES ('$sysgroup','$system','$task','$juruteknik','$tarikhbaru','$asgroup','$asset')";
+			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id,ws_id) VALUES ('$sysgroup','$system','$task','$juruteknik','$tarikhbaru','$asgroup','$asset','1')";
 			$resworkorder = mysql_query($sqlworkorder,$dbi);
 		} else {
-			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id) VALUES ('$sysgroup','$system','$task','$juruteknik','$tarikhmula','$asgroup','$asset')";
+			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id,ws_id) VALUES ('$sysgroup','$system','$task','$juruteknik','$tarikhmula','$asgroup','$asset','1')";
 			$resworkorder = mysql_query($sqlworkorder,$dbi);
 		}
 	} elseif($flg == "edit"){

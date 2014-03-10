@@ -1,4 +1,12 @@
 <?php
+session_start();
+$staffrole = $_SESSION['userrole'];
+
+$sql2=sql_query("select staff_id from staff where staff_id='".$_SESSION["username"]."' ",$dbi);
+$res2=sql_fetch_array($sql2);
+$staffid=$res2["staff_id"];
+
+// echo "Staff ID=".$staffid;
 
 include('include/function.php');
 $Mfunction = new fungsi();
@@ -21,21 +29,30 @@ if($_GET['delete']==1){
 }
 
 ?>
-<div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_workorder">Tambah<img src="images/admin/btn_add.gif"></a></div><br>
+<div style="text-align:right;font-weight:bold;">
+    <?php if ($staffrole<>15) {
+        echo "<a href=\"mainpage.php?module=Setup&task=setup_workorder\">Tambah<img src=\"images/admin/btn_add.gif\"></a>";
+    } ?>
+</div><br>
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
 	<tr>
-		<td style="font-weight:bold;" colspan="5">Senarai Arahan Kerja</td>
+		<td style="font-weight:bold;" colspan="6">Senarai Arahan Kerja</td>
 	</tr>
 	<tr>
 		<th width="5">Bil</th>
         <th width="50">Tarikh</th>
         <th width="200">Tugasan</th>
         <th>Juruteknik Bertugas</th>
+        <th width="50">Status</th>
         <th width="15">Tindakan</td>
 	</tr>
 	<?php
 
-	$sql = "SELECT task_date, task_id, staff_id, id FROM tbl_workorder WHERE id ORDER BY task_date";
+	$sql = "SELECT task_date, task_id, staff_id, id, ws_id FROM tbl_workorder WHERE 1";
+    if($staffid<>""){
+        $sql .=" and staff_id='$staffid'";
+    }
+    $sql .= " ORDER BY task_date";
 	$sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);
@@ -47,6 +64,8 @@ if($_GET['delete']==1){
         $taskid = $data['task_id'];
         $tugasan = GetDesc("task","task_desc","task_id",$taskid);
         $staffid = $data['staff_id'];
+        $stat = $data['ws_id'];
+        $wstatus = GetDesc("work_status","ws_desc","ws_id",$stat);
         $namastaff = GetDesc("staff","staff_name","staff_id",$staffid);
         $cnt++;
         
@@ -55,7 +74,8 @@ if($_GET['delete']==1){
         echo "<td>$taskdate</td>";
         echo "<td>$tugasan</td>";
         echo "<td>$namastaff</td>";
-        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_workorder&sysid=$idworkorder\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_workorder&delete=1&iddelete=$idworkorder\" onClick=\"return confirm('Do you wish to proceed?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
+        echo "<td>$wstatus</td>";
+        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_workorder&sysid=$idworkorder\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_workorder&delete=1&iddelete=$idworkorder\" onClick=\"return confirm('Anda pasti?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
         echo "</tr>";
     }
     
