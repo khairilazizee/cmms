@@ -2,9 +2,7 @@
 session_start();
 $staffrole = $_SESSION['userrole'];
 
-$sql2=sql_query("select staff_id from staff where staff_id='".$_SESSION["username"]."' ",$dbi);
-$res2=sql_fetch_array($sql2);
-$staffid=$res2["staff_id"];
+$staffid = $_SESSION['staffid'];
 
 // echo "Staff ID=".$staffid;
 
@@ -41,7 +39,7 @@ if($_GET['delete']==1){
 	<tr>
 		<th width="5">Bil</th>
         <th width="50">Tarikh</th>
-        <th width="200">Tugasan</th>
+        <th width="250">Tugasan</th>
         <th>Juruteknik Bertugas</th>
         <th width="50">Status</th>
         <th width="15">Tindakan</td>
