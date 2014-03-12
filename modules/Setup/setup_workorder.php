@@ -2,6 +2,12 @@
 
 $idworkorder = mysql_real_escape_string($_GET['sysid']);
 
+$staffrole = $_SESSION['userrole'];
+if($staffrole<>14 && $staffrole<>15)
+    $info="enabled";
+else
+    $info="disabled";
+
 if($_POST['submit']){
 	$sysgroup = $_POST['txtSysGroup'];
 	$system = $_POST['txtSystem'];
@@ -11,6 +17,7 @@ if($_POST['submit']){
 	$asset = $_POST['txtAsset'];
 	$kekerapan = $_POST['txtKekerapan'];
 	$tarikhmula = mysql_real_escape_string(mysqldate($_POST['txtTarikhMula']));
+	$status_p = $_POST['txtStatus'];
 	$flg = $_POST['flg'];
 
 	$hari = (strtotime("31-12-2014") - strtotime($tarikhmula)) / (60 * 60 * 24);
@@ -34,7 +41,7 @@ if($_POST['submit']){
 			$resworkorder = mysql_query($sqlworkorder,$dbi);
 		}
 	} elseif($flg == "edit"){
-		$update = "UPDATE tbl_workorder SET sg_id='$sysgroup', sys_id='$system', task_id='$task', staff_id='$juruteknik', task_date='$tarikhmula', ag_id='$asgroup', asset_id='$asset' WHERE id='$idworkorder'";
+		$update = "UPDATE tbl_workorder SET sg_id='$sysgroup', sys_id='$system', task_id='$task', staff_id='$juruteknik', task_date='$tarikhmula', ag_id='$asgroup', asset_id='$asset', ws_id='$status_p' WHERE id='$idworkorder'";
 		mysql_query($update,$dbi);
 	}
 
@@ -44,7 +51,8 @@ if($_POST['submit']){
 }
 
 $flg = "add";
-$sql = "SELECT sg_id, sys_id, tg_id, task_id, staff_id, task_date, ag_id, asset_id FROM tbl_workorder WHERE 1 and id='$idworkorder'";
+$sql = "SELECT sg_id, sys_id, tg_id, task_id, staff_id, task_date, ag_id, asset_id, ws_id FROM tbl_workorder WHERE 1 and id='$idworkorder'";
+// die("SELECT sg_id, sys_id, tg_id, task_id, staff_id, task_date, ag_id, asset_id FROM tbl_workorder WHERE 1 and id='$idworkorder'");
 $res = mysql_query($sql,$dbi);
 if(mysql_num_rows($res)>0){
 	$data = mysql_fetch_array($res);
@@ -56,6 +64,7 @@ if(mysql_num_rows($res)>0){
 	$taskdate = $data['task_date'];
 	$assetgroupid = $data['ag_id'];
 	$assetpilihid = $data['asset_id'];
+	$workstatus = $data['ws_id'];
 	$flg = "edit";
 }
 
@@ -69,7 +78,7 @@ if(mysql_num_rows($res)>0){
 		<td width="100" class="title">Kumpulan Sistem</td>
 		<td width="5" class="title">:</td>
 		<td>
-			<select name="txtSysGroup" id="txtSysGroup">
+			<select name="txtSysGroup" id="txtSysGroup" <?php echo $info; ?>>
 				<option value="">- PILIH -</option>
 				<?php
 					$sql = "SELECT sg_id, sg_desc FROM system_group";
@@ -92,7 +101,7 @@ if(mysql_num_rows($res)>0){
 		<td class="title">Sistem</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtSystem" id="txtSystem">
+			<select name="txtSystem" id="txtSystem" <?php echo $info; ?>>
 				<?php
 					echo "<option value=''>- PILIH -</option>";
 					$sqlsystem = "SELECT sys_id, sys_desc FROM system";
@@ -115,7 +124,7 @@ if(mysql_num_rows($res)>0){
 		<td width="100" class="title">Kumpulan Tugasan</td>
 		<td width="5" class="title">:</td>
 		<td>
-			<select name="txtKumpTugasan" id="txtKumpTugasan">
+			<select name="txtKumpTugasan" id="txtKumpTugasan" <?php echo $info; ?>>
 				<option value="">- PILIH -</option>
 				<?php
 					$sqltugasan = "SELECT tg_id, tg_desc FROM task_group";
@@ -138,7 +147,7 @@ if(mysql_num_rows($res)>0){
 		<td class="title">Tugasan</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtTask" id="txtTask">
+			<select name="txtTask" id="txtTask" <?php echo $info; ?>>
 				<?php
 					echo "<option value=''>- PILIH -</option>";
 					$sqltask = "SELECT task_id, task_desc FROM task";
@@ -160,15 +169,19 @@ if(mysql_num_rows($res)>0){
 	<tr>
 		<td>Tarikh Mula</td>
             <td>:</td>
-            <td><input type="text" readonly="" size="12" maxlength="12" name="txtTarikhMula" id="txtTarikhMula" value="<?php echo $taskdate; ?>">
-        <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.frmtask.txtTarikhMula);return false;" ><img class="PopcalTrigger" align="absmiddle" src="popupcal/calbtn.gif" width="34" height="22" border="0" alt=""></a> 
+            <td><input type="text" readonly="" size="12" maxlength="12" name="txtTarikhMula" id="txtTarikhMula" value="<?php echo fmtdate($taskdate); ?>" <?php echo $info; ?>>
+        <?php
+        	if ($staffrole<>14 && $staffrole<>15) {
+       	?>
+        <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.frmtask.txtTarikhMula);return false;" ><img class="PopcalTrigger" align="absmiddle" src="popupcal/calbtn.gif" width="34" height="22" border="0" alt=""></a>
+        <?php } ?>
 			</td>
 	</tr>
 	<tr>
 		<td class="title">Kumpulan Aset</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtAssetGroup" id="txtAssetGroup">
+			<select name="txtAssetGroup" id="txtAssetGroup" <?php echo $info; ?>>
 				<?php
 					echo "<option value=''>- PILIH -</option>";
 					$sqlag = "SELECT ag_desc, ag_id FROM asset_group";
@@ -191,7 +204,7 @@ if(mysql_num_rows($res)>0){
 		<td class="title">Aset</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtAsset" id="txtAsset">
+			<select name="txtAsset" id="txtAsset" <?php echo $info; ?>>
 				<?php
 					echo "<option value=''>- PILIH -</option>";
 					$sqlasset = "SELECT asset_desc, asset_id FROM asset";
@@ -214,7 +227,7 @@ if(mysql_num_rows($res)>0){
 		<td class="title">Juru Teknik</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtJuruteknik" id="txtJuruteknik">
+			<select name="txtJuruteknik" id="txtJuruteknik" <?php echo $info; ?>>
 				<?php
 					echo "<option value=''>- PILIH -</option>";
 					$sqltech = "SELECT staff_id, staff_name FROM staff ";
@@ -238,7 +251,7 @@ if(mysql_num_rows($res)>0){
 		<td class="title">Kekerapan Tugas</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtKekerapan" id="txtKekerapan">
+			<select name="txtKekerapan" id="txtKekerapan" <?php echo $info; ?>>
 				<option value="">- PILIH -</option>
 				<option value="7">Seminggu sekali</option>
 				<option value="14">Dua minggu sekali</option>
@@ -247,12 +260,49 @@ if(mysql_num_rows($res)>0){
 			</select>
 		</td>
 	</tr>
+	<?php } 
+	if($flg == 'edit') { ?>
+	<tr>
+		<td class="title">Status</td>
+		<td class="title">:</td>
+		<td>
+			<select name="txtStatus" id="txtStatus">
+				<option value="">- PILIH -</option>
+				<?php
+					$sqlstatus="select ws_id, ws_desc from work_status where 1";
+					if($staffrole==15)
+						$sqlstatus.=" and ws_id!='4'";
+					if($staffrole==14)
+						$sqlstatus.=" and ws_id!='1' and ws_id!='2'";
+					$qstat=mysql_query($sqlstatus,$dbi);
+					while ($resstat=mysql_fetch_array($qstat)) {
+						$wsid=$resstat["ws_id"];
+						$wsdesc=$resstat["ws_desc"];
+
+						echo "<option ";
+						if ($workstatus==$wsid) {
+							echo " SELECTED ";
+						}
+						echo "value='$wsid'>$wsdesc</option>";
+					}
+				?>
+			</select>
+		</td>
+	</tr>
 	<?php } ?>
 	<tr>
 		<td colspan="3">
 	        <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
 	        <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
-	        <input type="submit" value="Hantar" name="submit" class="button" onClick="return confirm('Do you wish to proceed?');"/>
+	        <input type="hidden" name="txtSysGroup" value="<?php echo $sysgroupid; ?>"/>
+	        <input type="hidden" name="txtSystem" value="<?php echo $systemid; ?>"/>
+	        <input type="hidden" name="txtKumpTugasan" value="<?php echo $taskgroupid; ?>"/>
+	        <input type="hidden" name="txtTask" value="<?php echo $taskpilihid; ?>"/>
+	        <input type="hidden" name="txtTarikhMula" value="<?php echo $taskdate; ?>"/>
+	        <input type="hidden" name="txtAssetGroup" value="<?php echo $assetgroupid; ?>"/>
+	        <input type="hidden" name="txtAsset" value="<?php echo $assetpilihid; ?>"/>
+	        <input type="hidden" name="txtJuruteknik" value="<?php echo $staffid; ?>"/>
+	        <input type="submit" value="Hantar" name="submit" class="button" onClick="return confirm('Adakah anda pasti?');"/>
 	        <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_workorder'" class="button"/>
 	    </td>
     </tr>

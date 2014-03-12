@@ -1,10 +1,14 @@
 <?php
 session_start();
 $staffrole = $_SESSION['userrole'];
-
 $staffid = $_SESSION['staffid'];
 
 // echo "Staff ID=".$staffid;
+
+if($staffrole<>14 && $staffrole<>15)
+    $info="enabled";
+else
+    $info="disabled";
 
 include('include/function.php');
 $Mfunction = new fungsi();
@@ -28,30 +32,33 @@ if($_GET['delete']==1){
 
 ?>
 <div style="text-align:right;font-weight:bold;">
-    <?php if ($staffrole<>15) {
+    <?php if ($staffrole<>15 && $staffrole<>14) {
         echo "<a href=\"mainpage.php?module=Setup&task=setup_workorder\">Tambah<img src=\"images/admin/btn_add.gif\"></a>";
     } ?>
 </div><br>
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
-	<tr>
-		<td style="font-weight:bold;" colspan="6">Senarai Arahan Kerja</td>
-	</tr>
-	<tr>
-		<th width="5">Bil</th>
+    <tr>
+        <td style="font-weight:bold;" colspan="6">Senarai Arahan Kerja</td>
+    </tr>
+    <tr>
+        <th width="5">Bil</th>
         <th width="50">Tarikh</th>
         <th width="250">Tugasan</th>
         <th>Juruteknik Bertugas</th>
         <th width="50">Status</th>
         <th width="15">Tindakan</td>
-	</tr>
-	<?php
+    </tr>
+    <?php
 
-	$sql = "SELECT task_date, task_id, staff_id, id, ws_id FROM tbl_workorder WHERE 1";
+    $sql = "SELECT task_date, task_id, staff_id, id, ws_id FROM tbl_workorder WHERE 1";
     if($staffid<>""){
         $sql .=" and staff_id='$staffid'";
     }
+    if($staffrole==14){
+        $sql .=" and ws_id='3' or ws_id='4'";
+    }
     $sql .= " ORDER BY task_date";
-	$sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
+    $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);
     $cnt=$rowstart;
