@@ -27,10 +27,10 @@ if($_POST['submit']){
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO asset (asset_desc,asset_ag_id,ag_id) VALUES ('$taskdesc','$assetgroup','$systemgroup')";
+        $insert = "INSERT INTO asset (asset_desc,asset_ag_id,sg_id) VALUES ('$taskdesc','$assetgroup','$systemgroup')";
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE asset SET asset_desc='$taskdesc', asset_ag_id='$assetgroup', ag_id='$systemgroup' WHERE asset_id='$tid'";
+        $update = "UPDATE asset SET asset_desc='$taskdesc', asset_ag_id='$assetgroup', sg_id='$systemgroup' WHERE asset_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
