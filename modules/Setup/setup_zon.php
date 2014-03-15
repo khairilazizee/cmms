@@ -19,15 +19,16 @@ $tid = $_GET['zonid'];
 
 if($_POST['submit']){
     $tdesc_p = mysql_real_escape_string($_POST['txtDescription']);
+    $ag_id = mysql_real_escape_string($_POST['txtAsGroup']);
     
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO zone (zon_desc) VALUES ('$tdesc_p')";
+        $insert = "INSERT INTO zone (zon_desc,ag_id) VALUES ('$tdesc_p','$ag_id')";
         // die($insert)
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE zone SET zon_desc='$tdesc_p' WHERE zon_id='$tid'";
+        $update = "UPDATE zone SET zon_desc='$tdesc_p', ag_id='$ag_id' WHERE zon_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
@@ -56,6 +57,25 @@ if($a = mysql_fetch_array($result)){
 <table width="100%" cellspacing="3" cellpadding="3" align="center" class="outerform">
     <tr>
         <td style="font-weight:bold;" class="formheader" colspan="3">Zon</td>
+    </tr>
+    <tr>
+        <td>Kump. Asset</td>
+        <td>:</td>
+        <td>
+            <select name="txtAsGroup" id="txtAsGroup">
+                <option value="">- PILIH KUMP. ASSET -</option>
+                <?php
+                    $sqlasgroup = "SELECT ag_id, ag_desc FROM asset_group ";
+                    $resasgroup = mysql_query($sqlasgroup,$dbi);
+                    while($dataasgroup = mysql_fetch_array($resasgroup)){
+                        $agid = $dataasgroup['ag_id'];
+                        $agdesc = $dataasgroup['ag_desc'];
+
+                        echo "<option value='$agid'>$agdesc</option>";
+                    }
+                ?>
+            </select>
+        </td>
     </tr>
     <tr>
         <td width="120" valign="top">Penerangan Zon</td>

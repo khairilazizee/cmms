@@ -22,7 +22,7 @@ defined( '_UMPORTAL_ADMIN' ) or die( 'Akses tidak dibenarkan !' );
  }
  else {
    $id=$_REQUEST["login"];
-   $qry="SELECT `password`,`role`,`nama`,`bahagian`,`unit` from user where login='$login'";
+   $qry="SELECT `password`,`role`,`nama`,`ag_id`,`unit` from user where login='$login'";
    //die ($qry);
    $result = sql_query($qry,$dbi);
    $num_rows = sql_num_rows($result);
@@ -31,7 +31,7 @@ defined( '_UMPORTAL_ADMIN' ) or die( 'Akses tidak dibenarkan !' );
 	   $data=sql_fetch_array($result,$dbi); 
        $password = $data["password"];
        $nama = $data["nama"];
-       $bahagian = $data["bahagian"];
+       $bahagian = $data["ag_id"];
        $unit = $data["unit"];
 	   $role = $data["role"];
    }
@@ -61,18 +61,18 @@ defined( '_UMPORTAL_ADMIN' ) or die( 'Akses tidak dibenarkan !' );
     <td ><input name="txt_name"  type="text" size="50" maxlength="50" value="<?php echo $nama; ?>"></td>
   </tr>
      <tr>
-      <td>Bahagian</td>
+      <td>Asset</td>
       <td><select name="txt_bahagian" onChange="document.frmpengguna.action='admin.php?module=pengguna&flg=1&task=kemaskini';document.frmpengguna.submit();" >
-	      <option value="">-- Pilih Bahagian --</option>
+	      <option value="">-- Pilih Asset --</option>
           <?php
-	$query = "SELECT KOD_BAH,NAMA_BAH FROM tbl_bahagian order by NAMA_BAH ";
+	$query = "SELECT ag_id,ag_desc FROM asset_group order by ag_desc ";
     $result = sql_query($query,$dbi);
   $num_rows = sql_num_rows($result);
     
   if($num_rows > 0) {
       while($data=sql_fetch_array($result,$dbi)){ 
-      $r_id = $data["KOD_BAH"];
-      $name = $data["NAMA_BAH"];
+      $r_id = $data["ag_id"];
+      $name = $data["ag_desc"];
 		  if ($bahagian==$r_id)
 	        echo "<option selected value=\"$r_id\">$name</option>";
 		  else

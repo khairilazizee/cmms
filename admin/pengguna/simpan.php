@@ -8,17 +8,16 @@ defined( '_UMPORTAL_ADMIN' ) or die( 'Akses tidak dibenarkan !' );
   $name=$_REQUEST["txt_name"];  
   $role=$_REQUEST["txt_role"];
   $bahagian=$_REQUEST["txt_bahagian"];
-  $unit=$_REQUEST["txt_unit"];
-  $dbtrans=$_REQUEST["dbtrans"];  
+  $dbtrans=$_REQUEST["dbtrans"];
   $now = date("Y-m-d G:i:s");
   if ($dbtrans=="0") //insert
-   $qry="INSERT INTO `user` (`login`,`password`,`role`,`nama`,`bahagian`,`unit`,`regdate`,`lastlogin`) 
+   $qry="INSERT INTO `user` (`login`,`password`,`role`,`nama`,`ag_id`,`unit`,`regdate`,`lastlogin`) 
          VALUES ('$login','$password','$role','$name','$bahagian','$unit','$now', '0000-00-00 00:00:00')";
   else {
      if ($password=="")
-     	$qry="update `user` set `role`='$role',`nama`='$name',`bahagian`='$bahagian',`unit`='$unit' where login='$login'"; 
+     	$qry="update `user` set `role`='$role',`nama`='$name',`ag_id`='$bahagian',`unit`='$unit' where login='$login'"; 
 	 else
-     	$qry="update `user` set `password`='$password',`role`='$role',`nama`='$name',`bahagian`='$bahagian',
+     	$qry="update `user` set `password`='$password',`role`='$role',`nama`='$name',`ag_id`='$bahagian',
 			`unit`='$unit' where login='$login'"; 
   }		   
   

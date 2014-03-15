@@ -43,7 +43,7 @@ if($_GET['delete']==1){
     <tr>
         <th width="5">Bil</th>
         <th width="50">Tarikh</th>
-        <th width="250">Tugasan</th>
+        <th width="250">Sub Sistem</th>
         <th>Juruteknik Bertugas</th>
         <th width="50">Status</th>
         <th width="15">Tindakan</td>

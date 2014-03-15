@@ -32,22 +32,24 @@ $nama=$_REQUEST["nama"];
 <TABLE cellpadding="1" cellspacing="1" border="0" width="100%">
  <?php
 if($login=="" && $nama==""){
-	$query = "SELECT login,nama,role.name FROM user left join role on user.role=role.id 
-		where user.id<>1 order by nama";
+	$query = "SELECT login,nama,role.name, ag_id FROM user left join role on user.role=role.id 
+		where user.id<>1 ";
 	} elseif($login!="") {
-	$query = "SELECT login,nama,role.name FROM user left join role on user.role=role.id 
-		where user.id<>1 and login like '%$login%' order by nama";
+	$query = "SELECT login,nama,role.name, ag_id FROM user left join role on user.role=role.id 
+		where user.id<>1 and login like '%$login%' ";
 
 	} elseif($nama!="") {
-	$query = "SELECT login,nama,role.name,fak.NAMA_FAK,jab.NAMA_JAB FROM user left join role on user.role=role.id 
-		 where user.id<>1 and nama like '%$nama%' order by nama";
+	$query = "SELECT login,nama,role.name,fak.NAMA_FAK,jab.NAMA_JAB, ag_id FROM user left join role on user.role=role.id 
+		 where user.id<>1 and nama like '%$nama%' ";
 
 } else {
-	$query = "SELECT login,nama,role.name FROM user left join role on user.role=role.id 
+	$query = "SELECT login,nama,role.name, ag_id FROM user left join role on user.role=role.id 
 		where user.id<>1 
-		and login like '%$login%' and nama like '%$nama%' order by nama";
+		and login like '%$login%' and nama like '%$nama%' ";
 
 }
+
+	$query.=" order by nama ";
 
 	//echo $query;			   
     $result = sql_query($query,$dbi);
@@ -55,8 +57,10 @@ if($login=="" && $nama==""){
 			
 		
 	if($num_rows > 0) {
-	    echo "<tr><td class=\"list_table_header\" width='5'>Bil</td><td class=\"list_table_header\" width='20%'>Login</td><td  class=\"list_table_header\" width='40%'>Nama</td><td class=\"list_table_header\" >Bahagian</td>
-		     <td class=\"list_table_header\" >Unit</td><td class=\"list_table_header\" >Role</td><td class=\"list_table_header\" >Tindakan</td></tr>\n";
+	    echo "<tr><td class=\"list_table_header\" width='5'>Bil</td><td class=\"list_table_header\" width='20%'>Login</td><td  class=\"list_table_header\" width='40%'>Nama</td>
+		     <td class=\"list_table_header\" >Role</td>
+			 <td class=\"list_table_header\" >Aset</td>
+		     <td class=\"list_table_header\" >Tindakan</td></tr>\n";
 		$count=0;
 	    while ($data=sql_fetch_array($result,$dbi)) {
 						$userlogin = $data["login"];
@@ -64,6 +68,7 @@ if($login=="" && $nama==""){
 						$bahagian = $data["NAMA_FAK"];
 						$unit = $data["NAMA_JAB"];
 						$rolename = $data["name"];
+						$assetid = $data['ag_id'];
 						$count++;
                         echo "<tr bgcolor='$ncolor' onMouseOver=\"this.bgColor = '$hlcolor'\" onMouseOut =\"this.bgColor = '$ncolor'\"> \n";
 			            echo "<td>$count</td>";

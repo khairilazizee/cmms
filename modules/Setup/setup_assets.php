@@ -22,14 +22,15 @@ $tid = $_GET['assetid'];
 if($_POST['submit']){
     $taskdesc = mysql_real_escape_string($_POST['txtAssetDesc']);
     $systemgroup = $_POST['txtSystemGroup'];
+    $assetgroup = $_POST['txtAssetGroup'];
     
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO asset (asset_desc,asset_ag_id) VALUES ('$taskdesc','$systemgroup')";
+        $insert = "INSERT INTO asset (asset_desc,asset_ag_id,ag_id) VALUES ('$taskdesc','$assetgroup','$systemgroup')";
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE asset SET asset_desc='$taskdesc', asset_ag_id='$systemgroup' WHERE asset_id='$tid'";
+        $update = "UPDATE asset SET asset_desc='$taskdesc', asset_ag_id='$assetgroup', ag_id='$systemgroup' WHERE asset_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
@@ -40,7 +41,7 @@ if($_POST['submit']){
 
 
 $flg = "add";
-$check = "SELECT asset_id, asset_desc, asset_ag_id FROM asset WHERE asset_id='$tid'";
+$check = "SELECT asset_id, asset_desc, asset_ag_id, sg_id FROM asset WHERE asset_id='$tid'";
 //echo $check;
 $result = sql_query($check,$dbi);
 if($a = mysql_fetch_array($result)){
@@ -48,6 +49,7 @@ if($a = mysql_fetch_array($result)){
     $adesc = $a['asset_desc'];
     $aid = $a['asset_id'];
     $agid = $a['asset_ag_id'];
+    $sgid = $a['sg_id'];
 }
 
 ?>
@@ -57,23 +59,46 @@ if($a = mysql_fetch_array($result)){
         <td style="font-weight:bold;" class="formheader" colspan="3">Aset</td>
     </tr>
     <tr>
-        <td width="220" valign="middle" class="title">Kumpulan Aset</td>
+        <td width="220" valign="middle" class="title">Kumpulan Sistem</td>
         <td width="5" valign="middle" class="title">:</td>
         <td>
             <select name="txtSystemGroup" id="txtSystemGroup">
                 <option value="">- PILIH -</option>
                 <?php
-                    $sql = "SELECT ag_id, ag_desc FROM asset_group ORDER BY ag_id";
+                    $sql = "SELECT sg_id, sg_desc FROM system_group ORDER BY sg_id";
                     $res = mysql_query($sql,$dbi);
                     while($sgdata = mysql_fetch_array($res)){
-                        $sgid = $sgdata['ag_id'];
-                        $sgdesc = $sgdata['ag_desc'];
+                        $sgid = $sgdata['sg_id'];
+                        $sgdesc = $sgdata['sg_desc'];
 
                         echo "<option ";
                         if($agid==$sgid){
                             echo " SELECTED ";
                         }
                         echo" value='$sgid'>$sgdesc</option>";
+                    }
+                ?>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td width="220" valign="middle" class="title">Kumpulan Aset</td>
+        <td width="5" valign="middle" class="title">:</td>
+        <td>
+            <select name="txtAssetGroup" id="txtAssetGroup">
+                <option value="">- PILIH -</option>
+                <?php
+                    $sql = "SELECT ag_id, ag_desc FROM asset_group ORDER BY ag_id";
+                    $res = mysql_query($sql,$dbi);
+                    while($agdata = mysql_fetch_array($res)){
+                        $agid = $agdata['ag_id'];
+                        $agdesc = $agdata['ag_desc'];
+
+                        echo "<option ";
+                        if($agid==$agid){
+                            echo " SELECTED ";
+                        }
+                        echo" value='$agid'>$agdesc</option>";
                     }
                 ?>
             </select>

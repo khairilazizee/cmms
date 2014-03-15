@@ -1,9 +1,18 @@
+
+<script type="text/javascript">
+  function check_role(jenis){
+    // alert(jenis);
+    if(jenis==13){
+      document.getElementById("txt_bahagian").disabled=false;
+    } else {
+      document.getElementById("txt_bahagian").disabled=true;
+    }
+  }
+</script>
 <?php
 // capaian mesti melalui page admin
 defined( '_UMPORTAL_ADMIN' ) or die( 'Akses tidak dibenarkan !' );
-?>
-<script "text/javascript" src="jscript/semakpengguna.js"></script>
-<?php
+
  global $dbi;
 	
  if (isset($_REQUEST["txt_login"]))
@@ -52,30 +61,8 @@ defined( '_UMPORTAL_ADMIN' ) or die( 'Akses tidak dibenarkan !' );
     <td ><input name="txt_name"  type="text" size="50" maxlength="50" value="<?php echo $name; ?>"></td>
   </tr>
      <tr>
-      <td>Bahagian</td>
-      <td><select name="txt_bahagian" onChange="document.frmpengguna.action='admin.php?module=pengguna&flg=1&task=tambah';document.frmpengguna.submit();" >
-	      <option value="">-- Pilih Bahagian --</option>
-          <?php
-	$query = "SELECT KOD_BAH,NAMA_BAH FROM tbl_bahagian order by NAMA_BAH ";
-    $result = sql_query($query,$dbi);
-	$num_rows = sql_num_rows($result);
-		
-	if($num_rows > 0) {
-	    while($data=sql_fetch_array($result,$dbi)){ 
-		  $r_id = $data["KOD_BAH"];
-		  $name = $data["NAMA_BAH"];
-		  if ($bahagian==$r_id)
-	        echo "<option selected value=\"$r_id\">$name</option>";
-		  else
-	        echo "<option value=\"$r_id\">$name</option>";
-		}
-	} 
-	?>
-        </select></td>
-     </tr>
-     <tr>
       <td>Role</td>
-      <td><select name="txt_role" >
+      <td><select name="txt_role" id="txt_role" onchange="return check_role(this.value);" required >
 	      <option>-- Pilih Role --</option>
           <?php
 	$query = "SELECT id,name FROM role order by id ";
@@ -93,6 +80,28 @@ defined( '_UMPORTAL_ADMIN' ) or die( 'Akses tidak dibenarkan !' );
 		}
 	} 
 	?>
+        </select></td>
+     </tr>
+     <tr>
+      <td>Asset</td>
+      <td><select name="txt_bahagian" id="txt_bahagian" >
+        <option value="">-- Pilih Asset --</option>
+          <?php
+  $query = "SELECT ag_id,ag_desc FROM asset_group order by ag_desc ";
+    $result = sql_query($query,$dbi);
+  $num_rows = sql_num_rows($result);
+    
+  if($num_rows > 0) {
+      while($data=sql_fetch_array($result,$dbi)){ 
+      $r_id = $data["ag_id"];
+      $name = $data["ag_desc"];
+      if ($bahagian==$r_id)
+          echo "<option selected value=\"$r_id\">$name</option>";
+      else
+          echo "<option value=\"$r_id\">$name</option>";
+    }
+  } 
+  ?>
         </select></td>
      </tr>
   <tr>

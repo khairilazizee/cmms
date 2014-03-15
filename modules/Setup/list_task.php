@@ -9,6 +9,7 @@
 include('include/function.php');
 $Mfunction = new fungsi();
 $limit = 25;
+$userrole = $_SESSION['userrole'];
 
 if(!isset($_GET["limit"]))
   $rowstart = 0;
@@ -93,7 +94,9 @@ $kumpsistem=$_GET["kumpcarian"];
         echo "<td align=\"center\">$cnt</td>";
         echo "<td>$tdesc</td>";
         echo "<td>".GetDesc("system_group","sg_desc","sg_id",$tsgid)."</td>";
-        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_task&taskid=$tid\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_task&delete=1&iddelete=$tid\" onClick=\"return confirm('Adakah anda pasti?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
+        if($userrole==13 or $userrole==15){
+            echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_task&taskid=$tid\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_task&delete=1&iddelete=$tid\" onClick=\"return confirm('Adakah anda pasti?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
+        }
         echo "</tr>";
     }
     

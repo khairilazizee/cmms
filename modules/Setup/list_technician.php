@@ -41,6 +41,10 @@ if($_GET['delete']=="1"){
     
     $delete = "DELETE FROM staff WHERE staff_id='$iddelete'";
     sql_query($delete,$dbi);
+
+    $deleteuser = "DELETE FROM user WHERE staff_id='$iddelete' or login='$iddelete'";
+    // die($deleteuser);
+    sql_query($deleteuser,$dbi);
     
     pageredirect("mainpage.php?module=Setup&task=list_technician");
 }

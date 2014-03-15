@@ -53,14 +53,14 @@ if($_POST['submit']){
         // die($insert);
         sql_query($insert,$dbi);
 
-        $tambah = "INSERT INTO user (login, password, role, nama) VALUES ('$idstafbaru','".md5(123)."','15','$namastaff')";
+        $tambah = "INSERT INTO user (login, password, role, nama, staff_id) VALUES ('$idstafbaru','".md5(123)."','15','$namastaff','$idstafbaru')";
         mysql_query($tambah,$dbi);
     } elseif($flg == "edit"){
         $update = "UPDATE staff SET staff_name='$namastaff', staff_ag_id='$agroup', staff_sg_id='$sysgroup' WHERE staff_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
 
-        $edit = "UPDATE user SET login='$idstafbaru', nama='$namastaff' WHERE id='".$_SESSION['staff_id_table_user']."'";
+        $edit = "UPDATE user SET nama='$namastaff' WHERE id='".$_SESSION['staff_id_table_user']."'";
         mysql_query($edit,$dbi);
     }
     
