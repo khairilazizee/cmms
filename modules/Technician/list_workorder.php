@@ -30,28 +30,10 @@ if($_GET['delete']==1){
     }
 }
 
-if($_POST['submitcarian']){
-    $tarikhmula = mysql_real_escape_string($_POST['txtTarikhMula']);
-    $tmula = mysqldate($tarikhmula);
-    $tarikhakhir = mysql_real_escape_string($_POST['txtTarikhAkhir']);
-    $takhir = mysqldate($tarikhakhir);
-}
+$tarikhsemasa = date("Y-m-d");
 
 ?>
-<div style="float:left">
-    <form action="" name="ftmtarikh">
-        Tarikh Mula <input type="text" name="txtTarikhMula" id="txtTarikhMula" value="<?php echo $tarikhmula;?>">
-         <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.ftmtarikh.txtTarikhMula);return false;" ><img class="PopcalTrigger" align="absmiddle" src="popupcal/calbtn.gif" width="34" height="22" border="0" alt=""></a>
-         Tarikh Tamat <input type="text" name="txtTarikhAkhir" id="txtTarikhAkhir" value="<?php echo $tarikhakhir;?>">
-          <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.ftmtarikh.txtTarikhAkhir);return false;" ><img class="PopcalTrigger" align="absmiddle" src="popupcal/calbtn.gif" width="34" height="22" border="0" alt=""></a>
-        <input type="submit" name="submitcarian" class="button" value="carian">
-    </form>
-</div>
-<div style="text-align:right;font-weight:bold;">
-    <?php if ($staffrole<>15 && $staffrole<>14) {
-        echo "<a href=\"mainpage.php?module=Setup&task=setup_workorder\">Tambah<img src=\"images/admin/btn_add.gif\"></a>";
-    } ?>
-</div><br>
+<br>
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
     <tr>
         <td style="font-weight:bold;" colspan="6">Senarai Arahan Kerja</td>
@@ -59,14 +41,14 @@ if($_POST['submitcarian']){
     <tr>
         <th width="5">Bil</th>
         <th width="50">Tarikh</th>
-        <th width="250">Sub Sistem</th>
-        <th>Juruteknik Bertugas</th>
-        <th width="50">Status</th>
+        <th>Sub Sistem</th>
+        <!-- <th width="250">Tugasan</th> -->
+        <!-- <th width="50">Status</th> -->
         <th width="15">Tindakan</td>
     </tr>
     <?php
 
-    $sql = "SELECT task_date, task_id, staff_id, id, ws_id FROM tbl_workorder WHERE 1";
+    $sql = "SELECT task_date, task_id, staff_id, id, ws_id, tg_id FROM tbl_workorder WHERE 1";
     if($staffid<>""){
         $sql .=" and staff_id='$staffid'";
     }
@@ -74,10 +56,10 @@ if($_POST['submitcarian']){
         $sql .=" and ws_id='3' or ws_id='4'";
     }
 
-    if($tarikhmula<>"" or $tarikhakhir<>""){
-        $sql.=" and task_date<='$tmula' and task_date>='$takhir'";
-    }
-    $sql .= " ORDER BY task_date";
+    $sql.="and task_date='$tarikhsemasa'";
+
+    $sql .= " ORDER BY tg_id";
+    
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);
@@ -88,6 +70,7 @@ if($_POST['submitcarian']){
         $taskdate = fmtdate($data['task_date']);
         $taskid = $data['task_id'];
         $tugasan = GetDesc("task","task_desc","task_id",$taskid);
+        $tgid = $data['tg_id'];
         $staffid = $data['staff_id'];
         $stat = $data['ws_id'];
         $wstatus = GetDesc("work_status","ws_desc","ws_id",$stat);
@@ -97,9 +80,9 @@ if($_POST['submitcarian']){
         echo "<tr bgcolor=\"$bgcolor\" onMouseOver=\"this.bgColor = '$hlcolor'\" onMouseOut =\"this.bgColor = '$bgcolor'\">\n";
         echo "<td align=\"center\">$cnt</td>";
         echo "<td>$taskdate</td>";
-        echo "<td>$tugasan</td>";
-        echo "<td>$namastaff</td>";
-        echo "<td>$wstatus</td>";
+        echo "<td>$tgid</td>";
+        // echo "<td>$tugasan</td>";
+        // echo "<td>$wstatus</td>";
         if($staffrole==13 or $staffrole==15){
             echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_workorder&sysid=$idworkorder\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_workorder&delete=1&iddelete=$idworkorder\" onClick=\"return confirm('Anda pasti?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
         }

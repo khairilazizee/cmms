@@ -53,7 +53,7 @@ if ($next_month == 13 ) {
 	<td align="center">
 		<table width="100%" border="0" cellpadding="2" cellspacing="2">
 			<tr align="center">
-				<td colspan="7" bgcolor="#999999" style="color:#FFFFFF"><strong><?php echo $monthNames[$cMonth-1].' '.$cYear; ?></strong></td>
+				<td colspan="7" bgcolor="#999999" style="color:#FFFFFF"><strong><?php echo namabulan($cMonth).' '.$cYear; ?></strong></td>
 			</tr>
 			<tr>
 			<td align="center" bgcolor="#999999" style="color:#FFFFFF"><strong>S</strong></td>
