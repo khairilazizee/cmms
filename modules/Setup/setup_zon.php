@@ -39,13 +39,13 @@ if($_POST['submit']){
 
 
 $flg = "add";
-$check = "SELECT zon_desc FROM zone WHERE zon_id='$tid'";
+$check = "SELECT zon_desc, ag_id FROM zone WHERE zon_id='$tid'";
 //echo $check;
 $result = sql_query($check,$dbi);
 if($a = mysql_fetch_array($result)){
     $flg = "edit";
     $tdesc = $a['zon_desc'];
-    // $tagid = $a['task_ag_id'];
+    $tagid = $a['ag_id'];
     // $tstaff = $a['task_staff_id'];
     // $tasset = $a['task_asset_id'];
     // $tsystem = $a['task_sys_id'];
@@ -65,13 +65,17 @@ if($a = mysql_fetch_array($result)){
             <select name="txtAsGroup" id="txtAsGroup">
                 <option value="">- PILIH KUMP. ASSET -</option>
                 <?php
-                    $sqlasgroup = "SELECT ag_id, ag_desc FROM asset_group ";
-                    $resasgroup = mysql_query($sqlasgroup,$dbi);
-                    while($dataasgroup = mysql_fetch_array($resasgroup)){
-                        $agid = $dataasgroup['ag_id'];
-                        $agdesc = $dataasgroup['ag_desc'];
+                    $sql = "SELECT ag_id, ag_desc FROM asset_group ORDER BY ag_id";
+                    $res = mysql_query($sql,$dbi);
+                    while($agdata = mysql_fetch_array($res)){
+                        $agid = $agdata['ag_id'];
+                        $agdesc = $agdata['ag_desc'];
 
-                        echo "<option value='$agid'>$agdesc</option>";
+                        echo "<option ";
+                        if($agid==$tagid){
+                            echo " SELECTED ";
+                        }
+                        echo" value='$agid'>$agdesc</option>";
                     }
                 ?>
             </select>
