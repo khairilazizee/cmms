@@ -48,8 +48,8 @@ if($a = mysql_fetch_array($result)){
     $flg = "edit";
     $adesc = $a['asset_desc'];
     $aid = $a['asset_id'];
-    $agid = $a['asset_ag_id'];
-    $sgid = $a['sg_id'];
+    $tagid = $a['asset_ag_id'];
+    $tsgid = $a['sg_id'];
 }
 
 ?>
@@ -72,7 +72,7 @@ if($a = mysql_fetch_array($result)){
                         $sgdesc = $sgdata['sg_desc'];
 
                         echo "<option ";
-                        if($agid==$sgid){
+                        if($sgid==$tsgid){
                             echo " SELECTED ";
                         }
                         echo" value='$sgid'>$sgdesc</option>";
@@ -95,7 +95,7 @@ if($a = mysql_fetch_array($result)){
                         $agdesc = $agdata['ag_desc'];
 
                         echo "<option ";
-                        if($agid==$agid){
+                        if($agid==$tagid){
                             echo " SELECTED ";
                         }
                         echo" value='$agid'>$agdesc</option>";
