@@ -47,10 +47,10 @@ if($a = mysql_fetch_array($result)){
 <form name="frmtask" method="POST" action="">
 <table width="100%" cellspacing="3" cellpadding="3" align="center" class="outerform">
     <tr>
-        <td style="font-weight:bold;" class="formheader" colspan="3">Kumpulan Tugasan</td>
+        <td style="font-weight:bold;" class="formheader" colspan="3">Sub Sistem</td>
     </tr>
     <tr>
-        <td width="220" valign="middle" class="title">Penerangan Kumpulan Tugasan</td>
+        <td width="220" valign="middle" class="title">Penerangan Sub Sistem</td>
         <td width="5" valign="middle" class="title">:</td>
         <td>
             <textarea name="txtAssetDesc" rows="3" wrap="physical" cols="100%"><?php echo $adesc;?></textarea>
