@@ -53,7 +53,10 @@ if($_POST['workorder']){
 <form action="" method="POST">
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
     <tr>
-        <td style="font-weight:bold;" colspan="6">Senarai tugasan pada <?php echo $tarikhsemasa;?></td>
+        <td style="font-weight:bold;" colspan="6">
+            <div style="float: left";>Senarai tugasan pada <?php echo $tarikhsemasa;?></div>
+            <div style="float: right";><input type="button" name="back" class="button" value="Kembali" onclick="location.href='mainpage.php?module=Technician&task=workorder';" /></div>
+        </td>
     </tr>
     <tr>
         <th width="5">Bil</th>
@@ -86,6 +89,7 @@ if($_POST['workorder']){
             echo "<td>";
             ?>
                 <select name="txtStatus<?php echo $cnt;?>" id="txtStatus">
+                    <option value="">- PILIH -</option>
                     <option value="1">Berjaya</option>
                     <option value="2">Gagal</option>
                 </select>
