@@ -18,6 +18,8 @@ if($cDay==""){
 }
 
 $tarikhsemasa = sprintf("%02d",$cDay)." / ".sprintf("%02d",$cMonth)." / ".$cYear;
+// echo $tarikhsemasa;
+$_SESSION['tarikhsemasa'] = $tarikhsemasa;
 $currentdate = $cYear."-".sprintf("%02d",$cMonth)."-".sprintf("%02d",$cDay);
  
 $prev_year = $cYear;
@@ -97,7 +99,7 @@ if ($next_month == 13 ) {
 	</tr>
 	<?php
 		$bil = 0;
-		$sqltugasan = "SELECT  staff_id, tg_id, id FROM tbl_workorder WHERE task_date='$currentdate'";
+		$sqltugasan = "SELECT  staff_id, tg_id, id, ws_id FROM tbl_workorder WHERE task_date='$currentdate'";
 
 		if($staffid<>""){
 			$sqltugasan .=" and staff_id='$staffid'";
@@ -114,12 +116,16 @@ if ($next_month == 13 ) {
 			$subsistem = $data['tg_id'];
 			$namasubsistem = GetDesc("task_group","tg_desc","tg_id",$subsistem);
 			$id = $data['id'];
+			$status = $data['ws_id'];
+			if($status==1){
+				$kepastian = "onclick='return confirm(\"Menekan butang ini bermaksud kerja-kerja sudah bermula dan data akan direkod. Anda pasti?\")'";
+			}
 			$bil++;
 
 			echo "<tr>";
 			echo "<td>$bil</td>";
 			echo "<td>$namasubsistem</td>";
-			echo "<td align='center'><a href='mainpage.php?module=Technician&task=list_task&sub=$subsistem&sis=$id'><img src='images/admin/btn_papar.gif'/></a></td>";
+			echo "<td align='center'><a href='mainpage.php?module=Technician&task=list_task&sub=$subsistem&sis=$id' $kepastian ><img src='images/admin/btn_papar.gif'/></a></td>";
 			echo "</tr>";
 		}
 	?>

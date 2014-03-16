@@ -39,7 +39,7 @@ if($_POST['submitcarian']){
 
 ?>
 <div style="float:left">
-    <form action="" name="ftmtarikh">
+    <form action="" method="POST" name="ftmtarikh">
         Tarikh Mula <input type="text" name="txtTarikhMula" id="txtTarikhMula" value="<?php echo $tarikhmula;?>">
          <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.ftmtarikh.txtTarikhMula);return false;" ><img class="PopcalTrigger" align="absmiddle" src="popupcal/calbtn.gif" width="34" height="22" border="0" alt=""></a>
          Tarikh Tamat <input type="text" name="txtTarikhAkhir" id="txtTarikhAkhir" value="<?php echo $tarikhakhir;?>">
@@ -75,7 +75,7 @@ if($_POST['submitcarian']){
     }
 
     if($tarikhmula<>"" or $tarikhakhir<>""){
-        $sql.=" and task_date<='$tmula' and task_date>='$takhir'";
+        $sql.=" and task_date>='$tmula' and task_date<='$takhir'";
     }
     $sql .= " ORDER BY task_date";
     // echo $sql;
