@@ -1,8 +1,8 @@
 <script type="text/javascript">
     function checkform(){
-        if (document.frmtask.txtSystemGroup.value=="") {
-            alert("Sila pilih Kumpulan Sistem.");
-            document.frmtask.txtSystemGroup.focus();
+        if (document.frmtask.txtTaskGroup.value=="") {
+            alert("Sila pilih Sub Sistem.");
+            document.frmtask.txtTaskGroup.focus();
             return false;
         }
         else if (document.frmtask.txtTaskDesc.value==""){
