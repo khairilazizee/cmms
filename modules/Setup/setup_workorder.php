@@ -30,19 +30,19 @@ if($_POST['submit']){
 			for ( $counter = 0; $counter <= $hari; $counter+= $kekerapan) {
 				$tarikhbaru[$counter] = date("Y-m-d", strtotime("$tarikhmula +$counter days"));
 				// echo $counter.$tarikhbaru[$counter]."<br />";
-				$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id,ws_id,js_id) VALUES ('$sysgroup','$system','$task','$juruteknik','".$tarikhbaru[$counter]."','$asgroup','$asset','1','2')";
+				$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, staff_id, task_date, ag_id, asset_id,ws_id,js_id) VALUES ('$sysgroup','$system','$juruteknik','".$tarikhbaru[$counter]."','$asgroup','$asset','1','2')";
 				$resworkorder = mysql_query($sqlworkorder,$dbi);
 			}
 		} elseif($kekerapan == 365) {
 			$tarikhbaru = date("Y-m-d", strtotime("$tarikhmula +$kekerapan days"));
-			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id,ws_id,js_id) VALUES ('$sysgroup','$system','$task','$juruteknik','$tarikhbaru','$asgroup','$asset','1','2')";
+			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, staff_id, task_date, ag_id, asset_id,ws_id,js_id) VALUES ('$sysgroup','$system','$juruteknik','$tarikhbaru','$asgroup','$asset','1','2')";
 			$resworkorder = mysql_query($sqlworkorder,$dbi);
 		} else {
-			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id,ws_id,js_id) VALUES ('$sysgroup','$system','$task','$juruteknik','$tarikhmula','$asgroup','$asset','1','2')";
+			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, staff_id, task_date, ag_id, asset_id,ws_id,js_id) VALUES ('$sysgroup','$system','$juruteknik','$tarikhmula','$asgroup','$asset','1','2')";
 			$resworkorder = mysql_query($sqlworkorder,$dbi);
 		}
 	} elseif($flg == "edit"){
-		$update = "UPDATE tbl_workorder SET sg_id='$sysgroup', sys_id='$system', task_id='$task', staff_id='$juruteknik', task_date='$tarikhmula', ag_id='$asgroup', asset_id='$asset', ws_id='$status_p', catatan='$catatan' WHERE id='$idworkorder'";
+		$update = "UPDATE tbl_workorder SET sg_id='$sysgroup', sys_id='$system', staff_id='$juruteknik', task_date='$tarikhmula', ag_id='$asgroup', asset_id='$asset', ws_id='$status_p', catatan='$catatan' WHERE id='$idworkorder'";
 		mysql_query($update,$dbi);
 	}
 
@@ -52,7 +52,7 @@ if($_POST['submit']){
 }
 
 $flg = "add";
-$sql = "SELECT sg_id, sys_id, tg_id, task_id, staff_id, task_date, ag_id, asset_id, ws_id FROM tbl_workorder WHERE 1 and id='$idworkorder'";
+$sql = "SELECT sg_id, sys_id, tg_id, staff_id, task_date, ag_id, asset_id, ws_id FROM tbl_workorder WHERE 1 and id='$idworkorder'";
 // die("SELECT sg_id, sys_id, tg_id, task_id, staff_id, task_date, ag_id, asset_id FROM tbl_workorder WHERE 1 and id='$idworkorder'");
 $res = mysql_query($sql,$dbi);
 if(mysql_num_rows($res)>0){
