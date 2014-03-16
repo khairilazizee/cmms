@@ -1,5 +1,11 @@
 <script type="text/javascript">
     function checkform(){
+        if(document.frmtask.txtAsGroup.value==""){
+            alert("Sila pilih kumpulan aset.");
+            return false;
+        }
+
+
         var desc=document.frmtask.txtDescription.value;
         if(desc==""){
             alert("Sila isi penerangan zon.");

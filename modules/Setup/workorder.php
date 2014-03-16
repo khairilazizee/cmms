@@ -92,10 +92,10 @@ if ($next_month == 13 ) {
 	</tr>
 	<tr>
 		<th width="5">Bil</th>
-		<th>Tugasan</th>
+		<th width="300">Tugasan</th>
 		<th>Juruteknik</th>
-		<th>Kump. Asset</th>
-		<th>Asset</th>
+		<th width="100">Kump. Asset</th>
+		<th width="100">Asset</th>
 		<!-- <th width="100">Tindakan</th> -->
 	</tr>
 	<?php
