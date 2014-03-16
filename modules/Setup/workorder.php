@@ -102,9 +102,9 @@ if ($next_month == 13 ) {
 		$bil = 0;
 		$sqltugasan = "SELECT task_id, staff_id, ag_id, asset_id FROM tbl_workorder WHERE task_date='$currentdate'";
 
-		if($staffid<>""){
-			$sqltugasan .=" and staff_id='$staffid'";
-		}
+		// if($staffid<>""){
+		// 	$sqltugasan .=" and staff_id='$staffid'";
+		// }
 		// echo $sqltugasan;
 		$restugasan = mysql_query($sqltugasan,$dbi);
 		while($data = mysql_fetch_array($restugasan)){
