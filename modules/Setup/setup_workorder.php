@@ -9,7 +9,9 @@ else
     $info="disabled";
 
 if($_POST['submit']){
+	// die("masuk");
 	$sysgroup = $_POST['txtSysGroup'];
+	// die($sysgroup);
 	$system = $_POST['txtSystem'];
 	$task = $_POST['txtTask'];
 	$juruteknik = $_POST['txtJuruteknik'];
@@ -32,7 +34,10 @@ if($_POST['submit']){
 				// echo $counter.$tarikhbaru[$counter]."<br />";
 				$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, staff_id, task_date, ag_id, asset_id,ws_id,js_id) VALUES ('$sysgroup','$system','$juruteknik','".$tarikhbaru[$counter]."','$asgroup','$asset','1','2')";
 				$resworkorder = mysql_query($sqlworkorder,$dbi);
+				// echo $sqlworkorder;
 			}
+
+			// die();
 		} elseif($kekerapan == 365) {
 			$tarikhbaru = date("Y-m-d", strtotime("$tarikhmula +$kekerapan days"));
 			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, staff_id, task_date, ag_id, asset_id,ws_id,js_id) VALUES ('$sysgroup','$system','$juruteknik','$tarikhbaru','$asgroup','$asset','1','2')";
@@ -303,14 +308,14 @@ if(mysql_num_rows($res)>0){
 		<td colspan="3">
 	        <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
 	        <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
-	        <input type="hidden" name="txtSysGroup" value="<?php echo $sysgroupid; ?>"/>
+	        <!-- <input type="hidden" name="txtSysGroup" value="<?php echo $sysgroupid; ?>"/>
 	        <input type="hidden" name="txtSystem" value="<?php echo $systemid; ?>"/>
 	        <input type="hidden" name="txtKumpTugasan" value="<?php echo $taskgroupid; ?>"/>
 	        <input type="hidden" name="txtTask" value="<?php echo $taskpilihid; ?>"/>
 	        <input type="hidden" name="txtTarikhMula" value="<?php echo $taskdate; ?>"/>
 	        <input type="hidden" name="txtAssetGroup" value="<?php echo $assetgroupid; ?>"/>
 	        <input type="hidden" name="txtAsset" value="<?php echo $assetpilihid; ?>"/>
-	        <input type="hidden" name="txtJuruteknik" value="<?php echo $staffid; ?>"/>
+	        <input type="hidden" name="txtJuruteknik" value="<?php echo $staffid; ?>"/> -->
 	        <input type="submit" value="Hantar" name="submit" class="button" onClick="return confirm('Adakah anda pasti?');"/>
 	        <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_workorder'" class="button"/>
 	    </td>
