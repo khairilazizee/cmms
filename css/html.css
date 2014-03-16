@@ -24,7 +24,7 @@ body {
 table {
   font-size: 11px;
   font-family: Verdana;
-  bgcolor: #FFFFFF
+  background-color: #FFFFFF;
 }
 
 /*tr {
@@ -70,6 +70,11 @@ h5 {
   font-size: 0.8em;
 }
 
+.container-displayframework {
+  width:960px;
+  margin:30 auto;
+  padding:0;
+}
 
 /* Needed to horizontally pad in a coloured container */
 /*.horzPad h1,

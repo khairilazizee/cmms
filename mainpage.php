@@ -48,7 +48,9 @@ if ($displayframework==0){  //do not display framework
    echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/html.css\" media=\"screen, projection, tv \" />\n";
    echo "</head>\n";
    echo "<body>";
+   echo "<div class='container-displayframework'>";
    displaymodule($module,$task,0);
+   echo "</div>";
    echo "</body></html>"; //echo '</td>';
 } 
 else

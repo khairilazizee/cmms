@@ -92,7 +92,7 @@ if ($next_month == 13 ) {
 	<tr>
 		<td class="formheader" colspan="6" style="font-weight:bold;text-align:center;text-transform:uppercase;background:#fff;color:#000;">
 			<div style="float: left;">Senarai Tugasan pada <?php echo $tarikhsemasa;?></div>
-			<div style="float: right;"><img src="images/print.gif"></div>
+			<div style="float: right;"></div>
 		</td>
 	</tr>
 	<tr>
@@ -128,7 +128,9 @@ if ($next_month == 13 ) {
 			echo "<tr>";
 			echo "<td>$bil</td>";
 			echo "<td>$namasubsistem</td>";
-			echo "<td align='center'><a href='mainpage.php?module=Technician&task=list_task&sub=$subsistem&sis=$id' $kepastian ><img src='images/admin/btn_papar.gif'/></a></td>";
+			echo "<td align='center'><a href='mainpage.php?module=Technician&task=list_task&sub=$subsistem&sis=$id' $kepastian ><img src='images/admin/btn_papar.gif'/></a>
+				<a href=\"mainpage.php?module=Technician&task=borang&sub=$subsistem&sis=$id\"><img src=\"images/print.gif\"></a>
+			</td>";
 			echo "</tr>";
 		}
 	?>
