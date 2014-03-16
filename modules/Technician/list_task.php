@@ -105,7 +105,7 @@ if($_POST['workorder']){
     <tr>
         <td colspan="6">
             <div style="font-weight:bold;">Catatan Keseluruhan&nbsp;:&nbsp;</div>
-            <textarea name="txtCatatanKeseluruhan" rows="10" cols="150"></textarea>
+            <textarea name="txtCatatanKeseluruhan" rows="10" cols="100"></textarea>
         </td>
     </tr>
     <tr>
@@ -148,7 +148,7 @@ if($_POST['inspection']){
         <tr>
             <td class="title" colspan="6">
                 <div style="font-weight:bold;">Kerja yang perlu dilalukan / Komponen yang perlu ditukar&nbsp;:&nbsp;</div>
-                <textarea name="txtCatatanPemeriksaan" rows="10" cols="150"></textarea>
+                <textarea name="txtCatatanPemeriksaan" rows="10" cols="100"></textarea>
             </td>
         </tr>
         <tr>
