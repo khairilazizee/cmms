@@ -18,16 +18,17 @@ if($_POST['submit']){
 	$asgroup = $_POST['txtAssetGroup'];
 	$asset = $_POST['txtAsset'];
 	$kekerapan = $_POST['txtKekerapan'];
-	$tarikhmula = mysql_real_escape_string(mysqldate($_POST['txtTarikhMula']));
+	$tarikhmula = mysql_real_escape_string(mysqldate($_POST['txtTmula']));
 	$status_p = $_POST['txtStatus'];
 	$catatan = mysql_real_escape_string($_POST['txtCatatan']);
 	$kumptugasan = $_POST['txtKumpTugasan'];
 	$flg = $_POST['flg'];
-
-	$hari = (strtotime("2014-12-31") - strtotime($tarikhmula)) / (60 * 60 * 24);
+	// echo $tarikhmula;
+	$hari = (strtotime("31-12-2014") - strtotime($tarikhmula)) / (60 * 60 * 24);
 	$hari = $hari + 1;
 	// $bahagi = $hari / $kekerapan;
-	// echo round($bahagi);
+	// echo round($hari);
+	// die();
 	if($flg=="add"){
 		if($kekerapan == 7 or $kekerapan == 14 or $kekerapan == 30){
 			for ( $counter = 0; $counter <= $hari; $counter+= $kekerapan) {
