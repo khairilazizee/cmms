@@ -90,7 +90,10 @@ if ($next_month == 13 ) {
 
 <table class="table" width="100%">
 	<tr>
-		<td class="formheader" colspan="6" style="font-weight:bold;text-align:center;text-transform:uppercase;background:#fff;color:#000;">Senarai Tugasan pada <?php echo $tarikhsemasa;?></td>
+		<td class="formheader" colspan="6" style="font-weight:bold;text-align:center;text-transform:uppercase;background:#fff;color:#000;">
+			<div style="float: left;">Senarai Tugasan pada <?php echo $tarikhsemasa;?></div>
+			<div style="float: right;"><img src="images/print.gif"></div>
+		</td>
 	</tr>
 	<tr>
 		<th width="5">Bil</th>
