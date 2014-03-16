@@ -97,7 +97,7 @@ if ($next_month == 13 ) {
 	</tr>
 	<?php
 		$bil = 0;
-		$sqltugasan = "SELECT  staff_id, tg_id FROM tbl_workorder WHERE task_date='$currentdate'";
+		$sqltugasan = "SELECT  staff_id, tg_id, id FROM tbl_workorder WHERE task_date='$currentdate'";
 
 		if($staffid<>""){
 			$sqltugasan .=" and staff_id='$staffid'";
@@ -119,7 +119,7 @@ if ($next_month == 13 ) {
 			echo "<tr>";
 			echo "<td>$bil</td>";
 			echo "<td>$namasubsistem</td>";
-			echo "<td align='center'><a href='mainpage.php?module=Technician&task=list_workorder&sub=$subsistem&sis=$id'><img src='images/admin/btn_papar.gif'/></a></td>";
+			echo "<td align='center'><a href='mainpage.php?module=Technician&task=list_task&sub=$subsistem&sis=$id'><img src='images/admin/btn_papar.gif'/></a></td>";
 			echo "</tr>";
 		}
 	?>
