@@ -100,16 +100,11 @@ if ($next_month == 13 ) {
 	</tr>
 	<?php
 		$bil = 0;
-		$sqltugasan = "SELECT staff_id, ag_id, asset_id FROM tbl_workorder WHERE task_date='$currentdate'";
-
-		// if($staffid<>""){
-		// 	$sqltugasan .=" and staff_id='$staffid'";
-		// }
+		$sqltugasan = "SELECT staff_id, ag_id, asset_id, task_desc FROM tbl_workorder , task WHERE task.tg_id=tbl_workorder.tg_id and tbl_workorder.task_date='$currentdate'";
 		// echo $sqltugasan;
 		$restugasan = mysql_query($sqltugasan,$dbi);
 		while($data = mysql_fetch_array($restugasan)){
-			$taskid = $data['task_id'];
-			$namatugasan = GetDesc("task","task_desc","task_id",$taskid);
+			$namatugasan = $data['task_desc'];
 			$staff_id = $data['staff_id'];
 			$namastaff = GetDesc("staff","staff_name","staff_id",$staff_id);
 			$agid = $data['ag_id'];
