@@ -21,15 +21,16 @@ $tid = $_GET['taskid'];
 
 if($_POST['submit']){
     $taskdesc = mysql_real_escape_string($_POST['txtTaskDesc']);
-    $sysgroup = $_POST['txtSystemGroup'];
+    // $sysgroup = $_POST['txtSystemGroup'];
+    $taskgroup = $_POST['txtTaskGroup'];
     
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO task (task_desc, task_sg_id) VALUES ('$taskdesc','$sysgroup')";
+        $insert = "INSERT INTO task (task_desc, tg_id) VALUES ('$taskdesc','$taskgroup')";
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE task SET task_desc='$taskdesc', task_sg_id='$sysgroup' WHERE task_id='$tid'";
+        $update = "UPDATE task SET task_desc='$taskdesc', tg_id='$taskgroup' WHERE task_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
@@ -60,7 +61,7 @@ if($a = mysql_fetch_array($result)){
     <tr>
         <td style="font-weight:bold;" class="formheader" colspan="3">Tugasan</td>
     </tr>
-    <tr>
+    <!-- <tr>
         <td width="220" valign="middle" class="title">Kumpulan Sistem</td>
         <td width="5" valign="middle" class="title">:</td>
         <td>
@@ -77,6 +78,25 @@ if($a = mysql_fetch_array($result)){
                         if($sgid==$tsgid)
                             echo "selected "; 
                         echo ">$sgdesc</option>";
+                    }
+                ?>
+            </select>
+        </td>
+    </tr> -->
+    <tr>
+        <td class="title">Sub Sistem</td>
+        <td class="title">:</td>
+        <td>
+            <select name="txtTaskGroup" id="txtTaskGroup">
+                <option value="">- PILIH -</option>
+                <?php
+                    $sqltugasan = "SELECT tg_id, tg_desc FROM task_group ORDER BY tg_id";
+                    $restugasan = mysql_query($sqltugasan,$dbi);
+                    while($tgdata = mysql_fetch_array($restugasan)){
+                        $tgid = $tgdata['tg_id'];
+                        $tgdesc = $tgdata['tg_desc'];
+
+                        echo "<option value='$tgid'>$tgdesc</option>";
                     }
                 ?>
             </select>

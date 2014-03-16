@@ -36,7 +36,7 @@ $tarikhsemasa = date("Y-m-d");
 <br>
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
     <tr>
-        <td style="font-weight:bold;" colspan="6">Senarai Arahan Kerja</td>
+        <td style="font-weight:bold;" colspan="6">Senarai Arahan Kerja pada <?php echo fmtdate($tarikhsemasa);?></td>
     </tr>
     <tr>
         <th width="5">Bil</th>
@@ -59,7 +59,7 @@ $tarikhsemasa = date("Y-m-d");
     $sql.="and task_date='$tarikhsemasa'";
 
     $sql .= " ORDER BY tg_id";
-    
+
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);

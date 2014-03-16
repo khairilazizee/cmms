@@ -1,75 +1,3 @@
-<?php
-
-$idworkorder = mysql_real_escape_string($_GET['sysid']);
-
-$staffrole = $_SESSION['userrole'];
-if($staffrole<>14 && $staffrole<>15)
-    $info="enabled";
-else
-    $info="disabled";
-
-if($_POST['submit']){
-	$sysgroup = $_POST['txtSysGroup'];
-	$system = $_POST['txtSystem'];
-	$task = $_POST['txtTask'];
-	$juruteknik = $_POST['txtJuruteknik'];
-	$asgroup = $_POST['txtAssetGroup'];
-	$asset = $_POST['txtAsset'];
-	$kekerapan = $_POST['txtKekerapan'];
-	$tarikhmula = mysql_real_escape_string(mysqldate($_POST['txtTarikhMula']));
-	$status_p = $_POST['txtStatus'];
-	$catatan = mysql_real_escape_string($_POST['txtCatatan']);
-	$flg = $_POST['flg'];
-
-	$hari = (strtotime("31-12-2014") - strtotime($tarikhmula)) / (60 * 60 * 24);
-	$hari = $hari + 1;
-	// $bahagi = $hari / $kekerapan;
-	// echo round($bahagi);
-	if($flg=="add"){
-		if($kekerapan == 7 or $kekerapan == 14 or $kekerapan == 30){
-			for ( $counter = 0; $counter <= $hari; $counter+= $kekerapan) {
-				$tarikhbaru[$counter] = date("Y-m-d", strtotime("$tarikhmula +$counter days"));
-				// echo $counter.$tarikhbaru[$counter]."<br />";
-				$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id,ws_id,js_id) VALUES ('$sysgroup','$system','$task','$juruteknik','".$tarikhbaru[$counter]."','$asgroup','$asset','1','2')";
-				$resworkorder = mysql_query($sqlworkorder,$dbi);
-			}
-		} elseif($kekerapan == 365) {
-			$tarikhbaru = date("Y-m-d", strtotime("$tarikhmula +$kekerapan days"));
-			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id,ws_id,js_id) VALUES ('$sysgroup','$system','$task','$juruteknik','$tarikhbaru','$asgroup','$asset','1','2')";
-			$resworkorder = mysql_query($sqlworkorder,$dbi);
-		} else {
-			$sqlworkorder = "INSERT INTO tbl_workorder (sg_id, sys_id, task_id, staff_id, task_date, ag_id, asset_id,ws_id,js_id) VALUES ('$sysgroup','$system','$task','$juruteknik','$tarikhmula','$asgroup','$asset','1','2')";
-			$resworkorder = mysql_query($sqlworkorder,$dbi);
-		}
-	} elseif($flg == "edit"){
-		$update = "UPDATE tbl_workorder SET sg_id='$sysgroup', sys_id='$system', task_id='$task', staff_id='$juruteknik', task_date='$tarikhmula', ag_id='$asgroup', asset_id='$asset', ws_id='$status_p', catatan='$catatan' WHERE id='$idworkorder'";
-		mysql_query($update,$dbi);
-	}
-
-	pageredirect("mainpage.php?module=Setup&task=list_workorder");
-
-	
-}
-
-$flg = "add";
-$sql = "SELECT sg_id, sys_id, tg_id, task_id, staff_id, task_date, ag_id, asset_id, ws_id FROM tbl_workorder WHERE 1 and id='$idworkorder'";
-// die("SELECT sg_id, sys_id, tg_id, task_id, staff_id, task_date, ag_id, asset_id FROM tbl_workorder WHERE 1 and id='$idworkorder'");
-$res = mysql_query($sql,$dbi);
-if(mysql_num_rows($res)>0){
-	$data = mysql_fetch_array($res);
-	$sysgroupid = $data['sg_id'];
-	$systemid = $data['sys_id'];
-	$taskgroupid = $data['tg_id'];
-	$taskpilihid = $data['task_id'];
-	$staffid = $data['staff_id'];
-	$taskdate = $data['task_date'];
-	$assetgroupid = $data['ag_id'];
-	$assetpilihid = $data['asset_id'];
-	$workstatus = $data['ws_id'];
-	$flg = "edit";
-}
-
-?>
 <form name="frmtask" method="POST" action="">
 <table class="outerform" width="100%" cellspacing="0" cellpadding="3" align="center">
 	<tr>
@@ -122,7 +50,7 @@ if(mysql_num_rows($res)>0){
 		</td>
 	</tr>
 	<tr>
-		<td width="100" class="title">Sub sistem</td>
+		<td width="100" class="title">Kumpulan Tugasan</td>
 		<td width="5" class="title">:</td>
 		<td>
 			<select name="txtKumpTugasan" id="txtKumpTugasan" <?php echo $info; ?>>
@@ -144,29 +72,6 @@ if(mysql_num_rows($res)>0){
 			</select>
 		</td>
 	</tr>
-	<!-- <tr>
-		<td class="title">Tugasan</td>
-		<td class="title">:</td>
-		<td>
-			<select name="txtTask" id="txtTask" <?php echo $info; ?>>
-				<?php
-					echo "<option value=''>- PILIH -</option>";
-					$sqltask = "SELECT task_id, task_desc FROM task";
-					$restask = mysql_query($sqltask,$dbi);
-					while($datatask = mysql_fetch_array($restask)){
-						$taskid = $datatask['task_id'];
-						$taskdesc = $datatask['task_desc'];
-
-						echo "<option ";
-						if($taskpilihid==$taskid){
-							echo " SELECTED ";
-						}
-						echo " value='$taskid'>$taskdesc</option>";
-					}
-				?>
-			</select>
-		</td>
-	</tr> -->
 	<tr>
 		<td>Tarikh Mula</td>
             <td>:</td>
@@ -365,4 +270,3 @@ $(function() {
 <!--  PopCalendar(tag name and id must match) Tags should not be enclosed in tags other than the html body tag. -->
 <iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="popupcal/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;">
 </iframe>	
-
