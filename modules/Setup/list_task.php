@@ -38,17 +38,17 @@ $kumpsistem=$_GET["kumpcarian"];
     <table>
         <form name="frmcarian">
         <tr>
-            <td>Kump. Sistem</td>
+            <td>Sub Sistem</td>
             <td>:</td>
             <td>
                 <select name="txtSystemGroup" id="txtSystemGroup" onchange="return cari();">
                     <option value="">- SEMUA -</option>
                     <?php
-                        $sql = "SELECT sg_id, sg_desc FROM system_group ORDER BY sg_id";
+                        $sql = "SELECT tg_id, tg_desc FROM task_group ORDER BY tg_id";
                         $res = mysql_query($sql,$dbi);
                         while($sgdata = mysql_fetch_array($res)){
-                            $sgid = $sgdata['sg_id'];
-                            $sgdesc = $sgdata['sg_desc'];
+                            $sgid = $sgdata['tg_id'];
+                            $sgdesc = $sgdata['tg_desc'];
 
                             echo "<option value='$sgid' "; 
                             if($sgid==$kumpsistem)
@@ -75,12 +75,12 @@ $kumpsistem=$_GET["kumpcarian"];
     </tr>
     <?php
     
-    $sql = "SELECT task_id, task_desc, task_sg_id, tg_id from task WHERE 1 ";
+    $sql = "SELECT task_id, task_desc, tg_id from task WHERE 1 ";
     // die($sql);
     if ($kumpsistem<>"") {
-        $sql.="and task_sg_id='$kumpsistem' ";
+        $sql.="and tg_id='$kumpsistem' ";
     }
-    $sql.="ORDER BY task_sg_id, task_id";
+    $sql.="ORDER BY task_id";
     // echo $sql;
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
@@ -90,7 +90,7 @@ $kumpsistem=$_GET["kumpcarian"];
     while($data = mysql_fetch_array($resfull)){
         $tid = $data['task_id'];
         $tdesc = $data['task_desc'];
-        $tsgid = $data['task_sg_id'];
+        // $tsgid = $data['task_sg_id'];
         $tgid = $data['tg_id'];
         $namatg = GetDesc("task_group","tg_desc","tg_id",$tgid);
         $cnt++;

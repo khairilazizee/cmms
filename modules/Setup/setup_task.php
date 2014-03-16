@@ -41,13 +41,13 @@ if($_POST['submit']){
 
 
 $flg = "add";
-$check = "SELECT task_desc, task_sg_id FROM task WHERE task_id='$tid'";
+$check = "SELECT task_desc, tg_id FROM task WHERE task_id='$tid'";
 //echo $check;
 $result = sql_query($check,$dbi);
 if($a = mysql_fetch_array($result)){
     $flg = "edit";
     $tdesc = $a['task_desc'];
-    $tsgid = $a['task_sg_id'];
+    $tgid = $a['tg_id'];
     // $tagid = $a['task_ag_id'];
     // $tstaff = $a['task_staff_id'];
     // $tasset = $a['task_asset_id'];
