@@ -170,11 +170,11 @@ if(mysql_num_rows($res)>0){
 	<tr>
 		<td>Tarikh Mula</td>
             <td>:</td>
-            <td><input type="text" readonly="" size="12" maxlength="12" name="txtTarikhMula" id="txtTarikhMula" value="<?php echo fmtdate($taskdate); ?>" <?php echo $info; ?>>
+            <td><input type="text" readonly="" size="12" maxlength="12" name="txtTmula" id="txtTmula" value="<?php echo fmtdate($taskdate); ?>" <?php echo $info; ?>>
         <?php
         	if ($staffrole<>14 && $staffrole<>15) {
        	?>
-        <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.frmtask.txtTarikhMula);return false;" ><img class="PopcalTrigger" align="absmiddle" src="popupcal/calbtn.gif" width="34" height="22" border="0" alt=""></a>
+        <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.frmtask.txtTmula);return false;" ><img class="PopcalTrigger" align="absmiddle" src="popupcal/calbtn.gif" width="34" height="22" border="0" alt=""></a>
         <?php } ?>
 			</td>
 	</tr>
