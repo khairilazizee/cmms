@@ -100,7 +100,7 @@ if ($next_month == 13 ) {
 	</tr>
 	<?php
 		$bil = 0;
-		$sqltugasan = "SELECT task_id, staff_id, ag_id, asset_id FROM tbl_workorder WHERE task_date='$currentdate'";
+		$sqltugasan = "SELECT staff_id, ag_id, asset_id FROM tbl_workorder WHERE task_date='$currentdate'";
 
 		// if($staffid<>""){
 		// 	$sqltugasan .=" and staff_id='$staffid'";
