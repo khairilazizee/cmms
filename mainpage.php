@@ -43,7 +43,7 @@ if ($displayframework==0){  //do not display framework
    echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n";
    echo "<html>\n";
    echo "<head>\n";
-   echo "<title>PORTAL NKRA KPM</title>\n";
+   echo "<title>PORTAL CMMS JPM</title>\n";
    echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n";
    echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/html.css\" media=\"screen, projection, tv \" />\n";
    echo "</head>\n";
