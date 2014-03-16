@@ -114,12 +114,14 @@ if ($next_month == 13 ) {
 			$asset = $data['asset_id'];
 			$namaasset = GetDesc("asset","asset_desc","asset_id",$asset);
 			$subsistem = $data['tg_id'];
+			$namasubsistem = GetDesc("task_group","tg_desc","tg_id",$subsistem);
+			$id = $data['id'];
 			$bil++;
 
 			echo "<tr>";
 			echo "<td>$bil</td>";
-			echo "<td>$subsistem</td>";
-			echo "<td align='center'><a href='mainpage.php?module=Technician&task=setup_workorder'><img src='images/admin/btn_papar.gif'/></a></td>";
+			echo "<td>$namasubsistem</td>";
+			echo "<td align='center'><a href='mainpage.php?module=Technician&task=list_workorder&sub=$subsistem&sis=$id'><img src='images/admin/btn_papar.gif'/></a></td>";
 			echo "</tr>";
 		}
 	?>
