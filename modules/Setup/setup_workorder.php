@@ -24,7 +24,7 @@ if($_POST['submit']){
 	$kumptugasan = $_POST['txtKumpTugasan'];
 	$flg = $_POST['flg'];
 
-	$hari = (strtotime("31-12-2014") - strtotime($tarikhmula)) / (60 * 60 * 24);
+	$hari = (strtotime("2014-12-31") - strtotime($tarikhmula)) / (60 * 60 * 24);
 	$hari = $hari + 1;
 	// $bahagi = $hari / $kekerapan;
 	// echo round($bahagi);
