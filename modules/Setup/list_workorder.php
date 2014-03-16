@@ -66,10 +66,10 @@ if($_POST['submitcarian']){
     </tr>
     <?php
 
-    $sql = "SELECT task_date, task_id, staff_id, id, ws_id FROM tbl_workorder WHERE 1";
-    if($staffid<>""){
-        $sql .=" and staff_id='$staffid'";
-    }
+    $sql = "SELECT task_date, staff_id, id, ws_id, tg_id FROM tbl_workorder WHERE 1";
+    // if($staffid<>""){
+    //     $sql .=" and staff_id='$staffid'";
+    // }
     if($staffrole==14){
         $sql .=" and ws_id='3' or ws_id='4'";
     }
@@ -78,6 +78,7 @@ if($_POST['submitcarian']){
         $sql.=" and task_date<='$tmula' and task_date>='$takhir'";
     }
     $sql .= " ORDER BY task_date";
+    // echo $sql;
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);
@@ -86,18 +87,18 @@ if($_POST['submitcarian']){
     while($data = mysql_fetch_array($resfull)){
         $idworkorder = $data['id'];
         $taskdate = fmtdate($data['task_date']);
-        $taskid = $data['task_id'];
-        $tugasan = GetDesc("task","task_desc","task_id",$taskid);
         $staffid = $data['staff_id'];
         $stat = $data['ws_id'];
         $wstatus = GetDesc("work_status","ws_desc","ws_id",$stat);
         $namastaff = GetDesc("staff","staff_name","staff_id",$staffid);
+        $tgid = $data['tg_id'];
+        $namakumptugasan = GetDesc("task_group","tg_desc","tg_id",$tgid);
         $cnt++;
         
         echo "<tr bgcolor=\"$bgcolor\" onMouseOver=\"this.bgColor = '$hlcolor'\" onMouseOut =\"this.bgColor = '$bgcolor'\">\n";
         echo "<td align=\"center\">$cnt</td>";
         echo "<td>$taskdate</td>";
-        echo "<td>$tugasan</td>";
+        echo "<td>$namakumptugasan</td>";
         echo "<td>$namastaff</td>";
         echo "<td>$wstatus</td>";
         if($staffrole==13 or $staffrole==15){
