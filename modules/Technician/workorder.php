@@ -14,7 +14,7 @@ if($cYear==""){
 }
 
 if($cDay==""){
-	$cDay = date("d");
+	$cDay = date("d") + 1;
 }
 
 $tarikhsemasa = sprintf("%02d",$cDay)." / ".sprintf("%02d",$cMonth)." / ".$cYear;

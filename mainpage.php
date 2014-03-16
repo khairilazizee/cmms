@@ -45,7 +45,7 @@ if ($displayframework==0){  //do not display framework
    echo "<head>\n";
    echo "<title>PORTAL CMMS JPM</title>\n";
    echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n";
-   echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/html.css\" media=\"screen, projection, tv \" />\n";
+   echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/html.css\" media=\"print, screen, projection, tv \" />\n";
    echo "</head>\n";
    echo "<body>";
    echo "<div class='container-displayframework'>";

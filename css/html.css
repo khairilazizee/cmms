@@ -441,12 +441,70 @@ padding: 2px;
   font-weight:500;
 }
 
-.menuTop {cursor:pointer; margin:1px; background: url(image/menu_bg.gif) no-repeat #FFFFFF; border:1px solid #CCCCCC; color:#000000; width:195px; height:24px; padding:2px; text-align:left; font-family:verdana; font-size:12px; }
+.menuTop { 
+  cursor:pointer; 
+  margin:1px; 
+  background: url(image/menu_bg.gif) no-repeat #FFFFFF; 
+  border:1px solid #CCCCCC; 
+  color:#000000; 
+  width:195px; 
+  height:24px; 
+  padding:2px; 
+  text-align:left; 
+  font-family:verdana; 
+  font-size:12px; 
+}
 .logout {
-color: #000099;
+  color: #000099;
 }
 
 /* tambahan table */
+
+@media print{
+
+  table.table {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #CCCCCC;
+    border-collapse: collapse;
+  }
+  table.table th {
+      border-width: 1px;
+      padding: 8px;
+      border-style: solid;
+      border-color: #CCCCCC;
+      background-color: #DBE6F4;
+  }
+  table.table td {
+      border-width: 1px;
+      padding: 8px;
+      border-style: solid;
+      border-color: #CCCCCC;
+      background-color: #ffffff;
+  }
+
+  table.outerform {
+    font-size: 11px;
+    font-family: Verdana;
+    bgcolor: #FFFFFF;
+  }
+
+  table.outerform td.formheader {
+    padding: 10px;
+    border-width: 1px;
+    border:1px solid #ccc;
+    background:#47A6DB;
+    text-transform:uppercase;
+  }
+
+  table.outerform td.title {
+    font-weight:550;
+    font-family:Verdana, Helvetica;
+  }
+
+}
 
 table.table {
     font-family: verdana,arial,sans-serif;
