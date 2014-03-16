@@ -70,7 +70,7 @@ $kumpsistem=$_GET["kumpcarian"];
     <tr>
         <th class="formheader" width="30" align="center">No</th>
         <th class="formheader">Tugasan</th>
-        <th class="formheader" width="100">Sub Sistem</th>
+        <th class="formheader" width="150">Sub Sistem</th>
         <th class="formheader" width="100" align="center">Tindakan</th>
     </tr>
     <?php
