@@ -129,7 +129,7 @@ if ($next_month == 13 ) {
 			echo "<td>$bil</td>";
 			echo "<td>$namasubsistem</td>";
 			echo "<td align='center'><a href='mainpage.php?module=Technician&task=list_task&sub=$subsistem&sis=$id' $kepastian ><img src='images/admin/btn_papar.gif'/></a>
-				<a href=\"mainpage.php?module=Technician&task=borang&sub=$subsistem&sis=$id\"><img src=\"images/print.gif\"></a>
+				<a href=\"mainpage.php?module=Technician&task=borang&sub=$subsistem&sis=$id&displayframework=0\"><img src=\"images/print.gif\"></a>
 			</td>";
 			echo "</tr>";
 		}
