@@ -17,7 +17,7 @@
 </script>
 <?php
 
-$tid = $_GET['assetid'];
+$tid = $_GET['taskid'];
 
 if($_POST['submit']){
     $taskdesc = mysql_real_escape_string($_POST['txtAssetDesc']);
@@ -40,13 +40,14 @@ if($_POST['submit']){
 
 
 $flg = "add";
-$check = "SELECT sys_desc, sys_id FROM system WHERE sys_id='$tid'";
+$check = "SELECT sys_desc, sys_id, sys_sg_id FROM system WHERE sys_id='$tid'";
 //echo $check;
 $result = sql_query($check,$dbi);
 if($a = mysql_fetch_array($result)){
     $flg = "edit";
     $adesc = $a['sys_desc'];
     $aid = $a['sys_id'];
+    $ssgid = $a['sys_sg_id'];
 }
 
 ?>
@@ -68,7 +69,10 @@ if($a = mysql_fetch_array($result)){
                         $sgid = $sgdata['sg_id'];
                         $sgdesc = $sgdata['sg_desc'];
 
-                        echo "<option value='$sgid'>$sgdesc</option>";
+                        echo "<option value='$sgid' ";
+                        if($sgid==$ssgid)
+                            echo " selected";
+                        echo ">$sgdesc</option>";
                     }
                 ?>
             </select>

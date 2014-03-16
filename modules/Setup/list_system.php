@@ -77,7 +77,7 @@ $kumpsistem=$_GET["kumpcarian"];
     $sql = "SELECT sys_id, sys_desc , sys_sg_id from system WHERE 1 ";
     if ($kumpsistem<>"")
         $sql.="and sys_sg_id='$kumpsistem' ";
-    $sql.="ORDER BY sys_id";
+    $sql.="ORDER BY sys_sg_id, sys_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);

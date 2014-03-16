@@ -47,7 +47,7 @@ $result = sql_query($check,$dbi);
 if($a = mysql_fetch_array($result)){
     $flg = "edit";
     $tdesc = $a['task_desc'];
-    $tgid = $a['tg_id'];
+    $tagid = $a['tg_id'];
     // $tagid = $a['task_ag_id'];
     // $tstaff = $a['task_staff_id'];
     // $tasset = $a['task_asset_id'];
@@ -96,7 +96,10 @@ if($a = mysql_fetch_array($result)){
                         $tgid = $tgdata['tg_id'];
                         $tgdesc = $tgdata['tg_desc'];
 
-                        echo "<option value='$tgid'>$tgdesc</option>";
+                        echo "<option value='$tgid' ";
+                        if($tgid==$tagid)
+                            echo "selected";
+                        echo ">$tgdesc</option>";
                     }
                 ?>
             </select>
