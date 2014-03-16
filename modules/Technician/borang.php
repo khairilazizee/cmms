@@ -12,7 +12,7 @@ $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
     <tr>
         <td style="font-weight:bold;" colspan="6">
-            <div style="float: left";>B&nbsp;:&nbsp;Langkah Keselamatan</div>
+            <div style="float: left";><!-- B&nbsp;:&nbsp; -->Langkah Keselamatan</div>
         </td>
         <tr>
             <td>1</td>
@@ -33,7 +33,7 @@ $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
     <tr>
         <td style="font-weight:bold;" colspan="6">
-            <div style="float: left";>C&nbsp;:&nbsp;Senarai tugasan</div>
+            <div style="float: left";><!-- C&nbsp;:&nbsp; -->Senarai tugasan</div>
         </td>
     </tr>
     <tr>
@@ -95,7 +95,7 @@ $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
 </table>
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
     <tr>
-        <td style="font-weight:bold;" colspan="6">D&nbsp;:&nbsp;Laporan Pemeriksaan</td>
+        <td style="font-weight:bold;" colspan="6"><!-- D&nbsp;:&nbsp; -->Laporan Pemeriksaan</td>
     </tr>
     <tr>
         <td width="5"><input type="checkbox" name="inspection_status" value="1"></td>
@@ -114,7 +114,7 @@ $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
 </table>
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
     <tr>
-        <td style="font-weight:bold;" colspan="4">E&nbsp;:&nbsp;Laporan Pembetulan</td>
+        <td style="font-weight:bold;" colspan="4"><!-- E&nbsp;:&nbsp; -->Laporan Pembetulan</td>
     </tr>
     <tr>
         <td width="5"><input type="checkbox" name="rectification_status" value="1"></td>
