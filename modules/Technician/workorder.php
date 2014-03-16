@@ -43,10 +43,10 @@ if ($next_month == 13 ) {
 	<td align="center">
 		<table width="100%" border="0" cellspacing="2" cellpadding="2">
 			<tr>
-				<td bgcolor="#999999" style="color:#FFFFFF" width="10%" align="center">  <a href="<?php echo "mainpage.php?module=Setup&task=workorder&" . "month=". $prev_month . "&year=" . $prev_year; ?>" style="color:#FFFFFF"><img src="images/left-arrow.gif"></a>
+				<td bgcolor="#999999" style="color:#FFFFFF" width="10%" align="center">  <a href="<?php echo "mainpage.php?module=Technician&task=workorder&" . "month=". $prev_month . "&year=" . $prev_year; ?>" style="color:#FFFFFF"><img src="images/left-arrow.gif"></a>
 				</td>
 				<td width="80%" align="center" bgcolor="#999999" style="color:#FFFFFF"><strong><?php echo namabulan($cMonth).' '.$cYear; ?></td>
-				<td bgcolor="#999999" style="color:#FFFFFF" width="10%" align="center"><a href="<?php echo "mainpage.php?module=Setup&task=workorder&" . "month=". $next_month . "&year=" . $next_year; ?>" style="color:#FFFFFF"><img src="images/right-arrow.gif"></a>  
+				<td bgcolor="#999999" style="color:#FFFFFF" width="10%" align="center"><a href="<?php echo "mainpage.php?module=Technician&task=workorder&" . "month=". $next_month . "&year=" . $next_year; ?>" style="color:#FFFFFF"><img src="images/right-arrow.gif"></a>  
 				</td>
 			</tr>
 		</table>
