@@ -96,17 +96,20 @@ if ($next_month == 13 ) {
 		<th width="300">Tugasan</th>
 		<th>Juruteknik</th>
 		<th width="100">Kump. Asset</th>
-		<th width="100">Asset</th>
+		<!-- <th width="100">Asset</th> -->
 		<!-- <th width="100">Tindakan</th> -->
+		<th width="100">Status</th>
 	</tr>
 	<?php
 		$bil = 0;
-		$sqltugasan = "SELECT staff_id, ag_id, asset_id, task_desc FROM tbl_workorder , task WHERE task.tg_id=tbl_workorder.tg_id and tbl_workorder.task_date='$currentdate'";
+		$sqltugasan = "SELECT staff_id, ag_id, asset_id, ws_id, task_desc FROM tbl_workorder , task WHERE task.tg_id=tbl_workorder.tg_id and tbl_workorder.task_date='$currentdate'";
 		// echo $sqltugasan;
 		$restugasan = mysql_query($sqltugasan,$dbi);
 		while($data = mysql_fetch_array($restugasan)){
 			$namatugasan = $data['task_desc'];
 			$staff_id = $data['staff_id'];
+			$wsid = $data['ws_id'];
+			$wstatus = GetDesc("work_status","ws_desc","ws_id",$wsid);
 			$namastaff = GetDesc("staff","staff_name","staff_id",$staff_id);
 			$agid = $data['ag_id'];
 			$namaassetgroup = GetDesc("asset_group","ag_desc","ag_id",$agid);
@@ -119,7 +122,8 @@ if ($next_month == 13 ) {
 			echo "<td>$namatugasan</td>";
 			echo "<td>$namastaff</td>";
 			echo "<td>$namaassetgroup</td>";
-			echo "<td>$namaasset</td>";
+			// echo "<td>$namaasset</td>";
+			echo "<td>$wstatus</td>";
 			// echo "<td align='center'><img src='images/admin/btn_papar.gif'/></td>";
 			echo "</tr>";
 		}
