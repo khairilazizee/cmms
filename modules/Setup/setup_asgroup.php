@@ -28,7 +28,7 @@ if($_POST['submit']){
         sql_query($update,$dbi);
     }
     
-    pageredirect("mainpage.php?module=Setup&task=setup_asset");
+    pageredirect("mainpage.php?module=Setup&task=list_asgroup");
     
 }
 
