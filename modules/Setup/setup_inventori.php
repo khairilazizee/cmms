@@ -1,3 +1,18 @@
+<script type="text/javascript">
+    function checkform(){
+        if(document.frmtask.txtNamaBarangan.value==""){
+            alert("Sila nyatakan nama barang.");
+            return false;
+        }
+        else if(document.frmtask.txtJumlahBarangan.value==""){
+            alert("Sila nyatakan kuantiti barang.");
+            return false;
+        }
+        else{
+            return confirm("Adakah anda pasti?");
+        }
+    }
+</script>
 <?php
 
 $invid = (int) mysql_real_escape_string($_REQUEST['inv']);
