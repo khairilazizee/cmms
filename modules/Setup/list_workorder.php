@@ -74,7 +74,13 @@ if($_POST['submitcarian']){
         $sql .=" and ws_id='3' or ws_id='4'";
     }
 
-    if($tarikhmula<>"" or $tarikhakhir<>""){
+    if($tarikhmula<>"" and $tarikhakhir==""){
+        $sql.=" and task_date>='$tmula'";
+    }
+    elseif($tarikhakhir<>"" and $tarikhmula==""){
+        $sql.=" and task_date<='$takhir'";
+    }
+    elseif($tarikhmula<>"" and $tarikhakhir<>""){
         $sql.=" and task_date>='$tmula' and task_date<='$takhir'";
     }
     $sql .= " ORDER BY task_date";
