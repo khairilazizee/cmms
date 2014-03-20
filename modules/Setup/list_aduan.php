@@ -26,7 +26,7 @@ if($_GET['delete']==1){
     $rescheck = mysql_query($check,$dbi);
     if(mysql_num_rows($rescheck)>0){
         $delete = mysql_query("DELETE FROM tbl_workorder WHERE id='$iddelete'");
-        pageredirect("mainpage.php?module=Setup&task=list_workorder");
+        pageredirect("mainpage.php?module=Setup&task=list_aduan");
     }
 }
 
@@ -49,12 +49,12 @@ if($_POST['submitcarian']){
 </div>
 <div style="text-align:right;font-weight:bold;">
     <?php if ($staffrole<>15 && $staffrole<>14) {
-        echo "<a href=\"mainpage.php?module=Setup&task=setup_workorder\">Tambah<img src=\"images/admin/btn_add.gif\"></a>";
+        echo "<a href=\"mainpage.php?module=Setup&task=setup_aduan\">Tambah<img src=\"images/admin/btn_add.gif\"></a>";
     } ?>
 </div><br>
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
     <tr>
-        <td style="font-weight:bold;" colspan="6">Senarai Arahan Kerja</td>
+        <td style="font-weight:bold;" colspan="6">Senarai Aduan</td>
     </tr>
     <tr>
         <th width="5">Bil</th>
@@ -66,7 +66,7 @@ if($_POST['submitcarian']){
     </tr>
     <?php
 
-    $sql = "SELECT task_date, staff_id, id, ws_id, tg_id FROM tbl_workorder WHERE js_id='2'";
+    $sql = "SELECT task_date, staff_id, id, ws_id, tg_id FROM tbl_workorder WHERE js_id='1'";
     // if($staffid<>""){
     //     $sql .=" and staff_id='$staffid'";
     // }
@@ -108,7 +108,7 @@ if($_POST['submitcarian']){
         echo "<td>$namastaff</td>";
         echo "<td>$wstatus</td>";
         if($staffrole==13 or $staffrole==15){
-            echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_workorder&sysid=$idworkorder\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_workorder&delete=1&iddelete=$idworkorder\" onClick=\"return confirm('Anda pasti?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
+            echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_aduan&sysid=$idworkorder\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_aduan&delete=1&iddelete=$idworkorder\" onClick=\"return confirm('Anda pasti?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
         }
         echo "</tr>";
     }
@@ -117,7 +117,7 @@ if($_POST['submitcarian']){
 </table>
 <div style="text-align:center;">
     <?php
-    print $Mfunction->page("?module=Setup&task=list_workorder", $limit, $rowstart, $numrows);
+    print $Mfunction->page("?module=Setup&task=list_aduan", $limit, $rowstart, $numrows);
     ?>
 </div>
 
