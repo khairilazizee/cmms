@@ -326,12 +326,12 @@ $(function() {
      });
  });
 
- $("#txtAssetGroup").bind("change", function() {
+ $("#txtSysGroup, #txtAssetGroup").bind("change", function() {
 
      $.ajax({
          type: "GET",
          url: "modules/Setup/asset.php",
-         data: "agid="+$("#txtAssetGroup").val(),
+         data: "txtSysGroup="+$("#txtSysGroup").val() + "&agid="+$("#txtAssetGroup").val(),
          success: function(html) {
              $("#txtAsset").html(html);
          }
