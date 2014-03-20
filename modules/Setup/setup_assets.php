@@ -1,8 +1,19 @@
 <script type="text/javascript">
     function checkform(){
         if (document.frmtask.txtSystemGroup.value=="") {
-            alert("Sila pilih Kumpulan Aset.");
+            alert("Sila pilih Kumpulan Sistem.");
             document.frmtask.txtSystemGroup.focus();
+            return false;
+        }
+        else if (document.frmtask.txtAssetGroup.value==""){
+            alert("Sila pilih Kumpulan Aset.");
+            document.frmtask.txtAssetGroup.focus();
+            return false;
+
+        }
+        else if (document.frmtask.txtZone.value==""){
+            alert("Sila pilih zon.");
+            document.frmtask.txtZone.focus();
             return false;
         }
         else if (document.frmtask.txtAssetDesc.value==""){
@@ -23,14 +34,15 @@ if($_POST['submit']){
     $taskdesc = mysql_real_escape_string($_POST['txtAssetDesc']);
     $systemgroup = $_POST['txtSystemGroup'];
     $assetgroup = $_POST['txtAssetGroup'];
+    $assetzone = $_POST['txtZone'];
     
     $flg = $_POST['flg'];
     
     if($flg == "add"){
-        $insert = "INSERT INTO asset (asset_desc,asset_ag_id,sg_id) VALUES ('$taskdesc','$assetgroup','$systemgroup')";
+        $insert = "INSERT INTO asset (asset_desc,asset_ag_id,asset_zone,sg_id) VALUES ('$taskdesc','$assetgroup','$assetzone',$systemgroup')";
         sql_query($insert,$dbi);
     } elseif($flg == "edit"){
-        $update = "UPDATE asset SET asset_desc='$taskdesc', asset_ag_id='$assetgroup', sg_id='$systemgroup' WHERE asset_id='$tid'";
+        $update = "UPDATE asset SET asset_desc='$taskdesc', asset_ag_id='$assetgroup', asset_zone='$assetzone', sg_id='$systemgroup' WHERE asset_id='$tid'";
         //die($update);
         sql_query($update,$dbi);
     }
@@ -41,7 +53,7 @@ if($_POST['submit']){
 
 
 $flg = "add";
-$check = "SELECT asset_id, asset_desc, asset_ag_id, sg_id FROM asset WHERE asset_id='$tid'";
+$check = "SELECT asset_id, asset_desc, asset_ag_id, sg_id, asset_zone FROM asset WHERE asset_id='$tid'";
 //echo $check;
 $result = sql_query($check,$dbi);
 if($a = mysql_fetch_array($result)){
@@ -50,6 +62,7 @@ if($a = mysql_fetch_array($result)){
     $aid = $a['asset_id'];
     $tagid = $a['asset_ag_id'];
     $tsgid = $a['sg_id'];
+    $tzid = $a['asset_zone'];
 }
 
 ?>
@@ -105,6 +118,32 @@ if($a = mysql_fetch_array($result)){
         </td>
     </tr>
     <tr>
+        <td width="220" valign="middle" class="title">Zon</td>
+        <td width="5" valign="middle" class="title">:</td>
+        <td>
+            <select name="txtZone" id="txtZone">
+                <option value="">- PILIH -</option>
+                <?php
+                    $sql = "SELECT zon_id, zon_desc FROM zone WHERE 1 ";
+                    if($tagid<>"")
+                        $sql .= "AND ag_id='$tagid'";
+                    $sql .= " ORDER BY zon_id";
+                    $res = mysql_query($sql,$dbi);
+                    while($agdata = mysql_fetch_array($res)){
+                        $agid = $agdata['zon_id'];
+                        $agdesc = $agdata['zon_desc'];
+
+                        echo "<option ";
+                        if($agid==$tzid){
+                            echo " SELECTED ";
+                        }
+                        echo" value='$agid'>$agdesc</option>";
+                    }
+                ?>
+            </select>
+        </td>
+    </tr>
+    <tr>
         <td width="220" valign="middle" class="title">Penerangan Aset</td>
         <td width="5" valign="middle" class="title">:</td>
         <td>
@@ -146,3 +185,22 @@ if($a = mysql_fetch_array($result)){
     </tr> 
 </table>
 </form>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+
+ $("#txtAssetGroup").bind("change", function() {
+
+     $.ajax({
+         type: "GET",
+         url: "modules/Setup/zone.php",
+         data: "txtAssetGroup="+$("#txtAssetGroup").val(),
+         success: function(html) {
+             $("#txtZone").html(html);
+         }
+     });
+ });
+
+});
+ </script>
