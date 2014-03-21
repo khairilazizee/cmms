@@ -57,7 +57,10 @@ if(!isset($_GET["limit"]))
 else
   $rowstart = $_GET["limit"];
 
-$haripilih = $_GET['hari'];
+$haripilih = mysql_real_escape_string($_GET['hari']);
+
+$haripilih=="" ? $haripilih=date("N") : @$haripilih;
+// echo $haripilih;
 if($haripilih==1){
 	$isnin = "active";
 } elseif($haripilih==2){
