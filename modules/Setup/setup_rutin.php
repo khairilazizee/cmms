@@ -19,7 +19,7 @@ if(isset($_POST['submit'])){
 
 	if($flg == "add"){
 		for($a = 0; $a < $loop; $a++){
-			$insert = "INSERT INTO tbl_rutin (sg_id,sys_id,tg_id,staff_id,hari,ag_id,asset_id) VALUES ('$sysgroup','$system','$kumptugasan','$juruteknik','".$hari[$a]."','$asgroup','$asset')";
+			$insert = "INSERT INTO tbl_rutin (sg_id,sys_id,tg_id,staff_id,hari,ag_id,asset_id,js_id) VALUES ('$sysgroup','$system','$kumptugasan','$juruteknik','".$hari[$a]."','$asgroup','$asset','3')";
 			// echo $insert."<br/>";
 			mysql_query($insert,$dbi);
 		}
@@ -28,6 +28,8 @@ if(isset($_POST['submit'])){
 		mysql_query($update,$dbi);
 	}
     // echo("You selected $N day(s): ");
+
+    pageredirect("mainpage.php?module=Setup&task=list_rutin");
     
 }
 

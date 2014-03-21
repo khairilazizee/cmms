@@ -105,9 +105,11 @@ if($haripilih==1){
 						</tr>
 						<?php
 							$bil=0;
-							$sqlrutin = "SELECT tg_id, staff_id, ag_id, ws_id FROM tbl_rutin WHERE hari='$haripilih' and js_id='3'";
+							$sqlrutin = "SELECT id, tg_id, staff_id, ag_id, ws_id FROM tbl_rutin WHERE hari='$haripilih' and js_id='3'";
+							// echo $sqlrutin;
 							$resrutin = mysql_query($sqlrutin,$dbi);
 							$sqlrutinfull = $sqlrutin." LIMIT $rowstart, $limit";
+							$resrutinfull = mysql_query($sqlrutinfull,$dbi);
 							$cnt=$rowstart;
 							while($info = mysql_fetch_array($resrutinfull)){
 								$cnt++;
@@ -116,18 +118,20 @@ if($haripilih==1){
 								$staffid = $info['staff_id'];
 								$namastaff = GetDesc("staff","staff_name","staff_id",$staffid);
 								$agid = $info['ag_id'];
+								$namakumpaset = GetDesc("asset_group","ag_desc","ag_id",$agid);
 								$stat = $info['ws_id'];
 								$wstatus = GetDesc("work_status","ws_desc","ws_id",$stat);
+								$idrutin = $info['id'];
 
 
 								echo "<tr bgcolor=\"$bgcolor\" onMouseOver=\"this.bgColor = '$hlcolor'\" onMouseOut =\"this.bgColor = '$bgcolor'\">\n";
 								echo "<td>$cnt</td>";
 								echo "<td>$namakumptugasan</td>";
 								echo "<td>$namastaff</td>";
-								echo "<td>$agid</td>";
+								echo "<td>$namakumpaset</td>";
 								echo "<td>$wstatus</td>";
-								echo "<td>
-									 <a href=\"mainpage.php?module=Setup&task=setup_rutin&rutin=$idinv\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_rutin&delete=1&iddelete=$idinv\" onClick=\"return confirm('Hapus Data?');\"><img src=\"images/admin/btn_delete.gif\"/></a>
+								echo "<td align='center'>
+									 <a href=\"mainpage.php?module=Setup&task=setup_rutin&rutin=$idrutin\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_rutin&delete=1&iddelete=$idrutin\" onClick=\"return confirm('Hapus Data?');\"><img src=\"images/admin/btn_delete.gif\"/></a>
 								</td>";
 								echo "</tr>";
 							}
