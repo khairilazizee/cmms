@@ -1,5 +1,4 @@
 <?php
-
 include('include/function.php');
 $Mfunction = new fungsi();
 $limit = 25;
@@ -8,7 +7,8 @@ if(!isset($_GET["limit"]))
   $rowstart = 0;
 else
   $rowstart = $_GET["limit"];
-  
+
+kebenaran($_SESSION['login']);
 
 if($_POST['submit']){
     $code = $_POST['txtSearchCode'];

@@ -1,5 +1,7 @@
 <?php
 
+kebenaran($_SESSION['login']);
+
 $staffid = $_SESSION['staffid'];
 
 $cMonth = $_REQUEST["month"];

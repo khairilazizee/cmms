@@ -5,10 +5,10 @@ session_start();
 include_once("mainfile.php");
 global $dbi;
 head();
-if (!$_SESSION["start"]){ 
-   $_SESSION["start"]=1;
-   sql_query("update visitor set total=total+1",$dbi);
-}
+// if (!$_SESSION["start"]){ 
+//    $_SESSION["start"]=1;
+//    sql_query("update visitor set total=total+1",$dbi);
+// }
 
 define( '_UMPORTAL', 1 );
 $home=1;

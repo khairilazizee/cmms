@@ -1,8 +1,9 @@
 <?php
+
 session_start();
 $staffrole = $_SESSION['userrole'];
 $staffid = $_SESSION['staffid'];
-
+kebenaran($_SESSION['login']);
 // echo "Staff ID=".$staffid;
 
 if($staffrole<>14 && $staffrole<>15)

@@ -1,39 +1,30 @@
 <?php
 
 $rutinid = (int) mysql_real_escape_string($_REQUEST['rutin']);
+$idworkorder = mysql_real_escape_string($_GET['sis']);
+$tarikhbermula = date("Y-m-d");
+
+if($statuskerja<="1"){
+    $update = "UPDATE tbl_rutin SET ws_id='2', work_start='$tarikhbermula' WHERE id='$rutinid'";
+    $resupdate = mysql_query($update,$dbi);
+}
+
 
 if(isset($_POST['submit'])){
-	$hari = $_POST['chkhari'];
-	$sysgroup = $_POST['txtSysGroup'];
-	// die($sysgroup);
-	$system = $_POST['txtSystem'];
-	$kumptugasan = $_POST['txtKumpTugasan'];
-	$juruteknik = $_POST['txtJuruteknik'];
-	$asgroup = $_POST['txtAssetGroup'];
-	$asset = $_POST['txtAsset'];
-	$rutin = $_POST['rutin'];
-	$loop = count($hari);
+	$wsid = $_POST['txtStatus'];
 	$flg = $_POST['flg'];
-
+	$datedone = date("Y-m-d");
 	// echo $loop;
 
-	if($flg == "add"){
-		for($a = 0; $a < $loop; $a++){
-			$insert = "INSERT INTO tbl_rutin (sg_id,sys_id,tg_id,staff_id,hari,ag_id,asset_id,js_id,ws_id) VALUES ('$sysgroup','$system','$kumptugasan','$juruteknik','".$hari[$a]."','$asgroup','$asset','3','1')";
-			// echo $insert."<br/>";
-			mysql_query($insert,$dbi);
-		}
-	} elseif($flg=="edit"){
-		$update = "UPDATE tbl_rutin SET sg_id='$sysgroup', sys_id='$system', tg_id='$kumptugasan',staff_id='$juruteknik', hari='$hari', ag_id='$asgroup', asset_id='$asset' WHERE id='$rutin'";
+	if($flg=="edit"){
+		$update = "UPDATE tbl_rutin SET ws_id='$wsid', work_done='$datedone' WHERE id='$rutinid'";
 		mysql_query($update,$dbi);
 	}
-    // echo("You selected $N day(s): ");
 
     pageredirect("mainpage.php?module=Setup&task=list_rutin");
     
 }
 
-$flg = "add";
 $sqlselect = "SELECT sg_id, sys_id, tg_id, staff_id, hari, ag_id, asset_id FROM tbl_rutin WHERE id='$rutinid'";
 $resselect = mysql_query($sqlselect,$dbi);
 if($info = mysql_fetch_array($resselect)){
@@ -57,10 +48,10 @@ if($info = mysql_fetch_array($resselect)){
 		<td width="100" class="title">Kumpulan Sistem</td>
 		<td width="5" class="title">:</td>
 		<td>
-			<select name="txtSysGroup" id="txtSysGroup" <?php echo $info; ?>>
+			<select name="txtSysGroup" id="txtSysGroup">
 				<option value="">- PILIH -</option>
 				<?php
-					$sql = "SELECT sg_id, sg_desc FROM system_group";
+					$sql = "SELECT sg_id, sg_desc FROM system_group WHERE sg_id='$sysgroupid'";
 					$res = mysql_query($sql,$dbi);
 					while($datasg = mysql_fetch_array($res)){
 						$sgid = $datasg['sg_id'];
@@ -80,10 +71,10 @@ if($info = mysql_fetch_array($resselect)){
 		<td class="title">Sistem</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtSystem" id="txtSystem" <?php echo $info; ?>>
+			<select name="txtSystem" id="txtSystem">
 				<?php
 					echo "<option value=''>- PILIH -</option>";
-					$sqlsystem = "SELECT sys_id, sys_desc FROM system";
+					$sqlsystem = "SELECT sys_id, sys_desc FROM system WHERE sys_id='$systemid'";
 					$ressystem = mysql_query($sqlsystem,$dbi);
 					while($datasystem = mysql_fetch_array($ressystem)){
 						$sysid = $datasystem['sys_id'];
@@ -103,10 +94,10 @@ if($info = mysql_fetch_array($resselect)){
 		<td width="100" class="title">Sub sistem</td>
 		<td width="5" class="title">:</td>
 		<td>
-			<select name="txtKumpTugasan" id="txtKumpTugasan" <?php echo $info; ?>>
+			<select name="txtKumpTugasan" id="txtKumpTugasan">
 				<option value="">- PILIH -</option>
 				<?php
-					$sqltugasan = "SELECT tg_id, tg_desc FROM task_group";
+					$sqltugasan = "SELECT tg_id, tg_desc FROM task_group WHERE tg_id='$taskgroupid'";
 					$restugasan = mysql_query($sqltugasan,$dbi);
 					while($datatg = mysql_fetch_array($restugasan)){
 						$tgid = $datatg['tg_id'];
@@ -126,10 +117,10 @@ if($info = mysql_fetch_array($resselect)){
 		<td class="title">Kumpulan Aset</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtAssetGroup" id="txtAssetGroup" <?php echo $info; ?>>
+			<select name="txtAssetGroup" id="txtAssetGroup">
 				<?php
 					echo "<option value=''>- PILIH -</option>";
-					$sqlag = "SELECT ag_desc, ag_id FROM asset_group";
+					$sqlag = "SELECT ag_desc, ag_id FROM asset_group WHERE ag_id='$assetgroupid'";
 					$resag = mysql_query($sqlag,$dbi);
 					while($dataag = mysql_fetch_array($resag)){
 						$agid = $dataag['ag_id'];
@@ -149,10 +140,10 @@ if($info = mysql_fetch_array($resselect)){
 		<td class="title">Aset</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtAsset" id="txtAsset" <?php echo $info; ?>>
+			<select name="txtAsset" id="txtAsset">
 				<?php
 					echo "<option value=''>- PILIH -</option>";
-					$sqlasset = "SELECT asset_desc, asset_id FROM asset";
+					$sqlasset = "SELECT asset_desc, asset_id FROM asset WHERE asset_id='$assetpilihid'";
 					$resasset = mysql_query($sqlasset,$dbi);
 					while($dataasset = mysql_fetch_array($resasset)){
 						$assetid = $dataasset['asset_id'];
@@ -172,10 +163,10 @@ if($info = mysql_fetch_array($resselect)){
 		<td class="title">Juru Teknik</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtJuruteknik" id="txtJuruteknik" <?php echo $info; ?>>
+			<select name="txtJuruteknik" id="txtJuruteknik">
 				<?php
 					echo "<option value=''>- PILIH -</option>";
-					$sqltech = "SELECT staff_id, staff_name FROM staff ";
+					$sqltech = "SELECT staff_id, staff_name FROM staff WHERE staff_id='$staffid' ";
 					$restech = mysql_query($sqltech,$dbi);
 					while($datatech = mysql_fetch_array($restech)){
 						$techid = $datatech['staff_id'];
@@ -213,7 +204,7 @@ if($info = mysql_fetch_array($resselect)){
 			<select name="chkhari" id="chkhari">
 				<option value="">- PILIH -</option>
 				<?php
-					$sqlhari = "SELECT id, keterangan_bm FROM tbl_hari ORDER BY id";
+					$sqlhari = "SELECT id, keterangan_bm FROM tbl_hari WHERE id='$haripilih' ORDER BY id";
 					$reshari = mysql_query($sqlhari,$dbi);
 					while($datahari = mysql_fetch_array($reshari)){
 						$idhari = $datahari['id'];
@@ -228,6 +219,35 @@ if($info = mysql_fetch_array($resselect)){
 				?>
 			</select>
 		</td>
+	</tr>
+	<tr>
+		<td class="title">Status</td>
+		<td class="title">:</td>
+		<td>
+			<select name="txtStatus" id="txtStatus">
+				<option value="">- PILIH -</option>
+				<?php
+					$sqlstatus="select ws_id, ws_desc from work_status where 1 and ws_id not in ('1','2','4')";
+					
+					$qstat=mysql_query($sqlstatus,$dbi);
+					while ($resstat=mysql_fetch_array($qstat)) {
+						$wsid=$resstat["ws_id"];
+						$wsdesc=$resstat["ws_desc"];
+
+						echo "<option ";
+						if ($workstatus==$wsid) {
+							echo " SELECTED ";
+						}
+						echo "value='$wsid'>$wsdesc</option>";
+					}
+				?>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Catatan</td>
+		<td class="title">:</td>
+		<td><textarea name="txtCatatanJuruteknik" id="txtCatatanJuruteknik" cols="100%" rows="5"></textarea></td>
 	</tr>
 	<?php } ?>
 	<tr>

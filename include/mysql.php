@@ -142,4 +142,10 @@ function namabulan($bulan){
 
   return $namabulan;
 }
+
+function kebenaran($kebenaran){
+  if($kebenaran <> 1){
+    pageredirect("index.php");
+  }
+}
 ?>

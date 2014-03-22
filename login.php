@@ -33,6 +33,7 @@
            $_SESSION["password"]=$user_password;
            $_SESSION["userrole"]=$role;
            $_SESSION['staffid'] = $staffid;
+           $_SESSION['login'] = 1;
 	  	   //$_SESSION["email"]=$email;	   
 	  	   $_SESSION["negeri"]=$negeri;	
 	  	   $_SESSION["kodppd"]=$kodppd;	

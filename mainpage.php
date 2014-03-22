@@ -59,10 +59,9 @@ header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Mon, 26 Jul 1970 05:00:00 GMT"); // Date in the past
 head();
 
-
 $colwidth=824;	
   $date = date("d-m-Y");
- $time = date("h:i:s");
+ $time = date("H:i:s");
 ?>
 <table align="center" width="1004" border="0" cellpadding="0" cellspacing="0">
 

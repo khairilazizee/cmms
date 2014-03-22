@@ -1,5 +1,6 @@
 <?php
 
+kebenaran($_SESSION['login']);
 include('include/function.php');
 $Mfunction = new fungsi();
 $limit = 25;
