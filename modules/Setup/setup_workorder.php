@@ -83,7 +83,7 @@ if(mysql_num_rows($res)>0){
 		<td colspan="3" style="font-weight:bold;" class="formheader">Arahan Kerja</td>
 	</tr>
 	<tr>
-		<td width="100" class="title">Kumpulan Sistem</td>
+		<td width="150" class="title">Kumpulan Sistem</td>
 		<td width="5" class="title">:</td>
 		<td>
 			<select name="txtSysGroup" id="txtSysGroup" <?php echo $info; ?>>
@@ -129,7 +129,7 @@ if(mysql_num_rows($res)>0){
 		</td>
 	</tr>
 	<tr>
-		<td width="100" class="title">Sub sistem</td>
+		<td class="title">Sub sistem</td>
 		<td width="5" class="title">:</td>
 		<td>
 			<select name="txtKumpTugasan" id="txtKumpTugasan" <?php echo $info; ?>>
@@ -270,7 +270,7 @@ if(mysql_num_rows($res)>0){
 	</tr>
 	<?php } 
 	if($flg == 'edit') { ?>
-	<tr>
+	<!-- <tr>
 		<td class="title">Status</td>
 		<td class="title">:</td>
 		<td>
@@ -296,12 +296,12 @@ if(mysql_num_rows($res)>0){
 				?>
 			</select>
 		</td>
-	</tr>
+	</tr> -->
 	<tr>
 		<td class="title" valign="top">Catatan</td>
 		<td class="title" valign="top">:</td>
 		<td>
-			<textarea name="txtCatatan" rows="10" cols="100%"></textarea>
+			<textarea name="txtCatatan" rows="5" cols="70"></textarea>
 		</td>
 	</tr>
 	<?php } ?>
