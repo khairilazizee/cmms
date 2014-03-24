@@ -103,7 +103,7 @@ if($haripilih==1){
 							<th>Kump. Tugasan</th>
 							<th>Juruteknik</th>
 							<th>Kump. Asset</th>
-							<th>Status</th>
+							<!-- <th>Status</th> -->
 							<th>Tindakan</th>
 						</tr>
 						<?php
@@ -132,7 +132,7 @@ if($haripilih==1){
 								echo "<td>$namakumptugasan</td>";
 								echo "<td>$namastaff</td>";
 								echo "<td>$namakumpaset</td>";
-								echo "<td>$wstatus</td>";
+								// echo "<td>$wstatus</td>";
 								echo "<td align='center'>
 									 <a href=\"mainpage.php?module=Setup&task=setup_rutin&rutin=$idrutin\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_rutin&delete=1&iddelete=$idrutin\" onClick=\"return confirm('Hapus Data?');\"><img src=\"images/admin/btn_delete.gif\"/></a>
 								</td>";
