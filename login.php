@@ -19,6 +19,7 @@
 			 $kodppd=sql_result($res1,0,"kodppd");
 			 $kodsek=sql_result($res1,0,"kodsek");
 			 $staffid = sql_result($res1,0,"login");
+			 $staffagid = sql_result($res1,0,"ag_id");
 			 
 			 
 		   }
@@ -33,7 +34,7 @@
            $_SESSION["password"]=$user_password;
            $_SESSION["userrole"]=$role;
            $_SESSION['staffid'] = $staffid;
-           $_SESSION['login'] = 1;
+           $_SESSION['staffagid'] = $staffagid;
 	  	   //$_SESSION["email"]=$email;	   
 	  	   $_SESSION["negeri"]=$negeri;	
 	  	   $_SESSION["kodppd"]=$kodppd;	

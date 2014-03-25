@@ -36,6 +36,9 @@ if($_POST['submit']){
     $desc = mysql_real_escape_string($_POST['txtSearchDescription']);
 }
 
+$staffagid = $_SESSION['staffagid'];
+echo $staffagid;
+
 if($_GET['delete']=="1"){
     $iddelete = $_GET['iddelete'];
     
@@ -130,8 +133,8 @@ $kumpaset=$_GET["kumpcarianaset"];
     if ($kumpsistem<>"")
         $sql.="and staff_sg_id='$kumpsistem' ";
     // Ikut kumpulan aset
-    if ($kumpaset<>"")
-        $sql.="and staff_ag_id='$kumpaset' ";
+    if ($staffagid<>"")
+        $sql.="and staff_ag_id='$staffagid' ";
     $sql.="ORDER BY staff_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
