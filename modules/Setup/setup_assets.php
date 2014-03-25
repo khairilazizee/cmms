@@ -106,7 +106,7 @@ if($a = mysql_fetch_array($result)){
                     if($staffagid<>0){
                         $sql.=" and ag_id='$staffagid'";
                     }
-                    $sql .="ORDER BY ag_id";
+                    $sql .=" ORDER BY ag_id";
                     $res = mysql_query($sql,$dbi);
                     while($agdata = mysql_fetch_array($res)){
                         $agid = $agdata['ag_id'];
