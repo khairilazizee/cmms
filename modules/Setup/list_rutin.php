@@ -58,6 +58,7 @@ else
   $rowstart = $_GET["limit"];
 
 $haripilih = mysql_real_escape_string($_GET['hari']);
+$staffagid = $_SESSION['staffagid'];
 
 $haripilih=="" ? $haripilih=date("N") : @$haripilih;
 // echo $haripilih;
@@ -109,6 +110,9 @@ if($haripilih==1){
 						<?php
 							$bil=0;
 							$sqlrutin = "SELECT id, tg_id, staff_id, ag_id, ws_id FROM tbl_rutin WHERE hari='$haripilih' and js_id='3'";
+							if($staffagid<>0){
+								$sqlrutin.=" and ag_id='$staffagid'";
+							}
 							// echo $sqlrutin;
 							$resrutin = mysql_query($sqlrutin,$dbi);
 							$sqlrutinfull = $sqlrutin." LIMIT $rowstart, $limit";

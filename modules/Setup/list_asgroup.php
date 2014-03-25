@@ -16,6 +16,9 @@ if($_POST['submit']){
     $desc = mysql_real_escape_string($_POST['txtSearchDescription']);
 }
 
+$staffagid = $_SESSION['staffagid'];
+// echo $staffagid;
+
 if($_GET['delete']=="1"){
     $iddelete = $_GET['iddelete'];
     
@@ -38,7 +41,13 @@ if($_GET['delete']=="1"){
     </tr>
     <?php
     
-    $sql = "SELECT ag_id, ag_desc from asset_group ORDER BY ag_id";
+    $sql = "SELECT ag_id, ag_desc from asset_group WHERE 1 ";
+    if($staffagid<>0){
+        $sql.=" and ag_id='$staffagid'";
+    }
+
+    $sql.=" ORDER BY ag_id ";
+    // echo $sql;
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
     $resfull = sql_query($sqlfull,$dbi);

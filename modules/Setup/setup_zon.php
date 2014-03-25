@@ -22,6 +22,7 @@
 <?php
 
 $tid = $_GET['zonid'];
+$staffagid = $_SESSION['staffagid'];
 
 if($_POST['submit']){
     $tdesc_p = mysql_real_escape_string($_POST['txtDescription']);
@@ -71,7 +72,11 @@ if($a = mysql_fetch_array($result)){
             <select name="txtAsGroup" id="txtAsGroup">
                 <option value="">- PILIH KUMP. ASSET -</option>
                 <?php
-                    $sql = "SELECT ag_id, ag_desc FROM asset_group ORDER BY ag_id";
+                    $sql = "SELECT ag_id, ag_desc FROM asset_group WHERE 1";
+                    if($staffagid<>0){
+                        $sql.=" and ag_id='$staffagid'";
+                    }
+                    $sql.=" ORDER BY ag_id";
                     $res = mysql_query($sql,$dbi);
                     while($agdata = mysql_fetch_array($res)){
                         $agid = $agdata['ag_id'];

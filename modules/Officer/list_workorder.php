@@ -2,6 +2,7 @@
 session_start();
 $staffrole = $_SESSION['userrole'];
 $staffid = $_SESSION['staffid'];
+$staffagid = $_SESSION['staffagid'];
 
 // echo "Staff ID=".$staffid;
 
@@ -83,6 +84,11 @@ if($_POST['submitcarian']){
     elseif($tarikhmula<>"" and $tarikhakhir<>""){
         $sql.=" and task_date>='$tmula' and task_date<='$takhir'";
     }
+
+    if($staffagid<>0){
+        $sql.=" and ag_id='$staffagid'";
+    }
+
     $sql .= " ORDER BY task_date";
     // echo $sql;
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;

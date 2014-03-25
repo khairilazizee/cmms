@@ -23,6 +23,7 @@
 <?php
 
 $tid = $_GET['taskid'];
+$staffagid = $_SESSION['staffagid'];
 
 if($_POST['submit']){
     $namastaff = mysql_real_escape_string($_POST['txtName']);
@@ -123,7 +124,11 @@ if($a = mysql_fetch_array($result)){
             <select name="txtAsetGroup" id="txtAsetGroup">
                 <option value="">- PILIH -</option>
                 <?php
-                    $sql = "SELECT ag_id, ag_desc FROM asset_group ORDER BY ag_id";
+                    $sql = "SELECT ag_id, ag_desc FROM asset_group WHERE 1 ";
+                    if($staffagid<>0){
+                        $sql.=" and ag_id='$staffagid'";
+                    }
+                    $sql.=" ORDER BY ag_id";
                     $res = mysql_query($sql,$dbi);
                     while($sgdata = mysql_fetch_array($res)){
                         $sgid = $sgdata['ag_id'];

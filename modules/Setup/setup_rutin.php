@@ -1,6 +1,7 @@
 <?php
 
 $rutinid = (int) mysql_real_escape_string($_REQUEST['rutin']);
+$staffagid = $_SESSION['staffagid'];
 
 if(isset($_POST['submit'])){
 	$hari = $_POST['chkhari'];
@@ -129,7 +130,10 @@ if($info = mysql_fetch_array($resselect)){
 			<select name="txtAssetGroup" id="txtAssetGroup" <?php echo $info; ?>>
 				<?php
 					echo "<option value=''>- PILIH -</option>";
-					$sqlag = "SELECT ag_desc, ag_id FROM asset_group";
+					$sqlag = "SELECT ag_desc, ag_id FROM asset_group WHERE 1";
+					if($staffagid<>0){
+						$sqlag.=" and ag_id='$staffagid'";
+					}
 					$resag = mysql_query($sqlag,$dbi);
 					while($dataag = mysql_fetch_array($resag)){
 						$agid = $dataag['ag_id'];

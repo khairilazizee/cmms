@@ -36,6 +36,8 @@ if($_POST['submit']){
     $desc = mysql_real_escape_string($_POST['txtSearchDescription']);
 }
 
+$staffagid = $_SESSION['staffagid'];
+
 if($_GET['delete']=="1"){
     $iddelete = $_GET['iddelete'];
     
@@ -90,8 +92,8 @@ $kumpaset=$_GET["kumpcarianaset"];
     <?php
     
     $sql = "SELECT zon_id, zon_desc, ag_id from zone where 1 ";
-    if ($kumpaset<>"")
-        $sql.="and ag_id='$kumpaset' ";
+    if ($staffagid<>0)
+        $sql.="and ag_id='$staffagid' ";
     $sql.="ORDER BY zon_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);

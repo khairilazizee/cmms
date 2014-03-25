@@ -29,6 +29,8 @@ if(!isset($_GET["limit"]))
   $rowstart = 0;
 else
   $rowstart = $_GET["limit"];
+
+$staffagid = $_SESSION['staffagid'];
   
 
 if($_POST['submit']){
@@ -131,8 +133,8 @@ $kumpaset=$_GET["kumpcarianaset"];
     if ($kumpsistem<>"")
         $sql.="and eng_sg_id='$kumpsistem' ";
     // Ikut kumpulan aset
-    if ($kumpaset<>"")
-        $sql.="and eng_ag_id='$kumpaset' ";
+    if ($staffagid<>0)
+        $sql.="and eng_ag_id='$staffagid' ";
     $sql.="ORDER BY eng_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);

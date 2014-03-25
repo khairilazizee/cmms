@@ -36,6 +36,8 @@ if($_POST['submit']){
     $desc = mysql_real_escape_string($_POST['txtSearchDescription']);
 }
 
+$staffagid = $_SESSION['staffagid'];
+
 if($_GET['delete']=="1"){
     $iddelete = $_GET['iddelete'];
     
@@ -124,8 +126,8 @@ if($_GET['delete']=="1"){
     $sql = "SELECT asset_id, asset_desc, asset_ag_id, sg_id from asset WHERE 1 ";
     if ($kumpsistem<>"")
         $sql.="and sg_id='$kumpsistem' ";
-    if ($kumpaset<>"")
-        $sql.="and asset_ag_id='$kumpaset' ";
+    if ($staffagid<>0)
+        $sql.="and asset_ag_id='$staffagid' ";
     $sql.="ORDER BY asset_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);

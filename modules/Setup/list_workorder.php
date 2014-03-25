@@ -2,7 +2,7 @@
 session_start();
 $staffrole = $_SESSION['userrole'];
 $staffid = $_SESSION['staffid'];
-
+$staffagid = $_SESSION['staffagid'];
 // echo "Staff ID=".$staffid;
 
 if($staffrole<>14 && $staffrole<>15)
@@ -13,6 +13,7 @@ else
 include('include/function.php');
 $Mfunction = new fungsi();
 $limit = 25;
+
 
 if(!isset($_GET["limit"]))
   $rowstart = 0;
@@ -82,6 +83,10 @@ if($_POST['submitcarian']){
     }
     elseif($tarikhmula<>"" and $tarikhakhir<>""){
         $sql.=" and task_date>='$tmula' and task_date<='$takhir'";
+    }
+
+    if($staffagid<>0){
+        $sql.=" and ag_id='$staffagid'";
     }
     $sql .= " ORDER BY task_date";
     // echo $sql;

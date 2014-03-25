@@ -37,7 +37,7 @@ if($_POST['submit']){
 }
 
 $staffagid = $_SESSION['staffagid'];
-echo $staffagid;
+// echo $staffagid;
 
 if($_GET['delete']=="1"){
     $iddelete = $_GET['iddelete'];
@@ -133,7 +133,7 @@ $kumpaset=$_GET["kumpcarianaset"];
     if ($kumpsistem<>"")
         $sql.="and staff_sg_id='$kumpsistem' ";
     // Ikut kumpulan aset
-    if ($staffagid<>"")
+    if ($staffagid<>0)
         $sql.="and staff_ag_id='$staffagid' ";
     $sql.="ORDER BY staff_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
