@@ -29,18 +29,24 @@ if($_POST['workorder']){
     $catatankeseluruhan = mysql_real_escape_string($_POST['txtCatatanKeseluruhan']);
     $tarikhselesai = date("Y-m-d");
     $total = $_POST['total'];
+    // echo $total;
     $start = 1;
-    while($total <= $total){
+    while($start <= $total){
         $idtugasan = $_POST['id'.$start];
         $catatantugasan = mysql_real_escape_string($_POST['txtCatatan'.$start]);
         $statustugasan = $_POST['txtStatus'.$start];
         $selesaitugasan = $_POST['chkSelesai'.$start];
+        // echo $selesaitugasan;
 
         if($selesaitugasan==1){
             $updatetugasan = "UPDATE task SET date_work_done='$tarikhselesai', catatan='$catatantugasan', status='$statustugasan', selesai='$selesaitugasan', ModifiedBy='$staffid', ModifiedDate='$tarikhselesai' WHERE task_id='$idtugasan'";
+            // echo $updatetugasan."<br />";
             mysql_query($updatetugasan,$dbi);
         }
+
+       ++$start;
     }
+
 
     $catatanjuruteknik = "UPDATE tbl_workorder SET catatan_juruteknik='$catatankeseluruhan' WHERE id='$idworkorder'";
     mysql_query($catatanjuruteknik,$dbi);
