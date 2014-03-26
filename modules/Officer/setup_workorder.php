@@ -117,6 +117,20 @@ if(mysql_num_rows($res)>0){
 		<td class="title">Status</td>
 		<td class="title">:</td>
 		<td>
+			<input type="text" value="<?php echo GetDesc("work_status","ws_desc","ws_id",$workstatus); ?>" readonly />
+		</td>
+	</tr>
+	<?php
+	if($workstatus<4){
+		echo "<td>Pengesahan</td>";
+		echo "<td>:</td>";
+		echo "<td><input type=\"text\" value=\"Menunggu pengesahan oleh jurutera\" readonly size=\"40\" /></td>";
+	}
+	else{ ?>
+	<tr>
+		<td class="title">Status</td>
+		<td class="title">:</td>
+		<td>
 			<select name="txtStatus" id="txtStatus">
 				<option value="">- PILIH -</option>
 				<?php
@@ -140,6 +154,7 @@ if(mysql_num_rows($res)>0){
 			</select>
 		</td>
 	</tr>
+	<?php } ?>
 	<tr>
 		<td class="title" valign="top">Catatan</td>
 		<td class="title" valign="top">:</td>
