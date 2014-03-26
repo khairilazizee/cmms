@@ -132,6 +132,10 @@ if($_POST['inspection']){
 
 ?>
 
+<?php
+if($userrole==12){
+
+?>
 <form action="" method="POST">
     <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
         <tr>
@@ -229,3 +233,4 @@ if($_POST['servicing']){
     </tr>
     </table>
 </form>
+<?php } ?>
