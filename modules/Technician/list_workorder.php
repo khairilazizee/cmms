@@ -48,13 +48,15 @@ $tarikhsemasa = date("Y-m-d");
     </tr>
     <?php
 
-    $sql = "SELECT task_date, task_id, staff_id, id, ws_id, tg_id FROM tbl_workorder WHERE 1";
+    $sql = "SELECT task_date, staff_id, id, ws_id, tg_id FROM tbl_workorder WHERE 1";
     if($staffid<>""){
         $sql .=" and staff_id='$staffid'";
     }
     if($staffrole==14){
         $sql .=" and ws_id='3' or ws_id='4'";
     }
+
+    $sql.=" and js_id='2'";
 
     $sql.="and task_date='$tarikhsemasa'";
 
@@ -68,8 +70,8 @@ $tarikhsemasa = date("Y-m-d");
     while($data = mysql_fetch_array($resfull)){
         $idworkorder = $data['id'];
         $taskdate = fmtdate($data['task_date']);
-        $taskid = $data['task_id'];
-        $tugasan = GetDesc("task","task_desc","task_id",$taskid);
+        // $taskid = $data['task_id'];
+        // $tugasan = GetDesc("task","task_desc","task_id",$taskid);
         $tgid = $data['tg_id'];
         $staffid = $data['staff_id'];
         $stat = $data['ws_id'];

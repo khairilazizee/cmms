@@ -1,55 +1,60 @@
 <?php
 
-$rutinid = (int) mysql_real_escape_string($_REQUEST['rutin']);
-$statuskerja = mysql_real_escape_string($_GET['sis']);
-$tarikhbermula = date("Y-m-d");
+$aduanid = (int) mysql_real_escape_string($_GET['aduan']);
+$statuskerja = (int) mysql_real_escape_string($_GET['sis']);
+$tarikhbermula = date("Y-m-d h:i:s");
 
 if($statuskerja<="1"){
-    $update = "UPDATE tbl_rutin SET ws_id='2', work_start='$tarikhbermula' WHERE id='$rutinid'";
+    $update = "UPDATE tbl_workorder SET ws_id='2', work_start='$tarikhbermula' WHERE id='$aduanid'";
     $resupdate = mysql_query($update,$dbi);
 }
 
-
 if(isset($_POST['submit'])){
 	$wsid = $_POST['txtStatus'];
+	$catatan = mysql_real_escape_string($_POST['txtCatatan']);
 	$flg = $_POST['flg'];
-	$datedone = date("Y-m-d");
 	// echo $loop;
 
 	if($flg=="edit"){
-		$update = "UPDATE tbl_rutin SET ws_id='$wsid', work_done='$datedone' WHERE id='$rutinid'";
+		$update = "UPDATE tbl_workorder SET ws_id='$wsid', catatan_juruteknik='$catatan' WHERE id='$aduanid'";
 		mysql_query($update,$dbi);
 	}
 
-    pageredirect("mainpage.php?module=Setup&task=list_rutin");
+    pageredirect("mainpage.php?module=Setup&task=list_aduan");
     
 }
 
-$sqlselect = "SELECT sg_id, sys_id, tg_id, staff_id, hari, ag_id, asset_id FROM tbl_rutin WHERE id='$rutinid'";
-$resselect = mysql_query($sqlselect,$dbi);
-if($info = mysql_fetch_array($resselect)){
+$flg = "add";
+$sql = "SELECT sg_id, sys_id, tg_id, staff_id, task_date, ag_id, asset_id, ws_id, catatan_juruteknik FROM tbl_workorder WHERE 1 and id='$aduanid'";
+// var_dump($sql);
+$res = mysql_query($sql,$dbi);
+if(mysql_num_rows($res)>0){
+	$data = mysql_fetch_array($res);
+	$sysgroupid = $data['sg_id'];
+	$systemid = $data['sys_id'];
+	$taskgroupid = $data['tg_id'];
+	$taskpilihid = $data['task_id'];
+	$staffid = $data['staff_id'];
+	$taskdate = $data['task_date'];
+	$assetgroupid = $data['ag_id'];
+	$assetpilihid = $data['asset_id'];
+	$workstatus = $data['ws_id'];
+	$txtCatatan = $data['catatan_juruteknik'];
 	$flg = "edit";
-	$sysgroupid = $info['sg_id'];
-	$systemid = $info['sys_id'];
-	$taskgroupid = $info['tg_id'];
-	$assetgroupid = $info['ag_id'];
-	$assetpilihid = $info['asset_id'];
-	$staffid = $info['staff_id'];
-	$haripilih = $info['hari'];
 }
 
 ?>
 <form name="frmtask" method="POST" action="">
 <table class="outerform" width="100%" cellspacing="0" cellpadding="3" align="center">
 	<tr>
-		<td colspan="3" style="font-weight:bold;" class="formheader">Rutin</td>
+		<td colspan="3" style="font-weight:bold;" class="formheader">Aduan</td>
 	</tr>
 	<tr>
-		<td width="100" class="title">Kumpulan Sistem</td>
+		<td width="150" class="title">Kumpulan Sistem</td>
 		<td width="5" class="title">:</td>
 		<td>
-			<select name="txtSysGroup" id="txtSysGroup">
-				<option value="">- PILIH -</option>
+			<select name="txtSysGroup" id="txtSysGroup" <?php echo $info; ?>>
+				<!-- <option value="">- PILIH -</option> -->
 				<?php
 					$sql = "SELECT sg_id, sg_desc FROM system_group WHERE sg_id='$sysgroupid'";
 					$res = mysql_query($sql,$dbi);
@@ -71,9 +76,9 @@ if($info = mysql_fetch_array($resselect)){
 		<td class="title">Sistem</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtSystem" id="txtSystem">
+			<select name="txtSystem" id="txtSystem" <?php echo $info; ?>>
 				<?php
-					echo "<option value=''>- PILIH -</option>";
+					// echo "<option value=''>- PILIH -</option>";
 					$sqlsystem = "SELECT sys_id, sys_desc FROM system WHERE sys_id='$systemid'";
 					$ressystem = mysql_query($sqlsystem,$dbi);
 					while($datasystem = mysql_fetch_array($ressystem)){
@@ -91,11 +96,11 @@ if($info = mysql_fetch_array($resselect)){
 		</td>
 	</tr>
 	<tr>
-		<td width="100" class="title">Sub sistem</td>
+		<td class="title">Sub sistem</td>
 		<td width="5" class="title">:</td>
 		<td>
-			<select name="txtKumpTugasan" id="txtKumpTugasan">
-				<option value="">- PILIH -</option>
+			<select name="txtKumpTugasan" id="txtKumpTugasan" <?php echo $info; ?>>
+				<!-- <option value="">- PILIH -</option> -->
 				<?php
 					$sqltugasan = "SELECT tg_id, tg_desc FROM task_group WHERE tg_id='$taskgroupid'";
 					$restugasan = mysql_query($sqltugasan,$dbi);
@@ -114,10 +119,16 @@ if($info = mysql_fetch_array($resselect)){
 		</td>
 	</tr>
 	<tr>
+		<td>Tarikh Mula</td>
+            <td>:</td>
+            <td><input type="text" readonly="" size="12" maxlength="12" name="txtTmula" id="txtTmula" value="<?php echo fmtdate($taskdate); ?>" readonly>
+			</td>
+	</tr>
+	<tr>
 		<td class="title">Kumpulan Aset</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtAssetGroup" id="txtAssetGroup">
+			<select name="txtAssetGroup" id="txtAssetGroup" <?php echo $info; ?>>
 				<?php
 					echo "<option value=''>- PILIH -</option>";
 					$sqlag = "SELECT ag_desc, ag_id FROM asset_group WHERE ag_id='$assetgroupid'";
@@ -140,7 +151,7 @@ if($info = mysql_fetch_array($resselect)){
 		<td class="title">Aset</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtAsset" id="txtAsset">
+			<select name="txtAsset" id="txtAsset" <?php echo $info; ?>>
 				<?php
 					echo "<option value=''>- PILIH -</option>";
 					$sqlasset = "SELECT asset_desc, asset_id FROM asset WHERE asset_id='$assetpilihid'";
@@ -163,10 +174,10 @@ if($info = mysql_fetch_array($resselect)){
 		<td class="title">Juru Teknik</td>
 		<td class="title">:</td>
 		<td>
-			<select name="txtJuruteknik" id="txtJuruteknik">
+			<select name="txtJuruteknik" id="txtJuruteknik" <?php echo $info; ?>>
 				<?php
-					echo "<option value=''>- PILIH -</option>";
-					$sqltech = "SELECT staff_id, staff_name FROM staff WHERE staff_id='$staffid' ";
+					// echo "<option value=''>- PILIH -</option>";
+					$sqltech = "SELECT staff_id, staff_name FROM staff WHERE staff_id='$staffid'";
 					$restech = mysql_query($sqltech,$dbi);
 					while($datatech = mysql_fetch_array($restech)){
 						$techid = $datatech['staff_id'];
@@ -182,44 +193,8 @@ if($info = mysql_fetch_array($resselect)){
 			</select>
 		</td>
 	</tr>
-	<?php if($flg=="add") { ?>
-	<tr>
-		<td class="title">Hari</td>
-		<td class="title">:</td>
-		<td>
-			<input type="checkbox" name="chkhari[]" value="1"> Isnin
-			<input type="checkbox" name="chkhari[]" value="2"> Selasa
-			<input type="checkbox" name="chkhari[]" value="3"> Rabu
-			<input type="checkbox" name="chkhari[]" value="4"> Khamis
-			<input type="checkbox" name="chkhari[]" value="5"> Jumaat
-			<input type="checkbox" name="chkhari[]" value="6"> Sabtu
-			<input type="checkbox" name="chkhari[]" value="7"> Ahad
-		</td>
-	</tr>
-	<?php }elseif($flg == "edit") {?>
-	<tr>
-		<td class="title">Hari</td>
-		<td class="title">:</td>
-		<td>
-			<select name="chkhari" id="chkhari">
-				<option value="">- PILIH -</option>
-				<?php
-					$sqlhari = "SELECT id, keterangan_bm FROM tbl_hari WHERE id='$haripilih' ORDER BY id";
-					$reshari = mysql_query($sqlhari,$dbi);
-					while($datahari = mysql_fetch_array($reshari)){
-						$idhari = $datahari['id'];
-						$keteranganhari = $datahari['keterangan_bm'];
-
-						echo "<option ";
-						if($haripilih == $idhari){
-							echo " SELECTED ";
-						}
-						echo " value='$idhari'>$keteranganhari</option>";
-					}
-				?>
-			</select>
-		</td>
-	</tr>
+	<?php 
+	if($flg == 'edit') { ?>
 	<tr>
 		<td class="title">Status</td>
 		<td class="title">:</td>
@@ -245,61 +220,29 @@ if($info = mysql_fetch_array($resselect)){
 		</td>
 	</tr>
 	<tr>
-		<td class="title">Catatan</td>
-		<td class="title">:</td>
-		<td><textarea name="txtCatatanJuruteknik" id="txtCatatanJuruteknik" cols="100%" rows="5"></textarea></td>
+		<td class="title" valign="top">Catatan</td>
+		<td class="title" valign="top">:</td>
+		<td>
+			<textarea name="txtCatatan" rows="5" cols="70"><?php echo $txtCatatan;?></textarea>
+		</td>
 	</tr>
 	<?php } ?>
+	
 	<tr>
 		<td colspan="3">
-	        <input type="hidden" name="rutin" value="<?php echo $rutinid;?>"/>
+	        <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
 	        <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
+	        <!-- <input type="hidden" name="txtSysGroup" value="<?php echo $sysgroupid; ?>"/>
+	        <input type="hidden" name="txtSystem" value="<?php echo $systemid; ?>"/>
+	        <input type="hidden" name="txtKumpTugasan" value="<?php echo $taskgroupid; ?>"/>
+	        <input type="hidden" name="txtTask" value="<?php echo $taskpilihid; ?>"/>
+	        <input type="hidden" name="txtTarikhMula" value="<?php echo $taskdate; ?>"/>
+	        <input type="hidden" name="txtAssetGroup" value="<?php echo $assetgroupid; ?>"/>
+	        <input type="hidden" name="txtAsset" value="<?php echo $assetpilihid; ?>"/>
+	        <input type="hidden" name="txtJuruteknik" value="<?php echo $staffid; ?>"/> -->
 	        <input type="submit" value="Hantar" name="submit" class="button" onClick="return confirm('Adakah anda pasti?');"/>
-	        <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Setup&task=list_rutin'" class="button"/>
+	        <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Technician&task=list_aduan'" class="button"/>
 	    </td>
     </tr>
 </table>
 </form>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script type="text/javascript">
-$(function() {
-
- $("#txtSysGroup").bind("change", function() {
-
-     $.ajax({
-         type: "GET",
-         url: "modules/Setup/system.php",
-         data: "txtSysGroup="+$("#txtSysGroup").val(),
-         success: function(html) {
-             $("#txtSystem").html(html);
-         }
-     });
- });
-
- $("#txtAssetGroup").bind("change", function() {
-
-     $.ajax({
-         type: "GET",
-         url: "modules/Setup/asset.php",
-         data: "agid="+$("#txtAssetGroup").val(),
-         success: function(html) {
-             $("#txtAsset").html(html);
-         }
-     });
- });
-
- $("#txtSysGroup, #txtAssetGroup" ).bind("change", function() {
- 	$.ajax({
- 		type:"GET",
- 		url:"modules/Setup/juruteknik.php",
- 		data:"txtSysGroup="+$("#txtSysGroup").val() + "&agid="+$("#txtAssetGroup").val(),
- 		success:function(html){
- 			$("#txtJuruteknik").html(html);
- 		}
- 	});
- });
-
-
-});
-</script>
