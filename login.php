@@ -68,8 +68,8 @@
            }     	   
 
      	   
-		   if ($_SESSION["userrole"]==5) // user role SEKOLAH
-		   		pageredirect("mainpage.php?module=LamanUtama");		   
+		   if ($_SESSION["userrole"]==15) // user role SEKOLAH
+		   		pageredirect("mainpage.php?module=Technician&task=workorder");		   
 		   else
 		   		pageredirect("mainpage.php?module=LamanUtama");
         }

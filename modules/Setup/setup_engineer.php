@@ -85,7 +85,7 @@ if($_POST['submit']){
         // die($insert);
         sql_query($insert,$dbi);
 
-        $tambah = "INSERT INTO user (login, password, role, nama, staff_id,ag_id) VALUES ('$idstafbaru','".md5(123)."','15','$namastaff','$idstafbaru','$agroup')";
+        $tambah = "INSERT INTO user (login, password, role, nama, staff_id,ag_id) VALUES ('$idstafbaru','".md5(123)."','12','$namastaff','$idstafbaru','$agroup')";
         mysql_query($tambah,$dbi);
 
         for($i=1;$i<=$cvcount;$i++){
