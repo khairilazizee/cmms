@@ -48,7 +48,7 @@ if($_POST['workorder']){
     }
 
 
-    $catatanjuruteknik = "UPDATE tbl_workorder SET catatan_juruteknik='$catatankeseluruhan' WHERE id='$idworkorder'";
+    $catatanjuruteknik = "UPDATE tbl_workorder SET ws_id='3', catatan_juruteknik='$catatankeseluruhan' WHERE id='$idworkorder'";
     mysql_query($catatanjuruteknik,$dbi);
 
     pageredirect("mainpage.php?module=Technician&task=workorder");
@@ -74,7 +74,7 @@ if($_POST['workorder']){
         <th>Catatan</th>
     </tr>
     <?php
-        $sqltask = "SELECT task_id, task_desc FROM task WHERE tg_id='$subsistem'";
+        $sqltask = "SELECT task_id, task_desc, selesai, catatan, status FROM task WHERE tg_id='$subsistem'";
         // echo $sqltask;
         $sqlfull = $sqltask." LIMIT ".$rowstart.", ".$limit;
         $res = sql_query($sqltask,$dbi);
@@ -86,23 +86,29 @@ if($_POST['workorder']){
             $taskid = $datatask['task_id'];
             $taskdesc = $datatask['task_desc'];
             $taskdate = GetDesc("tbl_workorder","task_date","id",$idworkorder);
+            $selesai = $datatask['selesai'];
+            $catatan = $datatask['catatan'];
+            $status = $datatask['status'];
+            if($selesai==1){
+                $checked = "CHECKED";
+            }
 
             echo "<tr bgcolor=\"$bgcolor\" onMouseOver=\"this.bgColor = '$hlcolor'\" onMouseOut =\"this.bgColor = '$bgcolor'\">\n";
             echo "<td>$cnt</td>";
             echo "<td>".fmtdate($taskdate)."</td>";
             echo "<td>$taskdesc</td>";
-            echo "<td align='center'><input type='checkbox' name='chkSelesai$cnt' value='1'/></td>";
+            echo "<td align='center'><input type='checkbox' name='chkSelesai$cnt' $checked value='1'/></td>";
             echo "<td>";
             ?>
                 <select name="txtStatus<?php echo $cnt;?>" id="txtStatus">
                     <option value="">- PILIH -</option>
-                    <option value="1">Berjaya</option>
-                    <option value="2">Gagal</option>
+                    <option <?php if($status==1) { echo "SELECTED";} ?> value="1">Berjaya</option>
+                    <option <?php if($status==2) { echo "SELECTED";} ?> value="2">Gagal</option>
                 </select>
             <?php
             echo "</td>";
             echo "<td>
-                <textarea name='txtCatatan$cnt' rows='5' cols='20'></textarea>
+                <textarea name='txtCatatan$cnt' rows='5' cols='20'>$catatan</textarea>
                 <input type='hidden' name='id$cnt' value='$taskid'/>
             </td>";
             echo "</tr>";
