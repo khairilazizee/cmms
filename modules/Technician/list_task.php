@@ -113,11 +113,16 @@ if($_POST['workorder']){
             </td>";
             echo "</tr>";
         }
+
+        $sqlcatatan = "SELECT catatan_juruteknik FROM tbl_workorder WHERE id='$idworkorder'";
+        $rescatatan = mysql_query($sqlcatatan,$dbi);
+        $datacatatan = mysql_fetch_array($rescatatan);
+        $catatanjuruteknik = $datacatatan['catatan_juruteknik'];
     ?>
     <tr>
         <td colspan="6">
             <div style="font-weight:bold;">Catatan Keseluruhan&nbsp;:&nbsp;</div>
-            <textarea name="txtCatatanKeseluruhan" rows="10" cols="100"></textarea>
+            <textarea name="txtCatatanKeseluruhan" rows="10" cols="100"><?php echo $catatanjuruteknik;?></textarea>
         </td>
     </tr>
     <tr>
