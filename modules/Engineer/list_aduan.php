@@ -40,7 +40,7 @@ if($_POST['submitcarian']){
 </div>
 <!-- <div style="text-align:right;font-weight:bold;">
     <?php if ($staffrole<>15 && $staffrole<>14) {
-        echo "<a href=\"mainpage.php?module=Officer&task=setup_aduan\">Tambah<img src=\"images/admin/btn_add.gif\"></a>";
+        echo "<a href=\"mainpage.php?module=Engineer&task=setup_aduan\">Tambah<img src=\"images/admin/btn_add.gif\"></a>";
     } ?>
 </div><br> -->
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
@@ -57,29 +57,29 @@ if($_POST['submitcarian']){
     </tr>
     <?php
 
-    $sql = "SELECT task_date, staff_id, id, ws_id, tg_id FROM tbl_workorder WHERE js_id='1'";
+    $sql = "SELECT tbl_workorder.task_date, tbl_workorder.staff_id, tbl_workorder.id, tbl_workorder.ws_id, tbl_workorder.tg_id, tbl_engineer_tg.tg_id FROM tbl_workorder, tbl_engineer_tg WHERE tbl_workorder.tg_id=tbl_engineer_tg.tg_id and tbl_workorder.js_id='1'";
     // if($staffid<>""){
     //     $sql .=" and staff_id='$staffid'";
     // }
     if($staffrole==14){
-        $sql .=" and ws_id='3' or ws_id='4'";
+        $sql .=" and tbl_workorder.ws_id='3' or tbl_workorder.ws_id='4'";
     }
 
     if($tarikhmula<>"" and $tarikhakhir==""){
-        $sql.=" and task_date>='$tmula'";
+        $sql.=" and tbl_workorder.task_date>='$tmula'";
     }
     elseif($tarikhakhir<>"" and $tarikhmula==""){
-        $sql.=" and task_date<='$takhir'";
+        $sql.=" and tbl_workorder.task_date<='$takhir'";
     }
     elseif($tarikhmula<>"" and $tarikhakhir<>""){
-        $sql.=" and task_date>='$tmula' and task_date<='$takhir'";
+        $sql.=" and tbl_workorder.task_date>='$tmula' and tbl_workorder.task_date<='$takhir'";
     }
 
     if($staffagid<>0){
-        $sql.=" and ag_id='$staffagid'";
+        $sql.=" and tbl_workorder.ag_id='$staffagid'";
     }
 
-    $sql .= " ORDER BY task_date";
+    $sql .= " ORDER BY tbl_workorder.task_date";
     // echo $sql;
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
@@ -103,8 +103,8 @@ if($_POST['submitcarian']){
         echo "<td>$namakumptugasan</td>";
         echo "<td>$namastaff</td>";
         echo "<td>$wstatus</td>";
-        if($staffrole==13 or $staffrole==15){
-            echo "<td align=\"center\"><a href=\"mainpage.php?module=Officer&task=setup_aduan&sysid=$idworkorder\"><img src=\"images/admin/btn_edit.gif\"/></a></td>";
+        if($staffrole==13 or $staffrole==15 or $staffrole==12){
+            echo "<td align=\"center\"><a href=\"mainpage.php?module=Engineer&task=setup_aduan&sysid=$idworkorder\"><img src=\"images/admin/btn_edit.gif\"/></a></td>";
         }
         echo "</tr>";
     }
@@ -113,7 +113,7 @@ if($_POST['submitcarian']){
 </table>
 <div style="text-align:center;">
     <?php
-    print $Mfunction->page("?module=Officer&task=list_aduan", $limit, $rowstart, $numrows);
+    print $Mfunction->page("?module=Engineer&task=list_aduan", $limit, $rowstart, $numrows);
     ?>
 </div>
 

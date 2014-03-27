@@ -34,7 +34,7 @@ if($_POST['submit']){
 		mysql_query($update,$dbi);
 	}
 
-	pageredirect("mainpage.php?module=Officer&task=list_aduan");
+	pageredirect("mainpage.php?module=Engineer&task=list_aduan");
 
 	
 }
@@ -118,8 +118,20 @@ if(mysql_num_rows($res)>0){
 		</td>
 	</tr>
 	<tr>
-		<td class="title">Status</td>
+		<td>Status</td>
+		<td>:</td>
+		<td><input type="text" value="<?php echo GetDesc("work_status","ws_desc","ws_id",$workstatus); ?>" readonly /></td>
+	</tr>
+	<tr>
+		<td class="title">Pengesahan</td>
 		<td class="title">:</td>
+		<?php
+			if($workstatus<3)
+				echo "<td><input type=\"text\" value=\"Menunggu kerja selesai oleh juruteknik\" readonly size=\"40\" /></td>";
+			elseif($workstatus>4)
+				echo "<td><input type=\"text\" value=\"Sudah disahkan oleh pegawai\" readonly size=\"40\" /></td>";
+			else{
+		?>
 		<td>
 			<select name="txtStatus" id="txtStatus">
 				<option value="">- PILIH -</option>
@@ -129,6 +141,8 @@ if(mysql_num_rows($res)>0){
 						$sqlstatus.=" and ws_id!='4'";
 					if($staffrole==14)
 						$sqlstatus.=" and ws_id!='1' and ws_id!='2'";
+					if($staffrole==12)
+						$sqlstatus.=" and ws_id='3' or ws_id='4'";
 					$qstat=mysql_query($sqlstatus,$dbi);
 					while ($resstat=mysql_fetch_array($qstat)) {
 						$wsid=$resstat["ws_id"];
@@ -143,6 +157,7 @@ if(mysql_num_rows($res)>0){
 				?>
 			</select>
 		</td>
+		<?php } ?>
 	</tr>
 	<tr>
 		<td class="title" valign="top">Catatan</td>
@@ -156,16 +171,8 @@ if(mysql_num_rows($res)>0){
 		<td colspan="3">
 	        <input type="hidden" name="taskid" value="<?php echo $bankid;?>"/>
 	        <input type="hidden" name="flg" value="<?php echo $flg;?>"/>
-	        <!-- <input type="hidden" name="txtSysGroup" value="<?php echo $sysgroupid; ?>"/>
-	        <input type="hidden" name="txtSystem" value="<?php echo $systemid; ?>"/>
-	        <input type="hidden" name="txtKumpTugasan" value="<?php echo $taskgroupid; ?>"/>
-	        <input type="hidden" name="txtTask" value="<?php echo $taskpilihid; ?>"/>
-	        <input type="hidden" name="txtTarikhMula" value="<?php echo $taskdate; ?>"/>
-	        <input type="hidden" name="txtAssetGroup" value="<?php echo $assetgroupid; ?>"/>
-	        <input type="hidden" name="txtAsset" value="<?php echo $assetpilihid; ?>"/>
-	        <input type="hidden" name="txtJuruteknik" value="<?php echo $staffid; ?>"/> -->
 	        <input type="submit" value="Hantar" name="submit" class="button" onClick="return confirm('Adakah anda pasti?');"/>
-	        <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Officer&task=list_aduan'" class="button"/>
+	        <input type="button" name="back" value="Kembali" onclick="location.href='mainpage.php?module=Engineer&task=list_aduan'" class="button"/>
 	    </td>
     </tr>
 </table>

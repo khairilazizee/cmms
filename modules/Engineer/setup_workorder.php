@@ -123,16 +123,18 @@ if(mysql_num_rows($res)>0){
 			<div>&nbsp;&nbsp;<input type="button" class="button" name="workorder" id="workorder" value="Semak Kerja" onclick="location.href='mainpage.php?module=Engineer&task=list_task&sub=<?php echo $taskgroupid; ?>&sis=<?php echo $idworkorder; ?>'" /></div>
 		</td>
 	</tr>
-	<?php
-	if($workstatus<3){
-		echo "<td>Pengesahan</td>";
-		echo "<td>:</td>";
-		echo "<td><input type=\"text\" value=\"Menunggu kerja selesai oleh juruteknik\" readonly size=\"40\" /></td>";
-	}
-	else{ ?>
 	<tr>
 		<td class="title">Status</td>
 		<td class="title">:</td>
+		<?php
+			if($workstatus<3){
+				echo "<td><input type=\"text\" value=\"Menunggu tugasan selesai oleh juruteknik\" size=\"40\" readonly /></td>";
+			}
+			elseif($workstatus>4){
+				echo "<td><input type=\"text\" value=\"Sudah disahkan oleh pegawai\" size=\"40\" readonly /></td>";
+			}
+			else{
+		?>
 		<td>
 			<select name="txtStatus" id="txtStatus">
 				<option value="">- PILIH -</option>
@@ -156,8 +158,8 @@ if(mysql_num_rows($res)>0){
 				?>
 			</select>
 		</td>
+		<?php } ?>
 	</tr>
-	<?php } ?>
 	<tr>
 		<td class="title" valign="top">Catatan</td>
 		<td class="title" valign="top">:</td>
