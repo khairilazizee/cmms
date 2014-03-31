@@ -24,10 +24,10 @@ else
 if($_GET['delete']==1){
     $iddelete = mysql_real_escape_string($_GET['iddelete']);
 
-    $check = "SELECT id FROM tbl_workorder WHERE id='$iddelete'";
+    $check = "SELECT ad_id FROM tbl_aduan WHERE ad_id='$iddelete'";
     $rescheck = mysql_query($check,$dbi);
     if(mysql_num_rows($rescheck)>0){
-        $delete = mysql_query("DELETE FROM tbl_workorder WHERE id='$iddelete'");
+        $delete = mysql_query("DELETE FROM tbl_aduan WHERE ad_id='$iddelete'");
         pageredirect("mainpage.php?module=Setup&task=list_aduan");
     }
 }
@@ -60,21 +60,22 @@ if($_POST['submitcarian']){
     </tr>
     <tr>
         <th width="5">Bil</th>
-        <th width="50">Tarikh</th>
-        <th width="250">Sub Sistem</th>
-        <th>Juruteknik Bertugas</th>
+        <th width="70">Tarikh Aduan</th>
+        <th width="70">Kaedah Aduan</th>
+        <th width="250">Pengadu</th>
+        <th width="250">Juruteknik Bertugas</th>
         <!-- <th width="50">Status</th> -->
         <th width="15">Tindakan</td>
     </tr>
     <?php
 
-    $sql = "SELECT task_date, staff_id, id, ws_id, tg_id FROM tbl_workorder WHERE js_id='1'";
+    $sql = "SELECT ad_id, ad_pengadu, ad_kaedah, ad_tarikh_adu, ad_staff_id FROM tbl_aduan WHERE 1";
     // if($staffid<>""){
     //     $sql .=" and staff_id='$staffid'";
     // }
-    if($staffrole==14){
-        $sql .=" and ws_id='3' or ws_id='4'";
-    }
+    // if($staffrole==14){
+    //     $sql .=" and ws_id='3' or ws_id='4'";
+    // }
 
     if($tarikhmula<>"" and $tarikhakhir==""){
         $sql.=" and task_date>='$tmula'";
@@ -87,10 +88,10 @@ if($_POST['submitcarian']){
     }
 
     if($staffagid<>0){
-        $sql.=" and ag_id='$staffagid'";
+        $sql.=" and ad_ag_id='$staffagid'";
     }
     
-    $sql .= " ORDER BY task_date";
+    $sql .= " ORDER BY ad_tarikh_adu, ad_id";
     // echo $sql;
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
@@ -98,20 +99,20 @@ if($_POST['submitcarian']){
     $cnt=$rowstart;
     $numrows = mysql_num_rows($res);
     while($data = mysql_fetch_array($resfull)){
-        $idworkorder = $data['id'];
-        $taskdate = fmtdate($data['task_date']);
-        $staffid = $data['staff_id'];
-        $stat = $data['ws_id'];
-        $wstatus = GetDesc("work_status","ws_desc","ws_id",$stat);
+        $idworkorder = $data['ad_id'];
+        $taskdate = fmtdate($data['ad_tarikh_adu']);
+        $staffid = $data['ad_staff_id'];
         $namastaff = GetDesc("staff","staff_name","staff_id",$staffid);
-        $tgid = $data['tg_id'];
-        $namakumptugasan = GetDesc("task_group","tg_desc","tg_id",$tgid);
+        $pengadu = $data['ad_pengadu'];
+        $kaedahid = $data['ad_kaedah'];
+        $kaedahdesc = GetDesc("tbl_aduan_kaedah","kad_desc","kad_id",$kaedahid);
         $cnt++;
         
         echo "<tr bgcolor=\"$bgcolor\" onMouseOver=\"this.bgColor = '$hlcolor'\" onMouseOut =\"this.bgColor = '$bgcolor'\">\n";
         echo "<td align=\"center\">$cnt</td>";
         echo "<td>$taskdate</td>";
-        echo "<td>$namakumptugasan</td>";
+        echo "<td>$kaedahdesc</td>";
+        echo "<td>$pengadu</td>";
         echo "<td>$namastaff</td>";
         // echo "<td>$wstatus</td>";
         if($staffrole==13 or $staffrole==15){
