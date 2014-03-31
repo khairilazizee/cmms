@@ -36,7 +36,7 @@ if($_POST['submit']){
 }
 
 $flg = "add";
-$sql = "SELECT sg_id, sys_id, tg_id, staff_id, task_date, ag_id, asset_id, ws_id FROM tbl_workorder WHERE 1 and id='$idworkorder'";
+$sql = "SELECT sg_id, sys_id, tg_id, staff_id, task_date, ag_id, asset_id, ws_id, catatan_juruteknik FROM tbl_workorder WHERE 1 and id='$idworkorder'";
 // die("SELECT sg_id, sys_id, tg_id, task_id, staff_id, task_date, ag_id, asset_id FROM tbl_workorder WHERE 1 and id='$idworkorder'");
 $res = mysql_query($sql,$dbi);
 if(mysql_num_rows($res)>0){
@@ -50,6 +50,7 @@ if(mysql_num_rows($res)>0){
 	$assetgroupid = $data['ag_id'];
 	$assetpilihid = $data['asset_id'];
 	$workstatus = $data['ws_id'];
+	$catat = $data['catatan_juruteknik'];
 	$flg = "edit";
 }
 
@@ -120,16 +121,14 @@ if(mysql_num_rows($res)>0){
 			<input type="text" value="<?php echo GetDesc("work_status","ws_desc","ws_id",$workstatus); ?>" readonly />
 		</td>
 	</tr>
-	<?php
-	if($workstatus<4){
-		echo "<td>Pengesahan</td>";
-		echo "<td>:</td>";
-		echo "<td><input type=\"text\" value=\"Menunggu pengesahan oleh jurutera\" readonly size=\"40\" /></td>";
-	}
-	else{ ?>
 	<tr>
-		<td class="title">Status</td>
+		<td class="title">Pengesahan</td>
 		<td class="title">:</td>
+		<?php
+		if($workstatus<4)
+			echo "<td><input type=\"text\" value=\"Menunggu semakan oleh jurutera\" size=\"40\" readonly /></td>";
+		else{
+		?>
 		<td>
 			<select name="txtStatus" id="txtStatus">
 				<option value="">- PILIH -</option>
@@ -153,13 +152,13 @@ if(mysql_num_rows($res)>0){
 				?>
 			</select>
 		</td>
+		<?php } ?>
 	</tr>
-	<?php } ?>
 	<tr>
 		<td class="title" valign="top">Catatan</td>
 		<td class="title" valign="top">:</td>
 		<td>
-			<textarea name="txtCatatan" rows="5" cols="70"></textarea>
+			<textarea name="txtCatatan" rows="5" cols="70"><?php echo $catat; ?></textarea>
 		</td>
 	</tr>	
 	<tr>

@@ -66,6 +66,7 @@ if($_POST['submitcarian']){
         <th width="15">Tindakan</td>
     </tr>
     <?php
+    // echo $staffrole;
 
     $sql = "SELECT task_date, staff_id, id, ws_id, tg_id FROM tbl_workorder WHERE js_id='2'";
     // if($staffid<>""){
@@ -73,6 +74,10 @@ if($_POST['submitcarian']){
     // }
     if($staffrole==14){
         $sql .=" and ws_id='3' or ws_id='4'";
+    }
+
+    if($staffrole==13){
+        $sql .=" and ws_id='3' or ws_id='4' or ws_id='5'";
     }
 
     if($tarikhmula<>"" and $tarikhakhir==""){
