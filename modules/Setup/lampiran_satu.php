@@ -8,9 +8,9 @@ include('include/function_pengurusan.php');
 		<th width="10">Item</th>
 		<th>Description</th>
 		<th>Contract Sum</th>
-		<th>Harga 1 Bulan</th>
-		<th>Harga 1 Tahun</th>
-		<th>Harga 3 Tahun</th>
+		<th>Contract Claim</th>
+		<th>Deduction</th>
+		<th>Approved</th>
 	</tr>
 	<tr>
 		<td></td>
@@ -22,7 +22,7 @@ include('include/function_pengurusan.php');
 	</tr>
 	<?php
 		$bil=0;
-		$sqlrumusan = "SELECT pu_id, pu_desc FROM tbl_pengurusan_utama WHERE 1 and pu_id<'5' ORDER BY pu_id";
+		$sqlrumusan = "SELECT pu_id, pu_desc FROM tbl_pengurusan_utama WHERE 1 ORDER BY pu_id";
 		$resrumusan = mysql_query($sqlrumusan,$dbi);
 		while($datarumusan = mysql_fetch_array($resrumusan)){
 			$bil++;
@@ -32,16 +32,19 @@ include('include/function_pengurusan.php');
 			$restajuk = mysql_query($tajuk,$dbi);
 			switch($bil) {
 				case "1" : 
-					$no = "A";
+					$no = "I";
 					break;
 				case "2" :
-					$no = "B";
+					$no = "II";
 					break;
 				case "3" :
-					$no = "C";
+					$no = "III";
 					break;
 				case "4" :
-					$no = "D";
+					$no = "IV";
+					break;
+				case "5" :
+					$no = "V";
 					break;
 				default :
 					$no = "";
