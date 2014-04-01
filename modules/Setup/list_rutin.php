@@ -59,6 +59,7 @@ else
 
 $haripilih = mysql_real_escape_string($_GET['hari']);
 $staffagid = $_SESSION['staffagid'];
+$staffrole = $_SESSION['userrole'];
 
 $haripilih=="" ? $haripilih=date("N") : @$haripilih;
 // echo $haripilih;
@@ -137,6 +138,7 @@ if($haripilih==1){
 								echo "<td>$namastaff</td>";
 								echo "<td>$namakumpaset</td>";
 								// echo "<td>$wstatus</td>";
+
 								echo "<td align='center'>
 									 <a href=\"mainpage.php?module=Setup&task=setup_rutin&rutin=$idrutin\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_rutin&delete=1&iddelete=$idrutin\" onClick=\"return confirm('Hapus Data?');\"><img src=\"images/admin/btn_delete.gif\"/></a>
 								</td>";

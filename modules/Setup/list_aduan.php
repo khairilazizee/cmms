@@ -115,9 +115,9 @@ if($_POST['submitcarian']){
         echo "<td>$pengadu</td>";
         echo "<td>$namastaff</td>";
         // echo "<td>$wstatus</td>";
-        if($staffrole==13 or $staffrole==15){
-            echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_aduan&sysid=$idworkorder\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_aduan&delete=1&iddelete=$idworkorder\" onClick=\"return confirm('Anda pasti?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
-        }
+        // if($staffrole==13 or $staffrole==15){
+        echo "<td align=\"center\"><a href=\"mainpage.php?module=Setup&task=setup_aduan&sysid=$idworkorder\"><img src=\"images/admin/btn_edit.gif\"/></a>&nbsp;&nbsp;<a href=\"mainpage.php?module=Setup&task=list_aduan&delete=1&iddelete=$idworkorder\" onClick=\"return confirm('Anda pasti?');\"><img src=\"images/admin/btn_delete.gif\"/></a></td>";
+        // }
         echo "</tr>";
     }
     

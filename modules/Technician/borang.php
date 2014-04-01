@@ -6,6 +6,8 @@ $staffid = $_SESSION['staffid'];
 $subsistem = mysql_real_escape_string($_GET['sub']);
 $idworkorder = mysql_real_escape_string($_GET['sis']);
 
+$noaduan = mysql_real_escape_string($_GET['noadu']);
+
 $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
 
 ?>
@@ -33,7 +35,7 @@ $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
 <table class="table" align="center" width="100%" cellspacing="3" cellpadding="0">
     <tr>
         <td style="font-weight:bold;" colspan="6">
-            <div style="float: left";><!-- C&nbsp;:&nbsp; -->Senarai tugasan</div>
+            <div style="float: left";><!-- C&nbsp;:&nbsp; --><?php if($noaduan=="") echo "Senarai tugasan"; else echo "Senarai Aduan"; ?></div>
         </td>
     </tr>
     <tr>
@@ -49,6 +51,7 @@ $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
         <th>(P)</th>
         <th>(F)</th>
     </tr>
+    <?php if($noaduan==""){ ?>
     <tr>
         <td></td>
         <td style="font-weight:bold;"><?php echo $subsistem_desc;?></td>
@@ -58,18 +61,31 @@ $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
         <td></td>
     </tr>
     <?php
-        $sqltask = "SELECT task_id, task_desc FROM task WHERE tg_id='$subsistem'";
-        // echo $sqltask;
-        // $sqlfull = $sqltask." LIMIT ".$rowstart.", ".$limit;
-        $res = sql_query($sqltask,$dbi);
-        // $resfull = sql_query($sqlfull,$dbi);
+    }
+        if($noaduan==""){
+            $sqltask = "SELECT task_id, task_desc FROM task WHERE tg_id='$subsistem'";
+            // echo $sqltask;
+            // $sqlfull = $sqltask." LIMIT ".$rowstart.", ".$limit;
+            $res = sql_query($sqltask,$dbi);
+        }
+        else{
+            $sqltask = "SELECT ad_keterangan FROM tbl_aduan WHERE ad_no_aduan='$noaduan' AND ad_id='$idworkorder'";
+            $res = sql_query($sqltask,$dbi);
+        }
+            // $resfull = sql_query($sqlfull,$dbi);
         $cnt=0;
         // $numrows = mysql_num_rows($res);
         while($datatask = mysql_fetch_array($res)){
             $cnt++;
-            $taskid = $datatask['task_id'];
-            $taskdesc = $datatask['task_desc'];
-            // $taskdate = GetDesc("tbl_workorder","task_date","id",$idworkorder);
+
+            if($noaduan==""){
+                $taskid = $datatask['task_id'];
+                $taskdesc = $datatask['task_desc'];
+                // $taskdate = GetDesc("tbl_workorder","task_date","id",$idworkorder);
+            }
+            else{
+                $taskdesc = $datatask['ad_keterangan'];
+            }
 
             echo "<tr bgcolor=\"$bgcolor\" onMouseOver=\"this.bgColor = '$hlcolor'\" onMouseOut =\"this.bgColor = '$bgcolor'\">\n";
             echo "<td>$cnt</td>";
@@ -89,7 +105,7 @@ $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
     <tr>
         <td colspan="6">
             <div style="font-weight:bold;">Catatan Keseluruhan&nbsp;:&nbsp;</div>
-            <textarea name="txtCatatanKeseluruhan" rows="10" cols="120"></textarea>
+            <textarea name="txtCatatanKeseluruhan" rows="10" cols="120" disabled></textarea>
         </td>
     </tr>
 </table>
@@ -98,17 +114,17 @@ $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
         <td style="font-weight:bold;" colspan="6"><!-- D&nbsp;:&nbsp; -->Laporan Pemeriksaan</td>
     </tr>
     <tr>
-        <td width="5"><input type="checkbox" name="inspection_status" value="1"></td>
+        <td width="5"><input type="checkbox" name="inspection_status" value="1" disabled></td>
         <td>BAGUS</td>
-        <td width="5"><input type="checkbox" name="inspection_status" value="2"></td>
+        <td width="5"><input type="checkbox" name="inspection_status" value="2" disabled></td>
         <td>MEMERLUKAN PEMBETULAN</td>
-        <td width="5"><input type="checkbox" name="inspection_status" value="3"></td>
+        <td width="5"><input type="checkbox" name="inspection_status" value="3" disabled></td>
         <td>MEMERLUKAN PERTUKARAN</td>
     </tr>
     <tr>
         <td class="title" colspan="6">
             <div style="font-weight:bold;">Kerja yang perlu dilalukan / Komponen yang perlu ditukar&nbsp;:&nbsp;</div>
-            <textarea name="txtCatatanPemeriksaan" rows="10" cols="120"></textarea>
+            <textarea name="txtCatatanPemeriksaan" rows="10" cols="120" disabled></textarea>
         </td>
     </tr>
 </table>
@@ -117,9 +133,9 @@ $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
         <td style="font-weight:bold;" colspan="4"><!-- E&nbsp;:&nbsp; -->Laporan Pembetulan</td>
     </tr>
     <tr>
-        <td width="5"><input type="checkbox" name="rectification_status" value="1"></td>
+        <td width="5"><input type="checkbox" name="rectification_status" value="1" disabled></td>
         <td>YA</td>
-        <td width="5"><input type="checkbox" name="rectification_status" value="2"></td>
+        <td width="5"><input type="checkbox" name="rectification_status" value="2" disabled></td>
         <td>TIDAK</td>
     </tr>
 </table>
@@ -131,9 +147,9 @@ $subsistem_desc = GetDesc("task_group","tg_desc","tg_id",$subsistem);
         <td colspan="4">Semua perkhidmatan telah dilakukan mengikut cara yang telah disyorkan oleh pengeluar peralatan.</td>
     </tr>
     <tr>
-        <td width="5"><input type="checkbox" name="follow_order" value="1"></td>
+        <td width="5"><input type="checkbox" name="follow_order" value="1" disabled></td>
         <td>YA</td>
-        <td width="5"><input type="checkbox" name="follow_order" value="2"></td>
+        <td width="5"><input type="checkbox" name="follow_order" value="2" disabled></td>
         <td>TIDAK</td>
     </tr>
     <tr>

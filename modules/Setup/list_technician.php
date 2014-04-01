@@ -88,6 +88,12 @@ $kumpaset=$_GET["kumpcarianaset"];
 <div style="float:left;">
     <table>
         <form name="frmcarianaset">
+        <?php
+            if($staffagid<>0){
+                echo "<input type=\"hidden\" name=\"CarianAset\" id=\"CarianAset\" value=\"\" /> ";
+            }
+            else{
+        ?> 
         <tr>
             <td>Kump. Aset</td>
             <td>:</td>
@@ -111,6 +117,7 @@ $kumpaset=$_GET["kumpcarianaset"];
                 </select>
             </td>
         </tr>
+        <?php } ?>
         </form>
     </table>
 </div>
@@ -135,6 +142,8 @@ $kumpaset=$_GET["kumpcarianaset"];
     // Ikut kumpulan aset
     if ($staffagid<>0)
         $sql.="and staff_ag_id='$staffagid' ";
+    if ($kumpaset<>"")
+        $sql.="and staff_ag_id='$kumpaset' ";
     $sql.="ORDER BY staff_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);

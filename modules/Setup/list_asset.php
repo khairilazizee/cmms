@@ -85,6 +85,12 @@ if($_GET['delete']=="1"){
 <div style="float:left;">
     <table>
         <form name="frmcarianaset">
+        <?php
+            if($staffagid<>0){
+                echo "<input type=\"hidden\" name=\"CarianAset\" id=\"CarianAset\" value=\"\" /> ";
+            }
+            else{
+        ?>    
         <tr>
             <td>Kump. Aset</td>
             <td>:</td>
@@ -112,6 +118,7 @@ if($_GET['delete']=="1"){
                 </select>
             </td>
         </tr>
+        <?php } ?>
         </form>
     </table>
 </div>
@@ -134,6 +141,8 @@ if($_GET['delete']=="1"){
         $sql.="and sg_id='$kumpsistem' ";
     if ($staffagid<>0)
         $sql.="and asset_ag_id='$staffagid' ";
+    if($kumpaset<>"")
+        $sql.="and asset_ag_id='$kumpaset' ";
     $sql.="ORDER BY asset_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);

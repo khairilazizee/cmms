@@ -138,3 +138,66 @@ if ($next_month == 13 ) {
 		}
 	?>
 </table>
+<br /><br />
+
+<?php
+	$sqltugasan = "SELECT  ad_id, ad_no_aduan, ad_lokasi, ad_pengadu, ad_jabatan, ad_kaedah, ad_tarikh_adu, ad_sg_id, ad_ag_id, ad_keterangan, ad_staff_id, ad_catatan, ad_status FROM tbl_aduan WHERE ad_tarikh_adu='$currentdate'";
+
+	if($staffid<>""){
+		$sqltugasan .=" and ad_staff_id='$staffid'";
+	}
+	$restugasan = mysql_query($sqltugasan,$dbi);
+
+	$jumtugasan = mysql_num_rows($restugasan);
+	if($jumtugasan<>0){
+?>
+<table class="table" width="100%">
+	<tr>
+		<td class="formheader" colspan="6" style="font-weight:bold;text-align:center;text-transform:uppercase;background:#fff;color:#000;">
+			<div style="float: left;">Senarai Aduan pada <?php echo $tarikhsemasa;?></div>
+			<div style="float: right;"></div>
+		</td>
+	</tr>
+	<tr>
+		<th width="80">No Aduan</th>
+		<th width="150">Lokasi</th>
+		<th>Keterangan</th>
+		<th width="100">Tindakan</th>
+	</tr>
+	<?php
+		$bil = 0;
+		
+		// echo $sqltugasan;
+		
+		while($data = mysql_fetch_array($restugasan)){
+			$staff_id = $data['ad_staff_id'];
+			$namastaff = GetDesc("staff","staff_name","staff_id",$staff_id);
+			$agid = $data['ad_ag_id'];
+			$namaassetgroup = GetDesc("asset_group","ag_desc","ag_id",$agid);
+			$sgid = $data['ad_sg_id'];
+			$namasysgroup = GetDesc("system_group","sg_desc","sg_id",$sgid);
+			$idlokasi = $data['ad_lokasi'];
+			$lokasi = GetDesc("zone","zon_desc","zon_id",$idlokasi);
+			$noaduan = $data['ad_no_aduan'];
+			$pengadu = $data['ad_pengadu'];
+			$tarikhadu = $data['ad_tarikh_adu'];
+			$keterangan = $data['ad_keterangan'];
+			$id = $data['ad_id'];
+			$status = $data['ad_status'];
+			if($status==1){
+				$kepastian = "onclick='return confirm(\"Menekan butang ini bermaksud kerja-kerja sudah bermula dan data akan direkod. Anda pasti?\")'";
+			}
+			$bil++;
+
+			echo "<tr>";
+			echo "<td>$noaduan</td>";
+			echo "<td>$lokasi</td>";
+			echo "<td>$keterangan</td>";
+			echo "<td align='center'><a href='mainpage.php?module=Technician&task=list_aduan&noadu=$noaduan&sis=$id' $kepastian ><img src='images/admin/btn_papar.gif'/></a>
+				<a href=\"mainpage.php?module=Technician&task=borang&noadu=$noaduan&sis=$id&displayframework=0\" target=\"_blank\"><img src=\"images/print.gif\"></a>
+			</td>";
+			echo "</tr>";
+		}
+	?>
+</table>
+<?php } ?>

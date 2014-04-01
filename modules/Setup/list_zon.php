@@ -16,7 +16,7 @@
         // if(carisistem=="")
         location.href="mainpage.php?module=Setup&task=list_zon&kumpcarianaset="+carianaset;
         // else
-        //     location.href="mainpage.php?module=Setup&task=list_asset&kumpcarianaset="+carianaset+"&kumpcariansistem="+carisistem;
+        //     location.hre f="mainpage.php?module=Setup&task=list_asset&kumpcarianaset="+carianaset+"&kumpcariansistem="+carisistem;
     }
 </script>
 <?php
@@ -49,6 +49,7 @@ if($_GET['delete']=="1"){
 
 $kumpaset=$_GET["kumpcarianaset"];
 ?>
+<?php if($staffagid==0){ ?>
 <div style="float:left;">
     <table>
         <form name="frmcarianaset">
@@ -78,6 +79,7 @@ $kumpaset=$_GET["kumpcarianaset"];
         </form>
     </table>
 </div>
+<?php } ?>
 <div style="text-align:right;font-weight:bold;"><a href="mainpage.php?module=Setup&task=setup_zon">Tambah<img src="images/admin/btn_add.gif"></a></div><br>
 <table width="100%" cellspacing="1" cellpadding="3" align="center" class="table">
     <tr>
@@ -94,6 +96,8 @@ $kumpaset=$_GET["kumpcarianaset"];
     $sql = "SELECT zon_id, zon_desc, ag_id from zone where 1 ";
     if ($staffagid<>0)
         $sql.="and ag_id='$staffagid' ";
+    if ($kumpaset<>"")
+        $sql.="and ag_id='$kumpaset' ";
     $sql.="ORDER BY zon_id";
     $sqlfull = $sql." LIMIT ".$rowstart.", ".$limit;
     $res = sql_query($sql,$dbi);
